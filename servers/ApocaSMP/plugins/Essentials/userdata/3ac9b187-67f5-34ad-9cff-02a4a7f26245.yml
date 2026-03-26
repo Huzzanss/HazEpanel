@@ -1,0 +1,55 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 127.0.0.1
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1774437451994
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1774437270313
+  login: 1774488273649
+money: '50000'
+last-account-name: Hapisss
+lastlocation:
+  world: bc194631-b931-4f66-bed9-99d4c273647b
+  world-name: world_nether
+  x: 5001.566941085975
+  y: 131.16313072812636
+  z: 5006.199493493498
+  yaw: 143.29249572753906
+  pitch: 28.904794692993164
+logoutlocation:
+  world: bc194631-b931-4f66-bed9-99d4c273647b
+  world-name: world_nether
+  x: 5038.3114477439885
+  y: 134.1573479370123
+  z: 5026.1832287307125
+  yaw: 117.201171875
+  pitch: 48.69615936279297
+homes:
+  quest1:
+    world: bc194631-b931-4f66-bed9-99d4c273647b
+    world-name: world_nether
+    x: 1001.996193922729
+    y: 32.0
+    z: 1009.5541041600178
+    yaw: 179.1427001953125
+    pitch: 4.85562801361084
+  tessenjata:
+    world: bc194631-b931-4f66-bed9-99d4c273647b
+    world-name: world_nether
+    x: 5000.482532499494
+    y: 130.0
+    z: 5000.368668714214
+    yaw: 179.58551025390625
+    pitch: 90.0

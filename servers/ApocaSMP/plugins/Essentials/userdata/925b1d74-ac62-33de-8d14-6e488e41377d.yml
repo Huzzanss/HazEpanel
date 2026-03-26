@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 125.160.114.204
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773892577610
+  login: 1773892542468
+money: '0'
+last-account-name: ambatikim
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 5000.256608474795
+  y: 44.0
+  z: 5001.321888183912
+  yaw: 26.39996337890625
+  pitch: 38.099998474121094
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 10137.5
+  y: 86.0
+  z: 10104.5
+  yaw: 108.2823486328125
+  pitch: 90.0

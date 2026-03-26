@@ -1,0 +1,50 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 125.160.127.41
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: true
+timestamps:
+  lastteleport: 1773997005986
+  lastheal: 1773996682046
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773997066319
+  login: 1773995888856
+  kits:
+    dtools: 1773840720055
+    tools: 1773873882719
+money: '2360.75000000000003'
+last-account-name: KFjavel1n
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 5000.417078001022
+  y: 43.5
+  z: 5000.417078001022
+  yaw: -77.4144287109375
+  pitch: 9.830399513244629
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 23734.18256895203
+  y: 161.0
+  z: 8769.504037911529
+  yaw: 75.405029296875
+  pitch: 13.973934173583984
+homes:
+  home:
+    world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+    world-name: world
+    x: 23731.872211134476
+    y: 161.0
+    z: 8768.135443693176
+    yaw: -139.59637451171875
+    pitch: 32.405967712402344

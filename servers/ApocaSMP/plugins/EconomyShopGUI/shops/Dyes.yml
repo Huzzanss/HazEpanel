@@ -1,0 +1,131 @@
+pages:
+  page1:
+    items:
+      '1':
+        material: BLACK_DYE
+        buy: 26.25
+        sell: 0
+      '2':
+        material: BLUE_DYE
+        buy: 5.25
+        sell: 0
+      '3':
+        material: BROWN_DYE
+        buy: 31.5
+        sell: 0
+      '4':
+        material: CYAN_DYE
+        buy: 3.05
+        sell: 0
+      '5':
+        material: GRAY_DYE
+        buy: 18.1
+        sell: 0
+      '6':
+        material: GREEN_DYE
+        buy: 0.55
+        sell: 0
+      '7':
+        material: LIGHT_BLUE_DYE
+        buy: 5.25
+        sell: 0
+      '8':
+        material: LIGHT_GRAY_DYE
+        buy: 5.25
+        sell: 0
+      '9':
+        material: LIME_DYE
+        buy: 31.5
+        sell: 0
+      '10':
+        material: MAGENTA_DYE
+        buy: 5.25
+        sell: 0
+      '11':
+        material: ORANGE_DYE
+        buy: 5.25
+        sell: 0
+      '12':
+        material: PINK_DYE
+        buy: 5.25
+        sell: 0
+      '13':
+        material: PURPLE_DYE
+        buy: 5.55
+        sell: 0
+      '14':
+        material: RED_DYE
+        buy: 5.25
+        sell: 0
+      '15':
+        material: WHITE_DYE
+        buy: 8.15
+        sell: 0
+      '16':
+        material: YELLOW_DYE
+        buy: 3.5
+        sell: 0
+      '17':
+        material: AZURE_BLUET
+        buy: 5
+        sell: 0
+      '18':
+        material: BLUE_ORCHID
+        buy: 5
+        sell: 0
+      '19':
+        material: CORNFLOWER
+        buy: 5
+        sell: 0
+      '20':
+        material: LILAC
+        buy: 5
+        sell: 0
+      '21':
+        material: LILY_OF_THE_VALLEY
+        buy: 5
+        sell: 0
+      '22':
+        material: ORANGE_TULIP
+        buy: 5
+        sell: 0
+      '23':
+        material: OXEYE_DAISY
+        buy: 5
+        sell: 0
+      '24':
+        material: PEONY
+        buy: 5
+        sell: 0
+      '25':
+        material: PINK_PETALS
+        buy: 5
+        sell: 0
+      '26':
+        material: PINK_TULIP
+        buy: 5
+        sell: 0
+      '27':
+        material: PITCHER_PLANT
+        buy: 103.75
+        sell: 0
+      '28':
+        material: POPPY
+        buy: 5
+        sell: 0
+      '29':
+        material: RED_TULIP
+        buy: 5
+        sell: 0
+      '30':
+        material: SUNFLOWER
+        buy: 5
+        sell: 0
+      '31':
+        material: TORCHFLOWER
+        buy: 103.75
+        sell: 0
+      '32':
+        material: INK_SAC
+        buy: 25
+        sell: 0

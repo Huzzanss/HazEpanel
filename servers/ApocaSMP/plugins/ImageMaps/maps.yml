@@ -1,0 +1,194 @@
+storageVersion: 1
+maps:
+  0:
+    ==: ImageMaps.Map
+    image: right
+    x: 0
+    y: 0
+    scale: 1.0
+  1:
+    ==: ImageMaps.Map
+    image: right
+    x: 0
+    y: 1
+    scale: 1.0
+  2:
+    ==: ImageMaps.Map
+    image: right
+    x: 0
+    y: 2
+    scale: 1.0
+  3:
+    ==: ImageMaps.Map
+    image: right
+    x: 0
+    y: 3
+    scale: 1.0
+  4:
+    ==: ImageMaps.Map
+    image: right
+    x: 1
+    y: 0
+    scale: 1.0
+  5:
+    ==: ImageMaps.Map
+    image: right
+    x: 1
+    y: 1
+    scale: 1.0
+  6:
+    ==: ImageMaps.Map
+    image: right
+    x: 1
+    y: 2
+    scale: 1.0
+  7:
+    ==: ImageMaps.Map
+    image: right
+    x: 1
+    y: 3
+    scale: 1.0
+  8:
+    ==: ImageMaps.Map
+    image: right
+    x: 2
+    y: 0
+    scale: 1.0
+  9:
+    ==: ImageMaps.Map
+    image: right
+    x: 2
+    y: 1
+    scale: 1.0
+  10:
+    ==: ImageMaps.Map
+    image: right
+    x: 2
+    y: 2
+    scale: 1.0
+  11:
+    ==: ImageMaps.Map
+    image: right
+    x: 2
+    y: 3
+    scale: 1.0
+  12:
+    ==: ImageMaps.Map
+    image: right
+    x: 3
+    y: 0
+    scale: 1.0
+  13:
+    ==: ImageMaps.Map
+    image: right
+    x: 3
+    y: 1
+    scale: 1.0
+  14:
+    ==: ImageMaps.Map
+    image: right
+    x: 3
+    y: 2
+    scale: 1.0
+  15:
+    ==: ImageMaps.Map
+    image: right
+    x: 3
+    y: 3
+    scale: 1.0
+  16:
+    ==: ImageMaps.Map
+    image: left
+    x: 0
+    y: 0
+    scale: 1.0
+  17:
+    ==: ImageMaps.Map
+    image: left
+    x: 0
+    y: 1
+    scale: 1.0
+  18:
+    ==: ImageMaps.Map
+    image: left
+    x: 0
+    y: 2
+    scale: 1.0
+  19:
+    ==: ImageMaps.Map
+    image: left
+    x: 0
+    y: 3
+    scale: 1.0
+  20:
+    ==: ImageMaps.Map
+    image: left
+    x: 1
+    y: 0
+    scale: 1.0
+  21:
+    ==: ImageMaps.Map
+    image: left
+    x: 1
+    y: 1
+    scale: 1.0
+  22:
+    ==: ImageMaps.Map
+    image: left
+    x: 1
+    y: 2
+    scale: 1.0
+  23:
+    ==: ImageMaps.Map
+    image: left
+    x: 1
+    y: 3
+    scale: 1.0
+  24:
+    ==: ImageMaps.Map
+    image: left
+    x: 2
+    y: 0
+    scale: 1.0
+  25:
+    ==: ImageMaps.Map
+    image: left
+    x: 2
+    y: 1
+    scale: 1.0
+  26:
+    ==: ImageMaps.Map
+    image: left
+    x: 2
+    y: 2
+    scale: 1.0
+  27:
+    ==: ImageMaps.Map
+    image: left
+    x: 2
+    y: 3
+    scale: 1.0
+  28:
+    ==: ImageMaps.Map
+    image: left
+    x: 3
+    y: 0
+    scale: 1.0
+  29:
+    ==: ImageMaps.Map
+    image: left
+    x: 3
+    y: 1
+    scale: 1.0
+  30:
+    ==: ImageMaps.Map
+    image: left
+    x: 3
+    y: 2
+    scale: 1.0
+  31:
+    ==: ImageMaps.Map
+    image: left
+    x: 3
+    y: 3
+    scale: 1.0

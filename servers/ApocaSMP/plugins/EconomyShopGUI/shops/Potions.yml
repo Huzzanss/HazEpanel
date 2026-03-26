@@ -1,0 +1,945 @@
+pages:
+  page1:
+    items:
+      '2':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - fire_resistance
+      '3':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - harming
+      '4':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - healing
+      '5':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - infested
+      '6':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - invisibility
+      '7':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - leaping
+      '8':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - night_vision
+      '10':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - oozing
+      '11':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - poison
+      '12':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - regeneration
+      '13':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slow_falling
+      '14':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slowness
+      '15':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strength
+      '16':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - swiftness
+      '17':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - turtle_master
+      '18':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - water_breathing
+      '19':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weakness
+      '20':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weaving
+      '21':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - wind_charged
+      '22':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_fire_resistance
+      '23':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_invisibility
+      '24':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_night_vision
+      '25':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_poison
+      '26':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_regeneration
+      '27':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slow_falling
+      '28':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slowness
+      '29':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_strength
+      '30':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_swiftness
+      '31':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_turtle_master
+      '32':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_water_breathing
+      '33':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_weakness
+      '34':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_harming
+      '35':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_healing
+      '36':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_leaping
+      '37':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_poison
+      '38':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_regeneration
+      '39':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_strength
+      '40':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_swiftness
+      '41':
+        material: POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_turtle_master
+      '42':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - fire_resistance
+      '43':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - harming
+      '44':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - healing
+      '45':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - infested
+      '46':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - invisibility
+      '47':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - leaping
+  page2:
+    items:
+      '48':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - night_vision
+      '49':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - oozing
+      '50':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - poison
+      '51':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - regeneration
+      '52':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slow_falling
+      '53':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slowness
+      '54':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strength
+      '55':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - swiftness
+      '56':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - turtle_master
+      '57':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - water_breathing
+      '58':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weakness
+      '59':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weaving
+      '60':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - wind_charged
+      '61':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_fire_resistance
+      '62':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_invisibility
+      '63':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_night_vision
+      '64':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_poison
+      '65':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_regeneration
+      '66':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slow_falling
+      '67':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slowness
+      '68':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_strength
+      '69':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_swiftness
+      '70':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_turtle_master
+      '71':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_water_breathing
+      '72':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_weakness
+      '73':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_harming
+      '74':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_healing
+      '75':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_leaping
+      '76':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_poison
+      '77':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_regeneration
+      '78':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_strength
+      '79':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_swiftness
+      '80':
+        material: SPLASH_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_turtle_master
+      '81':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - fire_resistance
+      '82':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - harming
+      '83':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - healing
+      '84':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - infested
+      '85':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - invisibility
+      '86':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - leaping
+      '87':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - night_vision
+      '88':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - oozing
+      '89':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - poison
+      '90':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - regeneration
+      '91':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slow_falling
+      '92':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slowness
+  page3:
+    items:
+      '93':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strength
+      '94':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - swiftness
+      '95':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - turtle_master
+      '96':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - water_breathing
+      '97':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weakness
+      '98':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weaving
+      '99':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - wind_charged
+      '100':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_fire_resistance
+      '101':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_invisibility
+      '102':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_night_vision
+      '103':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_poison
+      '104':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_regeneration
+      '105':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slow_falling
+      '106':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slowness
+      '107':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_strength
+      '108':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_swiftness
+      '109':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_turtle_master
+      '110':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_water_breathing
+      '111':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_weakness
+      '112':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_harming
+      '113':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_healing
+      '114':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_leaping
+      '115':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_poison
+      '116':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_regeneration
+      '117':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_strength
+      '118':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_swiftness
+      '119':
+        material: LINGERING_POTION
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_turtle_master
+      '120':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - fire_resistance
+      '121':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - harming
+      '122':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - healing
+      '123':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - infested
+      '124':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - invisibility
+      '125':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - leaping
+      '126':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_fire_resistance
+      '127':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_invisibility
+      '128':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_night_vision
+      '129':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_poison
+      '130':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_regeneration
+      '131':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slow_falling
+      '132':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_slowness
+      '133':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_strength
+      '134':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_swiftness
+      '135':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_turtle_master
+      '136':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_water_breathing
+      '137':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - long_weakness
+  page4:
+    items:
+      '138':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - night_vision
+      '139':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - oozing
+      '140':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - poison
+      '141':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - regeneration
+      '142':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slow_falling
+      '143':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - slowness
+      '144':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strength
+      '145':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_harming
+      '146':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_healing
+      '147':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_leaping
+      '148':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_poison
+      '149':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_regeneration
+      '150':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_strength
+      '151':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_swiftness
+      '152':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - strong_turtle_master
+      '153':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - swiftness
+      '154':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - turtle_master
+      '155':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - water_breathing
+      '156':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weakness
+      '157':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - weaving
+      '158':
+        material: TIPPED_ARROW
+        buy: 1000000
+        sell: 0
+        potiontypes:
+        - wind_charged

@@ -1,0 +1,34 @@
+{
+  "stats": {
+    "minecraft:used": {
+      "minecraft:stone_pickaxe": 3
+    },
+    "minecraft:killed_by": {
+      "minecraft:zombie": 1
+    },
+    "minecraft:mined": {
+      "minecraft:dirt": 1,
+      "minecraft:iron_ore": 1,
+      "minecraft:stone": 1
+    },
+    "minecraft:picked_up": {
+      "minecraft:dirt": 1,
+      "minecraft:cobblestone": 1,
+      "minecraft:raw_iron": 1
+    },
+    "minecraft:custom": {
+      "minecraft:sprint_one_cm": 280,
+      "minecraft:time_since_rest": 71,
+      "minecraft:fall_one_cm": 800,
+      "minecraft:walk_one_cm": 3454,
+      "minecraft:total_world_time": 1481,
+      "minecraft:leave_game": 1,
+      "minecraft:damage_taken": 314,
+      "minecraft:play_time": 1481,
+      "minecraft:deaths": 1,
+      "minecraft:jump": 7,
+      "minecraft:time_since_death": 42
+    }
+  },
+  "DataVersion": 4671
+}

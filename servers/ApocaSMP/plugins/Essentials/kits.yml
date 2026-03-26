@@ -1,0 +1,8 @@
+kits:
+  tools:
+    delay: 10
+    items:
+    - stonesword 1
+    - stoneshovel 1
+    - stonepickaxe 1
+    - stoneaxe 1

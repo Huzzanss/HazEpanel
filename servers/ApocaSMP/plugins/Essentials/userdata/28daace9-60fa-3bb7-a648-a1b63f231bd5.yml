@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 188.119.2.159
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773916079765
+  login: 1773915987288
+money: '0'
+last-account-name: DemoweCW
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 5006.5
+  y: 52.0
+  z: 4996.5
+  yaw: 0.0
+  pitch: 0.0
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 4995.379665798978
+  y: 45.0
+  z: 5004.300000011921
+  yaw: 11.525238037109375
+  pitch: 9.193902015686035

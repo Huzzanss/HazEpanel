@@ -1,0 +1,119 @@
+pages:
+  page1:
+    items:
+      '1':
+        material: MUSIC_DISC_11
+        buy: 375
+        sell: 0
+      '2':
+        material: MUSIC_DISC_13
+        buy: 375
+        sell: 0
+      '3':
+        material: MUSIC_DISC_5
+        buy: 4725
+        sell: 0
+      '4':
+        material: MUSIC_DISC_BLOCKS
+        buy: 375
+        sell: 0
+      '5':
+        material: MUSIC_DISC_CAT
+        buy: 375
+        sell: 0
+      '6':
+        material: MUSIC_DISC_CHIRP
+        buy: 375
+        sell: 0
+      '7':
+        material: MUSIC_DISC_CREATOR
+        buy: 500
+        sell: 0
+      '8':
+        material: MUSIC_DISC_CREATOR_MUSIC_BOX
+        buy: 500
+        sell: 0
+      '9':
+        material: MUSIC_DISC_FAR
+        buy: 375
+        sell: 0
+      '10':
+        material: MUSIC_DISC_MALL
+        buy: 375
+        sell: 0
+      '11':
+        material: MUSIC_DISC_MELLOHI
+        buy: 375
+        sell: 0
+      '12':
+        material: MUSIC_DISC_OTHERSIDE
+        buy: 375
+        sell: 0
+      '13':
+        material: MUSIC_DISC_PIGSTEP
+        buy: 375
+        sell: 0
+      '14':
+        material: MUSIC_DISC_PRECIPICE
+        buy: 500
+        sell: 0
+      '15':
+        material: MUSIC_DISC_RELIC
+        buy: 500
+        sell: 0
+      '16':
+        material: MUSIC_DISC_STAL
+        buy: 375
+        sell: 0
+      '17':
+        material: MUSIC_DISC_STRAD
+        buy: 375
+        sell: 0
+      '18':
+        material: MUSIC_DISC_WAIT
+        buy: 375
+        sell: 0
+      '19':
+        material: MUSIC_DISC_WARD
+        buy: 375
+        sell: 0
+      '20':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: ponder
+      '21':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: admire
+      '22':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: call
+      '23':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: dream
+      '24':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: feel
+      '25':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: seek
+      '26':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: sing
+      '27':
+        material: GOAT_HORN
+        buy: 500
+        sell: 0
+        instrument: yearn

@@ -1,0 +1,11 @@
+{
+  "databases": [],
+  "schedules": [],
+  "users": [],
+  "backups": [],
+  "allocations": [],
+  "settings": {
+    "name": "Demo Node",
+    "description": ""
+  }
+}

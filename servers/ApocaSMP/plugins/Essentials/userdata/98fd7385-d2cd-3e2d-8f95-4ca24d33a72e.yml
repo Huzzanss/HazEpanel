@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 182.8.162.223
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: true
+timestamps:
+  lastteleport: 1773926898979
+  lastheal: 1773890483445
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773931521500
+  login: 1773929379109
+money: '30456.2'
+last-account-name: binggo
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 10253.155360948289
+  y: 86.0
+  z: 10058.752719235259
+  yaw: 84.44989776611328
+  pitch: 2.249987840652466
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: -10033.876409567014
+  y: 202.0
+  z: 10015.271749275991
+  yaw: -12.7691650390625
+  pitch: 32.09999465942383

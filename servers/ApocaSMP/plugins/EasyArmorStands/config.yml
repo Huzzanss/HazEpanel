@@ -1,0 +1,96 @@
+# EasyArmorStands configuration
+# https://github.com/56738/EasyArmorStands/wiki/Configuration
+# 
+# Do not edit the _version section, this is used to automatically update your config.
+# 
+# Do not add comments to this file, they will be removed when the config is saved.
+
+_version:
+  config: 3
+  game: 1.21.3
+editor:
+  allow-players: false
+  button:
+    interpolation-ticks: 1
+    range: 64.0
+    threshold: 0.1
+  discovery:
+    limit: 128
+  input-hints:
+    enabled: true
+    format: '  [<key>] <input>'
+    left-click-key: <key:key.attack>
+    right-click-key: <key:key.use>
+    sneak-key: <lang:key.sneak>
+    swap-hands-key: <key:key.swapOffhand>
+  menu:
+    background:
+      config:
+        item:
+          hide-tooltip: true
+          name: ''
+          type: light_blue_stained_glass_pane
+      type: easyarmorstands:background
+  scale:
+    max-distance: 64.0
+    min-distance: 5.0
+  selection:
+    group:
+      limit: 64
+      range: 128.0
+    range: 10.0
+  tool:
+    name: <gold><lang:easyarmorstands.tool-name>
+    type: blaze_rod
+integration:
+  BentoBox:
+    enabled: true
+  FancyHolograms:
+    enabled: true
+  GriefDefender:
+    enabled: true
+  GriefPrevention:
+    enabled: true
+  HeadDatabase:
+    enabled: true
+  HuskClaims:
+    enabled: true
+  Lands:
+    enabled: true
+    flag:
+      description: Allow editing entities using EasyArmorStands
+      display: true
+      display-name: Edit entities
+      icon:
+        type: armor_stand
+  PlotSquared:
+    enabled: true
+  Residence:
+    enabled: true
+  Towny:
+    enabled: true
+  TrainCarts:
+    enabled: true
+  WorldGuard:
+    enabled: true
+limits:
+  display-entity:
+    max-scale: Infinity
+    min-scale: -Infinity
+  entity:
+    max-scale: 16
+    min-scale: 0.0625
+message:
+  format:
+    button-description: <gray><message>
+    button-name: <blue><message>
+    chat-button: <gray>[<message>]
+    error: <red><message>
+    hint: <gray><message>
+    hover: <gray><message>
+    success: <green><message>
+    title: '<gold><message>:'
+    warning: <yellow><message>
+  server-side-translation: true
+update-check:
+  enabled: true

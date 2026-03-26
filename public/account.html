@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account — HazEPanel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141824;--bg-nav:#141824;--bg-card:#1e2233;--bg-card2:#252a3a;--bg-hover:#252a3a;--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.13);--teal:#4ecdc4;--teal-g:rgba(78,205,196,.12);--teal-b:rgba(78,205,196,.3);--green:#2dce89;--green-g:rgba(45,206,137,.12);--red:#f5365c;--red-g:rgba(245,54,92,.12);--yellow:#fb6340;--yel-g:rgba(251,99,64,.12);--gray:#6c7a96;--txt:#d3d8e8;--txt2:#8896ac;--txt3:#485069;--font:'Rubik',sans-serif;--mono:'JetBrains Mono',monospace;--r:6px;--nav-h:54px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:14px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+
+.nav{height:var(--nav-h);background:var(--bg-nav);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--txt)}
+.nav-logo-icon{width:28px;height:28px;background:var(--teal);border-radius:var(--r);display:grid;place-items:center;font-size:14px}
+.nav-crumb{display:flex;align-items:center;gap:6px;font-size:13px;margin-left:18px;flex:1}
+.nav-crumb .c{color:var(--txt2)}.nav-crumb .sep{color:var(--txt3)}.nav-crumb .cur{color:var(--txt);font-weight:500}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav-ico{width:34px;height:34px;display:grid;place-items:center;border-radius:var(--r);color:var(--txt2);font-size:14px;background:none;border:none;transition:all .15s;cursor:pointer}
+.nav-ico:hover{background:var(--bg-card);color:var(--txt)}
+.nav-ico.active{background:var(--teal-g);color:var(--teal)}
+
+.side-layout{display:flex;min-height:calc(100vh - var(--nav-h))}
+.sidebar{width:220px;flex-shrink:0;background:var(--bg-nav);border-right:1px solid var(--bdr);padding:16px 8px;position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto}
+.sb-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--txt3);padding:10px 10px 5px}
+.sb-link{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border-radius:var(--r);border:1px solid transparent;background:none;color:var(--txt2);font-size:13px;font-weight:500;transition:all .14s;text-align:left;margin-bottom:1px;cursor:pointer}
+.sb-link:hover{background:var(--bg-hover);color:var(--txt)}
+.sb-link.active{background:var(--teal-g);color:var(--teal);border-color:var(--teal-b)}
+.sb-link .ic{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.sb-divider{height:1px;background:var(--bdr);margin:8px 0}
+
+.main{flex:1;padding:28px 32px 60px;max-width:860px}
+.page-title{font-size:22px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--txt2);margin-bottom:28px}
+
+.section{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:16px;display:none}
+.section.active{display:block}
+.section-hdr{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3)}
+.section-body{padding:20px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-row.single{grid-template-columns:1fr}
+.form-field{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:12px;font-weight:600;color:var(--txt2)}
+.form-input{background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--teal)}
+.form-input:disabled{opacity:.5;cursor:not-allowed}
+.form-desc{font-size:11.5px;color:var(--txt3)}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:13px;font-weight:600;border:1px solid transparent;transition:all .14s;cursor:pointer}
+.btn:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn-teal{background:var(--teal);color:#141824;border-color:var(--teal)}.btn-teal:hover{filter:brightness(1.1)}
+.btn-ghost{background:var(--bg-card2);color:var(--txt2);border-color:var(--bdr)}.btn-ghost:hover{background:var(--bg-hover);color:var(--txt);border-color:var(--bdr2)}
+.btn-red{background:var(--red-g);color:var(--red);border-color:rgba(245,54,92,.3)}.btn-red:hover{background:rgba(245,54,92,.2)}
+.btn-sm{padding:5px 11px;font-size:12px}
+
+.avatar-wrap{display:flex;align-items:center;gap:18px;margin-bottom:20px}
+.avatar-big{width:72px;height:72px;border-radius:50%;background:var(--teal);display:grid;place-items:center;font-size:28px;font-weight:700;color:#141824;flex-shrink:0}
+.avatar-info .name{font-size:18px;font-weight:700;margin-bottom:3px}
+.avatar-info .role{font-size:12.5px;color:var(--txt2)}
+.avatar-info .joined{font-size:11.5px;color:var(--txt3);margin-top:3px}
+
+.apikey-row{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--bdr)}
+.apikey-row:last-child{border-bottom:none}
+.apikey-desc{font-size:13px;font-weight:500;flex:1}
+.apikey-token{font-family:var(--mono);font-size:12px;color:var(--txt3);background:var(--bg-card2);padding:3px 8px;border-radius:4px}
+.apikey-date{font-size:11px;color:var(--txt3);font-family:var(--mono);min-width:100px;text-align:right}
+
+.activity-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--bdr)}
+.activity-row:last-child{border-bottom:none}
+.activity-ic{width:30px;height:30px;border-radius:50%;background:var(--teal-g);display:grid;place-items:center;font-size:13px;flex-shrink:0}
+.activity-info{flex:1}.activity-action{font-size:13px;font-weight:500}
+.activity-meta{font-size:11.5px;color:var(--txt3);font-family:var(--mono);margin-top:2px}
+.activity-time{font-size:11px;color:var(--txt3);font-family:var(--mono)}
+
+.twofa-box{background:var(--bg-card2);border:1px solid var(--bdr);border-radius:var(--r);padding:16px;display:flex;gap:16px;align-items:flex-start}
+.twofa-qr{width:120px;height:120px;background:#fff;border-radius:var(--r);display:grid;place-items:center;font-size:11px;color:#333;flex-shrink:0;padding:8px;image-rendering:pixelated}
+.twofa-info{flex:1}.twofa-title{font-size:13px;font-weight:600;margin-bottom:5px}
+.twofa-sub{font-size:12px;color:var(--txt2);line-height:1.6;margin-bottom:10px}
+.secret-code{font-family:var(--mono);font-size:13px;background:var(--bg-card2);border:1px solid var(--bdr);padding:6px 12px;border-radius:var(--r);letter-spacing:2px;margin-bottom:10px;word-break:break-all}
+
+.danger-card{background:var(--bg-card);border:1px solid rgba(245,54,92,.3);border-radius:var(--r);padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.danger-info .danger-title{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.danger-info .danger-sub{font-size:12px;color:var(--txt2)}
+
+.new-key-modal{background:var(--bg-card2);border:1px solid var(--bdr);border-radius:var(--r);padding:14px;margin-bottom:14px;display:none}
+.new-key-token{font-family:var(--mono);font-size:12.5px;background:var(--bg-card);border:1px solid var(--teal-b);color:var(--teal);padding:10px 14px;border-radius:var(--r);word-break:break-all;margin:8px 0}
+.copy-btn{cursor:pointer;padding:2px 8px;border-radius:3px;background:var(--teal-g);color:var(--teal);font-size:11px;font-weight:600;border:none;font-family:var(--font)}
+.copy-btn:hover{background:var(--teal-b)}
+
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
+.badge.green{background:var(--green-g);color:var(--green)}.badge.teal{background:var(--teal-g);color:var(--teal)}.badge.gray{background:rgba(108,122,150,.1);color:var(--gray)}
+
+.toast-rack{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{display:flex;align-items:center;gap:8px;background:var(--bg-card2);border:1px solid var(--bdr2);padding:10px 16px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:tIn .2s ease;max-width:300px}
+.toast.ok{border-color:rgba(45,206,137,.35);color:var(--green)}.toast.err{border-color:rgba(245,54,92,.35);color:var(--red)}.toast.info{border-color:rgba(78,205,196,.35);color:var(--teal)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes tOut{to{opacity:0;transform:translateY(8px)}}.toast.bye{animation:tOut .2s ease forwards}
+.footer{text-align:center;padding:12px;font-size:11px;color:var(--txt3);border-top:1px solid var(--bdr)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" class="nav-logo"><div class="nav-logo-icon"></div>HazEPanel</a>
+  <div class="nav-crumb">
+    <a href="/" class="c">Servers</a><span class="sep">/</span><span class="cur">Account</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-ico" title="Servers" onclick="location.href='/'">🗂</button>
+    <button class="nav-ico active" title="Account">👤</button>
+    <button class="nav-ico" title="Admin" onclick="location.href='/admin'">⚙️</button>
+    <button class="nav-ico" title="Sign Out" onclick="signOut()">⏏️</button>
+  </div>
+</nav>
+
+<div class="side-layout">
+  <nav class="sidebar">
+    <div class="sb-section">Account</div>
+    <button class="sb-link active" data-sec="profile"    onclick="showSection('profile')">    <span class="ic">👤</span> Profile</button>
+    <button class="sb-link"        data-sec="security"   onclick="showSection('security')">   <span class="ic">🔐</span> Security</button>
+    <button class="sb-link"        data-sec="apikeys"    onclick="showSection('apikeys')">    <span class="ic">🔑</span> API Keys</button>
+    <button class="sb-link"        data-sec="activity"   onclick="showSection('activity')">   <span class="ic">📋</span> Activity Log</button>
+    <div class="sb-divider"></div>
+    <div class="sb-section">Navigation</div>
+    <button class="sb-link" onclick="location.href='/'">           <span class="ic">🏠</span> My Servers</button>
+    <button class="sb-link" onclick="location.href='/admin'">      <span class="ic">⚙️</span> Admin Panel</button>
+  </nav>
+
+  <div class="main">
+    <div class="page-title" id="pageTitle">Your Profile</div>
+    <div class="page-sub" id="pageSub">Manage your personal details and account information.</div>
+
+    <!-- PROFILE -->
+    <div class="section active" id="sec-profile">
+      <div class="section-hdr"><div class="section-title">Personal Information</div></div>
+      <div class="section-body">
+        <div class="avatar-wrap">
+          <div class="avatar-big" id="avatarBig">A</div>
+          <div class="avatar-info">
+            <div class="name" id="profileName">—</div>
+            <div class="role"><span class="badge teal">Administrator</span></div>
+            <div class="joined">Member since local panel setup</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label class="form-label">Display Name</label><input class="form-input" id="profDisplayName" placeholder="Administrator"></div>
+          <div class="form-field"><label class="form-label">Username</label><input class="form-input" id="profUsername" placeholder="admin"></div>
+        </div>
+        <div class="form-row single">
+          <div class="form-field"><label class="form-label">Email Address</label><input class="form-input" id="profEmail" type="email" placeholder="admin@local"><div class="form-desc">Used for notifications (local only).</div></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-teal" onclick="saveProfile()">💾 Save Changes</button></div>
+      </div>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="section" id="sec-security">
+      <div class="section-hdr"><div class="section-title">Change Password</div></div>
+      <div class="section-body">
+        <div class="form-row single">
+          <div class="form-field"><label class="form-label">Current Password</label><input class="form-input" id="pwCurrent" type="password" placeholder="Current password"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label class="form-label">New Password</label><input class="form-input" id="pwNew" type="password" placeholder="Min. 8 characters" oninput="checkPwStrength()"></div>
+          <div class="form-field"><label class="form-label">Confirm New Password</label><input class="form-input" id="pwConfirm" type="password" placeholder="Repeat new password"></div>
+        </div>
+        <div id="pwStrengthBar" style="height:3px;background:var(--bdr);border-radius:2px;margin-bottom:6px;overflow:hidden"><div id="pwStrengthFill" style="height:100%;width:0%;transition:width .3s,background .3s;background:var(--red)"></div></div>
+        <div class="form-desc" id="pwStrengthLabel" style="margin-bottom:14px"></div>
+        <div class="form-actions"><button class="btn btn-teal" onclick="savePassword()">🔒 Update Password</button></div>
+      </div>
+      <div class="section-hdr" style="margin-top:0"><div class="section-title">Two-Factor Authentication</div><span class="badge green">Recommended</span></div>
+      <div class="section-body">
+        <div class="twofa-box" id="twofaBox">
+          <div class="twofa-qr" id="twofaQr"><canvas id="qrCanvas" width="104" height="104"></canvas></div>
+          <div class="twofa-info">
+            <div class="twofa-title">Enable 2FA with an authenticator app</div>
+            <div class="twofa-sub">Scan the QR code with Google Authenticator, Authy, or similar. Enter the 6-digit code to confirm setup.</div>
+            <div class="secret-code" id="twofaSecret">Loading…</div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input class="form-input" id="twofaCode" placeholder="6-digit code" maxlength="6" style="width:140px">
+              <button class="btn btn-teal btn-sm" onclick="enable2FA()">Enable 2FA</button>
+              <button class="btn btn-ghost btn-sm" onclick="copySecret()">Copy Key</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-hdr"><div class="section-title">Active Sessions</div></div>
+      <div class="section-body">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bdr)">
+          <div>
+            <div style="font-size:13px;font-weight:600">Current Session</div>
+            <div style="font-size:11.5px;color:var(--txt3);font-family:var(--mono)">127.0.0.1 · <span id="sessionBrowser">—</span></div>
+          </div>
+          <span class="badge green">● Active</span>
+        </div>
+        <div style="margin-top:12px"><button class="btn btn-red btn-sm" onclick="if(confirm('Invalidate all other sessions?'))toast('All other sessions invalidated','ok')">⚠ Invalidate All Other Sessions</button></div>
+      </div>
+    </div>
+
+    <!-- API KEYS -->
+    <div class="section" id="sec-apikeys">
+      <div class="section-hdr">
+        <div class="section-title">API Keys</div>
+        <button class="btn btn-teal btn-sm" onclick="showNewKey()">+ Create New Key</button>
+      </div>
+      <div id="newKeyBox" class="new-key-modal" style="margin:12px 16px 0">
+        <div style="font-size:12px;font-weight:600;color:var(--teal);margin-bottom:6px">New API Key Created</div>
+        <div style="font-size:11.5px;color:var(--txt2);margin-bottom:4px">Copy this key now — it won't be shown again.</div>
+        <div class="new-key-token" id="newKeyToken">—</div>
+        <button class="copy-btn" onclick="copyNewKey()">📋 Copy to Clipboard</button>
+      </div>
+      <div style="padding:12px 16px 8px;display:flex;gap:8px" id="createKeyForm">
+        <input class="form-input" id="newKeyDesc" placeholder="Key description (e.g. My Script)" style="flex:1">
+        <button class="btn btn-ghost btn-sm" onclick="createKey()">Generate</button>
+      </div>
+      <div id="keyList"><div style="padding:20px;text-align:center;color:var(--txt3)">Loading keys…</div></div>
+    </div>
+
+    <!-- ACTIVITY -->
+    <div class="section" id="sec-activity">
+      <div class="section-hdr">
+        <div class="section-title">Recent Activity</div>
+        <button class="btn btn-ghost btn-sm" onclick="loadActivity()">↺ Refresh</button>
+      </div>
+      <div id="activityList"><div style="padding:20px;text-align:center;color:var(--txt3)">Loading…</div></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">©</div>
+<div class="toast-rack" id="toasts"></div>
+
+<script>
+let account = {};
+let twoFASecret = '';
+
+async function boot() {
+  const d = await api('/api/account');
+  account = d;
+  qs('#profileName').textContent = d.displayName || d.username;
+  qs('#avatarBig').textContent = (d.displayName || d.username).charAt(0).toUpperCase();
+  qs('#profDisplayName').value = d.displayName || '';
+  qs('#profUsername').value = d.username || '';
+  qs('#profEmail').value = d.email || '';
+  qs('#sessionBrowser').textContent = navigator.userAgent.split(' ').slice(-1)[0] || 'Browser';
+  genTwoFASecret();
+}
+
+function showSection(name) {
+  qsa('.section').forEach(s => s.classList.remove('active'));
+  qsa('.sb-link[data-sec]').forEach(b => b.classList.toggle('active', b.dataset.sec === name));
+  qs('#sec-' + name).classList.add('active');
+  const titles = { profile:'Your Profile', security:'Security', apikeys:'API Keys', activity:'Activity Log' };
+  const subs   = { profile:'Manage your personal details.', security:'Manage password and two-factor authentication.', apikeys:'Manage API keys for external access.', activity:'See a log of recent account activity.' };
+  qs('#pageTitle').textContent = titles[name] || name;
+  qs('#pageSub').textContent   = subs[name]   || '';
+  if (name === 'apikeys')  loadApiKeys();
+  if (name === 'activity') loadActivity();
+}
+
+async function saveProfile() {
+  const r = await api('/api/account', 'PUT', {
+    displayName: qs('#profDisplayName').value.trim(),
+    username:    qs('#profUsername').value.trim(),
+    email:       qs('#profEmail').value.trim(),
+  });
+  if (r.ok) { toast('Profile saved', 'ok'); boot(); } else toast(r.error, 'err');
+}
+
+function checkPwStrength() {
+  const pw = qs('#pwNew').value;
+  const score = [pw.length >= 8, /[A-Z]/.test(pw), /[0-9]/.test(pw), /[^A-Za-z0-9]/.test(pw), pw.length >= 14].filter(Boolean).length;
+  const labels = ['','Very Weak','Weak','Fair','Strong','Very Strong'];
+  const colors = ['','#f5365c','#fb6340','#fbbf24','#2dce89','#4ecdc4'];
+  qs('#pwStrengthFill').style.width = (score * 20) + '%';
+  qs('#pwStrengthFill').style.background = colors[score];
+  qs('#pwStrengthLabel').textContent = pw ? labels[score] : '';
+  qs('#pwStrengthLabel').style.color = colors[score];
+}
+
+async function savePassword() {
+  const current = qs('#pwCurrent').value, nw = qs('#pwNew').value, conf = qs('#pwConfirm').value;
+  if (!current) return toast('Enter current password', 'err');
+  if (nw.length < 8) return toast('New password must be at least 8 characters', 'err');
+  if (nw !== conf) return toast('Passwords do not match', 'err');
+  const r = await api('/api/account/password', 'PUT', { current, newPassword: nw });
+  if (r.ok) { toast('Password updated', 'ok'); qs('#pwCurrent').value=''; qs('#pwNew').value=''; qs('#pwConfirm').value=''; checkPwStrength(); }
+  else toast(r.error, 'err');
+}
+
+function genTwoFASecret() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+  twoFASecret = Array.from({length:16}, () => chars[Math.floor(Math.random()*chars.length)]).join('');
+  const display = twoFASecret.match(/.{1,4}/g).join(' ');
+  qs('#twofaSecret').textContent = display;
+  drawFakeQR();
+}
+function drawFakeQR() {
+  const c = qs('#qrCanvas'), ctx = c.getContext('2d');
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,104,104);
+  ctx.fillStyle = '#000';
+  const seed = twoFASecret.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  let r = seed;
+  const next = () => { r = (r * 1664525 + 1013904223) >>> 0; return r; };
+  const sz = 4;
+  // Border
+  for(let x=0;x<26;x++) for(let y=0;y<26;y++) {
+    if(x===0||x===25||y===0||y===25) { ctx.fillRect(x*sz,y*sz,sz,sz); continue; }
+    if(next()%3 < 2) ctx.fillRect(x*sz,y*sz,sz,sz);
+  }
+  // Finder patterns
+  [[0,0],[18,0],[0,18]].forEach(([ox,oy])=>{
+    ctx.fillStyle='#000'; ctx.fillRect(ox*sz,oy*sz,7*sz,7*sz);
+    ctx.fillStyle='#fff'; ctx.fillRect((ox+1)*sz,(oy+1)*sz,5*sz,5*sz);
+    ctx.fillStyle='#000'; ctx.fillRect((ox+2)*sz,(oy+2)*sz,3*sz,3*sz);
+  });
+}
+function copySecret() { navigator.clipboard.writeText(twoFASecret).then(()=>toast('Secret copied','ok')); }
+function enable2FA() {
+  const code = qs('#twofaCode').value.trim();
+  if (code.length !== 6 || isNaN(code)) return toast('Enter valid 6-digit code','err');
+  toast('2FA enabled (demo — no server verification)', 'ok');
+  qs('#twofaCode').value = '';
+}
+
+async function loadApiKeys() {
+  const list = await api('/api/account/apikeys');
+  const el = qs('#keyList');
+  if (!list.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--txt3)">No API keys created yet.</div>'; return; }
+  el.innerHTML = list.map(k => `
+    <div class="apikey-row">
+      <div class="apikey-desc">${esc(k.description)}</div>
+      <div class="apikey-token">${esc(k.token)}</div>
+      <div class="apikey-date">${new Date(k.created).toLocaleDateString()}</div>
+      <button class="btn btn-red btn-sm" onclick="deleteKey('${k.id}')">🗑 Revoke</button>
+    </div>`).join('');
+}
+function showNewKey() { qs('#createKeyForm').style.display='flex'; qs('#newKeyDesc').focus(); }
+async function createKey() {
+  const desc = qs('#newKeyDesc').value.trim();
+  if (!desc) return toast('Enter a description', 'err');
+  const r = await api('/api/account/apikeys', 'POST', { description: desc });
+  if (r.token) {
+    qs('#newKeyBox').style.display = 'block';
+    qs('#newKeyToken').textContent = r.token;
+    qs('#newKeyDesc').value = '';
+    toast('API key created', 'ok');
+    loadApiKeys();
+  } else toast(r.error, 'err');
+}
+function copyNewKey() { navigator.clipboard.writeText(qs('#newKeyToken').textContent).then(()=>toast('Copied!','ok')); }
+async function deleteKey(id) {
+  if (!confirm('Revoke this API key? This cannot be undone.')) return;
+  const r = await api('/api/account/apikeys/' + id, 'DELETE');
+  if (r.ok) { toast('Key revoked','ok'); loadApiKeys(); } else toast(r.error,'err');
+}
+
+async function loadActivity() {
+  const list = await api('/api/account/activity');
+  const el = qs('#activityList');
+  if (!list.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--txt3)">No activity recorded yet.</div>'; return; }
+  el.innerHTML = list.map(a => `
+    <div class="activity-row">
+      <div class="activity-ic">📝</div>
+      <div class="activity-info">
+        <div class="activity-action">${esc(a.action)}</div>
+        <div class="activity-meta">${a.ip}</div>
+      </div>
+      <div class="activity-time">${new Date(a.t).toLocaleString()}</div>
+    </div>`).join('');
+}
+
+async function signOut() {
+  if (!confirm('Sign out of HazEPanel?\n(This is a local panel — the server will keep running.)')) return;
+  try { await fetch('/api/auth/logout', { method:'POST' }); } catch {}
+  location.href='/login';
+}
+
+const qs  = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+async function api(url, method='GET', body=null) {
+  const o={method,headers:{}}; if(body){o.headers['Content-Type']='application/json';o.body=JSON.stringify(body);}
+  return (await fetch(url,o)).json();
+}
+function toast(msg,type='info') {
+  const el=document.createElement('div'); el.className='toast '+type;
+  el.textContent=(type==='ok'?'✓ ':type==='err'?'✕ ':'ℹ ')+msg;
+  qs('#toasts').appendChild(el);
+  setTimeout(()=>{el.classList.add('bye');setTimeout(()=>el.remove(),220)},3500);
+}
+boot();
+</script>
+</body>
+</html>

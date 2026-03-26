@@ -1,0 +1,43 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 182.8.162.51
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: true
+timestamps:
+  lastteleport: 1773886577926
+  lastheal: 1773888046333
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773888190701
+  login: 1773888162750
+  kits:
+    notch: 1773840115477
+    tools: 1773872920785
+    dtools: 1773840765324
+    firework: 1773840391681
+money: '6425.85'
+last-account-name: abellook
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 4991.300000011921
+  y: 51.0
+  z: 5015.699999988079
+  yaw: 70.8397216796875
+  pitch: 53.10004806518555
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 5000.312690254641
+  y: 44.5
+  z: 4997.554323121192
+  yaw: -120.89979553222656
+  pitch: 43.20001983642578

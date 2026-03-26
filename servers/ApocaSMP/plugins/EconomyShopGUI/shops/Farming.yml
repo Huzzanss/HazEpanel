@@ -1,0 +1,119 @@
+pages:
+  page1:
+    items:
+      '1':
+        material: BAMBOO
+        buy: 0.5
+        sell: 10
+      '2':
+        material: BEE_NEST
+        buy: -1
+        sell: 7
+      '3':
+        material: BEEHIVE
+        buy: 84.35
+        sell: 4
+      '4':
+        material: BEETROOT
+        buy: 30
+        sell: 3
+      '5':
+        material: BEETROOT_SEEDS
+        buy: 15
+        sell: 3
+      '6':
+        material: BROWN_MUSHROOM
+        buy: 10
+        sell: 3
+      '7':
+        material: CACTUS
+        buy: -1
+        sell: 3
+      '8':
+        material: CARROT
+        buy: 25
+        sell: 3
+      '9':
+        material: CHORUS_FLOWER
+        buy: 5
+        sell: 3
+      '10':
+        material: CHORUS_FRUIT
+        buy: 15
+        sell: 3
+      '11':
+        material: COCOA_BEANS
+        buy: 30
+        sell: 3
+      '12':
+        material: CRIMSON_FUNGUS
+        buy: 30
+        sell: 3
+      '13':
+        material: EGG
+        buy: 25
+        sell: 2
+      '14':
+        material: KELP
+        buy: -1
+        sell: 2
+      '15':
+        material: LEATHER
+        buy: 168.0
+        sell: 7
+      '16':
+        material: MELON
+        buy: 47.25
+        sell: 5
+      '17':
+        material: MELON_SEEDS
+        buy: 15
+        sell: 1
+      '18':
+        material: MELON_SLICE
+        buy: 5
+        sell: 2
+      '19':
+        material: NETHER_WART
+        buy: 15
+        sell: 3
+      '20':
+        material: PITCHER_POD
+        buy: 102.5
+        sell: 4
+      '21':
+        material: POTATO
+        buy: 25
+        sell: 2
+      '22':
+        material: PUMPKIN
+        buy: 25
+        sell: 5
+      '23':
+        material: PUMPKIN_SEEDS
+        buy: 5.95
+        sell: 1
+      '24':
+        material: RED_MUSHROOM
+        buy: 10
+        sell: 2
+      '25':
+        material: SUGAR_CANE
+        buy: 0.5
+        sell: 10
+      '26':
+        material: TORCHFLOWER_SEEDS
+        buy: 102.5
+        sell: 4
+      '27':
+        material: WARPED_FUNGUS
+        buy: 30
+        sell: 2
+      '28':
+        material: WHEAT
+        buy: 25
+        sell: 10
+      '29':
+        material: WHEAT_SEEDS
+        buy: 15
+        sell: 1

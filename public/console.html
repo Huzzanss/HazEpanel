@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Loading… — HazEPanel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141824;--bg-nav:#141824;--bg-card:#1e2233;--bg-card2:#252a3a;
+  --bg-hover:#252a3a;--bg-con:#0d0f18;--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.13);
+  --teal:#4ecdc4;--teal-g:rgba(78,205,196,.12);--teal-b:rgba(78,205,196,.3);
+  --green:#2dce89;--green-g:rgba(45,206,137,.12);
+  --red:#f5365c;--red-g:rgba(245,54,92,.12);
+  --yellow:#fb6340;--yel-g:rgba(251,99,64,.12);
+  --gray:#6c7a96;--txt:#d3d8e8;--txt2:#8896ac;--txt3:#485069;
+  --font:'Rubik',sans-serif;--mono:'JetBrains Mono',monospace;--r:6px;
+  --nav-h:54px;--tab-h:42px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:14px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+
+/* NAV */
+.nav{height:var(--nav-h);background:var(--bg-nav);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 20px;position:fixed;top:0;left:0;right:0;z-index:200;}
+.nav-logo{font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--txt)}
+.nav-logo-icon{width:28px;height:28px;background:var(--teal);border-radius:var(--r);display:grid;place-items:center;font-size:14px}
+.nav-crumb{display:flex;align-items:center;gap:6px;font-size:13px;margin-left:18px;flex:1}
+.nav-crumb .c{color:var(--txt2)}.nav-crumb .sep{color:var(--txt3)}.nav-crumb .cur{color:var(--txt);font-weight:500}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:4px}
+.conn-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bg-card);border:1px solid var(--bdr);padding:4px 10px;border-radius:20px;font-family:var(--mono);font-size:11px;color:var(--txt2);margin-right:6px}
+.dot-g{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 5px var(--teal);animation:dp 2s infinite}
+.dot-off{width:6px;height:6px;border-radius:50%;background:var(--gray)}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:.4}}
+.nav-ico{width:34px;height:34px;display:grid;place-items:center;border-radius:var(--r);color:var(--txt2);font-size:14px;background:none;border:none;transition:all .15s;cursor:pointer}
+.nav-ico:hover{background:var(--bg-card);color:var(--txt)}
+
+/* TAB BAR */
+.tab-bar{position:fixed;top:var(--nav-h);left:0;right:0;z-index:190;height:var(--tab-h);background:var(--bg-nav);border-bottom:1px solid var(--bdr);display:flex;align-items:stretch;padding:0 20px;overflow-x:auto}
+.tab-bar::-webkit-scrollbar{height:0}
+.tab-item{display:flex;align-items:center;gap:5px;padding:0 13px;font-size:13px;font-weight:500;cursor:pointer;color:var(--txt2);border:none;background:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .14s;flex-shrink:0}
+.tab-item:hover{color:var(--txt)}.tab-item.active{color:var(--teal);border-bottom-color:var(--teal)}
+.tab-item .ti{font-size:12px}
+
+/* LAYOUT */
+.page{display:flex;position:fixed;top:calc(var(--nav-h) + var(--tab-h));left:0;right:0;bottom:0}
+
+/* SIDEBAR */
+.sidebar{width:230px;flex-shrink:0;background:var(--bg-nav);border-right:1px solid var(--bdr);display:flex;flex-direction:column;overflow-y:auto}
+.sb-hdr{padding:14px 16px;border-bottom:1px solid var(--bdr)}
+.sb-name{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.sb-icon{font-size:17px}
+.sb-status{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;font-family:var(--mono);text-transform:uppercase;letter-spacing:.4px}
+.sb-dot{width:8px;height:8px;border-radius:50%}
+.sb-dot.online{background:var(--green);box-shadow:0 0 5px var(--green)}
+.sb-dot.offline{background:var(--gray)}
+.sb-dot.starting,.sb-dot.stopping{background:var(--yellow);animation:blink 1s infinite}
+.sb-dot.error{background:var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.sb-res{padding:12px 16px;border-bottom:1px solid var(--bdr);display:flex;flex-direction:column;gap:11px}
+.sb-r{display:flex;flex-direction:column;gap:3px}
+.sb-r-head{display:flex;align-items:center;gap:6px}
+.sb-r-ic{font-size:12px;width:16px;text-align:center;flex-shrink:0}
+.sb-r-label{font-size:11px;color:var(--txt2);flex:1}
+.sb-r-val{font-size:11.5px;font-family:var(--mono);color:var(--txt);font-weight:500}
+.sb-r-bar{height:2px;background:var(--bg-card2);border-radius:2px;overflow:hidden}
+.sb-r-fill{height:100%;border-radius:2px;background:var(--teal);transition:width .5s ease}
+.sb-r-fill.warn{background:var(--yellow)}.sb-r-fill.danger{background:var(--red)}
+.sb-actions{padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+.sb-row{display:flex;gap:6px}
+.btn-sb{flex:1;padding:7px 0;border-radius:var(--r);font-size:12px;font-weight:600;border:none;background:var(--bg-card2);color:var(--txt2);transition:all .14s;cursor:pointer}
+.btn-sb:hover:not(:disabled){background:var(--bg-hover);color:var(--txt)}
+.btn-sb:disabled{opacity:.3;cursor:not-allowed}
+.btn-sb.red{background:var(--red);color:#fff;width:100%}
+.btn-sb.red:hover:not(:disabled){filter:brightness(1.1)}
+
+/* CONTENT */
+.content{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.panels{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.panel{display:none;flex:1;flex-direction:column;overflow:hidden}.panel.active{display:flex}
+
+/* GENERIC BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 13px;border-radius:var(--r);font-size:12.5px;font-weight:600;border:1px solid transparent;transition:all .14s;white-space:nowrap;cursor:pointer}
+.btn:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn-teal{background:var(--teal);color:#141824;border-color:var(--teal)}.btn-teal:hover{filter:brightness(1.1)}
+.btn-ghost{background:var(--bg-card);color:var(--txt2);border-color:var(--bdr)}.btn-ghost:hover{background:var(--bg-hover);color:var(--txt);border-color:var(--bdr2)}
+.btn-green{background:var(--green-g);color:var(--green);border-color:rgba(45,206,137,.3)}.btn-green:hover{background:rgba(45,206,137,.2)}
+.btn-red{background:var(--red-g);color:var(--red);border-color:rgba(245,54,92,.3)}.btn-red:hover{background:rgba(245,54,92,.2)}
+.btn-yellow{background:var(--yel-g);color:var(--yellow);border-color:rgba(251,99,64,.3)}.btn-yellow:hover{background:rgba(251,99,64,.2)}
+.btn-sm{padding:4px 10px;font-size:12px}
+.btn-xs{padding:3px 8px;font-size:11px}
+
+/* SECTION CARD */
+.section-card{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:14px}
+.section-hdr{padding:11px 16px;border-bottom:1px solid var(--bdr);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3);display:flex;align-items:center;justify-content:space-between}
+.section-body{padding:16px}
+.info-row{display:flex;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.info-row:last-child{border-bottom:none}
+.info-k{font-size:12.5px;color:var(--txt2);width:160px;flex-shrink:0;padding-top:1px}
+.info-v{font-size:12.5px;color:var(--txt);word-break:break-all;flex:1}
+.info-v.mono{font-family:var(--mono);font-size:12px;color:var(--txt2)}
+
+/* CONSOLE PANEL */
+.con-wrap{flex:1;overflow-y:auto;padding:8px 14px;background:var(--bg-con);font-family:var(--mono);font-size:12.5px;line-height:1.65}
+.log-line{display:flex;gap:10px;padding:1px 0}
+.log-ts{color:#1e2e42;font-size:10px;flex-shrink:0;min-width:60px;margin-top:2px;user-select:none}
+.log-body{white-space:pre-wrap;word-break:break-all;flex:1;color:#5a7a8a}
+.log-line.out .log-body{color:#b0c0cc}.log-line.err .log-body{color:#f5365c}
+.log-line.sys .log-body{color:#2d3e52;font-style:italic}.log-line.in .log-body{color:var(--teal)}
+.a1{font-weight:700}
+.a30{color:#374151}.a31{color:#ef4444}.a32{color:#2dce89}.a33{color:#fbbf24}
+.a34{color:#4ecdc4}.a35{color:#a78bfa}.a36{color:#22d3ee}.a37{color:#e5e7eb}
+.a90{color:#4b5563}.a91{color:#fca5a5}.a92{color:#6ee7b7}.a93{color:#fde68a}
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--bdr);flex-shrink:0;height:150px}
+.chart-box{padding:8px 14px;display:flex;flex-direction:column;gap:4px}
+.chart-box:first-child{border-right:1px solid var(--bdr)}
+.chart-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);display:flex;align-items:center;gap:5px}
+.chart-title::before{content:'▦';color:var(--teal);font-size:9px}
+.chart-canvas{flex:1;width:100%}
+.con-input-row{display:flex;align-items:center;gap:8px;padding:7px 12px;background:var(--bg-nav);border-top:1px solid var(--bdr);flex-shrink:0}
+.con-prompt{color:var(--green);font-family:var(--mono);font-size:13px;flex-shrink:0;user-select:none}
+.con-input{flex:1;background:transparent;border:none;outline:none;color:var(--txt);font-family:var(--mono);font-size:13px}
+.con-input::placeholder{color:var(--txt3)}.con-input:disabled{opacity:.3;cursor:not-allowed}
+
+/* FILE MANAGER */
+.files-container{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.files-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--bg-nav);border-bottom:1px solid var(--bdr);flex-shrink:0}
+.breadcrumbs{display:flex;align-items:center;gap:4px;flex:1;overflow-x:auto}
+.breadcrumbs::-webkit-scrollbar{height:0}
+.bc{font-size:12px;font-family:var(--mono);color:var(--txt2);cursor:pointer;padding:3px 6px;border-radius:4px;white-space:nowrap;transition:all .14s}
+.bc:hover{color:var(--txt);background:var(--bg-hover)}.bc.cur{color:var(--txt)}.bc-sep{color:var(--txt3)}
+.file-table{flex:1;overflow-y:auto}
+.file-table table{width:100%;border-collapse:collapse}
+.file-table thead th{padding:7px 14px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr);position:sticky;top:0}
+.file-table tbody tr{border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .12s}
+.file-table tbody tr:hover{background:var(--bg-hover)}.file-table tbody tr:last-child{border-bottom:none}
+.file-table td{padding:7px 14px;font-size:13px}
+.file-table .col-ic{width:36px;font-size:14px;text-align:center}
+.file-table .col-name{font-weight:500}
+.file-table .col-size{font-family:var(--mono);font-size:12px;color:var(--txt2);text-align:right;width:90px}
+.file-table .col-date{font-family:var(--mono);font-size:11px;color:var(--txt3);text-align:right;width:140px}
+.file-table .col-act{width:60px;text-align:right}
+.del-btn{background:none;border:none;color:var(--txt3);font-size:13px;padding:2px 6px;border-radius:3px;transition:all .14s;cursor:pointer}
+.del-btn:hover{color:var(--red);background:var(--red-g)}
+.editor-container{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.editor-bar{display:flex;align-items:center;gap:8px;padding:8px 14px;background:var(--bg-nav);border-bottom:1px solid var(--bdr);flex-shrink:0}
+.editor-fn{font-family:var(--mono);font-size:13px;color:var(--teal);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.editor-area{flex:1;background:#080b14;border:none;outline:none;resize:none;color:#b0c0cc;font-family:var(--mono);font-size:13px;padding:16px 18px;line-height:1.75;tab-size:2}
+
+/* PANEL WRAPPER */
+.panel-wrap{flex:1;overflow-y:auto;padding:20px}
+.panel-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.panel-title{font-size:15px;font-weight:600}
+
+/* DATABASES */
+.db-empty{text-align:center;padding:40px 20px;color:var(--txt3)}
+.db-empty-icon{font-size:32px;opacity:.3;margin-bottom:8px}
+.db-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--bdr);transition:background .12s}
+.db-row:last-child{border-bottom:none}
+.db-row:hover{background:var(--bg-hover)}
+.db-name{font-size:13px;font-weight:600;flex:1}
+.db-meta{font-size:11.5px;font-family:var(--mono);color:var(--txt2)}
+.db-host{font-size:11.5px;font-family:var(--mono);color:var(--txt3);min-width:110px}
+.pw-mask{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--txt3)}
+
+/* SCHEDULES */
+.sch-row{display:flex;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--bdr);transition:background .12s}
+.sch-row:last-child{border-bottom:none}.sch-row:hover{background:var(--bg-hover)}
+.sch-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sch-dot.on{background:var(--green);box-shadow:0 0 4px var(--green)}.sch-dot.off{background:var(--txt3)}
+.sch-info{flex:1;min-width:0}
+.sch-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.sch-cron{font-size:11.5px;font-family:var(--mono);color:var(--txt3)}
+.sch-action-badge{font-size:10.5px;font-weight:600;font-family:var(--mono);padding:2px 8px;border-radius:20px;flex-shrink:0}
+.sch-action-badge.command{background:var(--teal-g);color:var(--teal)}
+.sch-action-badge.backup{background:var(--green-g);color:var(--green)}
+.sch-action-badge.restart{background:var(--yel-g);color:var(--yellow)}
+.sch-action-badge.kill{background:var(--red-g);color:var(--red)}
+.sch-last{font-size:11px;font-family:var(--mono);color:var(--txt3);min-width:120px;text-align:right}
+.toggle-wrap{display:flex;align-items:center;cursor:pointer}
+.toggle{width:34px;height:18px;background:var(--bg-card2);border-radius:9px;position:relative;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--green)}
+.toggle::after{content:'';position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:2px;left:2px;transition:transform .2s}
+.toggle.on::after{transform:translateX(16px)}
+
+/* USERS */
+.user-row{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--bdr)}
+.user-row:last-child{border-bottom:none}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--teal-g);border:1px solid var(--teal-b);display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--teal);flex-shrink:0}
+.user-info{flex:1;min-width:0}.user-email{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.user-role{font-size:11.5px;color:var(--txt2);margin-top:1px}
+.perm-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.perm-tag{display:inline-flex;padding:2px 7px;border-radius:20px;font-size:10.5px;font-weight:600;background:var(--bg-card2);color:var(--txt2);border:1px solid var(--bdr2)}
+
+/* BACKUPS */
+.bk-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--bdr);transition:background .12s}
+.bk-row:last-child{border-bottom:none}.bk-row:hover{background:var(--bg-hover)}
+.bk-status{font-size:16px;flex-shrink:0}
+.bk-info{flex:1;min-width:0}
+.bk-name{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bk-meta{font-size:11.5px;font-family:var(--mono);color:var(--txt2);margin-top:2px}
+.bk-size{font-size:12px;font-family:var(--mono);color:var(--txt3);min-width:70px;text-align:right}
+.bk-actions{display:flex;gap:5px}
+.bk-progress{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--yellow);font-family:var(--mono)}
+.spinner{width:12px;height:12px;border:2px solid var(--yel-g);border-top-color:var(--yellow);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* NETWORK */
+.alloc-row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--bdr)}
+.alloc-row:last-child{border-bottom:none}
+.alloc-addr{font-family:var(--mono);font-size:13px;font-weight:600;flex:1}
+.alloc-primary-badge{display:inline-flex;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;background:var(--teal-g);color:var(--teal);border:1px solid var(--teal-b)}
+.alloc-note{font-size:12px;color:var(--txt2)}
+.net-stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.net-stat{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);padding:12px 14px}
+.net-stat-val{font-size:18px;font-weight:700;font-family:var(--mono);color:var(--teal);margin-bottom:2px}
+.net-stat-key{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);font-weight:700}
+
+/* STARTUP */
+.env-row{display:flex;align-items:center;gap:8px;padding:7px 16px;border-bottom:1px solid var(--bdr)}
+.env-row:last-child{border-bottom:none}
+.env-key{font-family:var(--mono);font-size:12px;color:var(--txt2);width:220px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.env-input{flex:1;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.env-input:focus{border-color:var(--teal)}
+
+/* SETTINGS */
+.form-field{margin-bottom:14px}
+.form-label{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:block}
+.form-input{width:100%;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--teal)}
+.form-desc{font-size:11.5px;color:var(--txt3);margin-top:4px}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal-bg.hidden{display:none}
+.modal{background:var(--bg-card);border:1px solid var(--bdr2);border-radius:var(--r);width:480px;max-width:92vw;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-hdr{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.modal-title{font-size:15px;font-weight:700}
+.modal-close{background:none;border:none;color:var(--txt2);font-size:18px;padding:2px 6px;border-radius:3px;transition:all .14s;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--txt);background:var(--bg-hover)}
+.modal-body{padding:20px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:12px 20px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:8px;flex-shrink:0}
+.modal-label{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:6px;display:block}
+.modal-input{width:100%;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.modal-input:focus{border-color:var(--teal)}
+.modal-select{width:100%;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;cursor:pointer;transition:border-color .15s}
+.modal-select:focus{border-color:var(--teal)}
+.modal-desc{font-size:11.5px;color:var(--txt3);margin-top:4px}
+.modal-divider{border:none;border-top:1px solid var(--bdr);margin:0}
+.modal-field{display:flex;flex-direction:column}
+.perm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.perm-check{display:flex;align-items:center;gap:8px;cursor:pointer;padding:5px 8px;border-radius:var(--r);border:1px solid var(--bdr);background:var(--bg-card2);transition:border-color .14s}
+.perm-check:hover{border-color:var(--bdr2)}
+.perm-check input{accent-color:var(--teal);width:14px;height:14px;cursor:pointer}
+.perm-check span{font-size:12px;color:var(--txt2)}
+.cron-presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.cron-preset{padding:3px 10px;background:var(--bg-card2);border:1px solid var(--bdr);border-radius:20px;font-size:11.5px;font-family:var(--mono);cursor:pointer;color:var(--txt2);transition:all .14s}
+.cron-preset:hover{border-color:var(--teal-b);color:var(--teal)}
+
+/* TOAST */
+.toast-rack{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{display:flex;align-items:center;gap:8px;background:var(--bg-card2);border:1px solid var(--bdr2);padding:10px 16px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:tIn .2s ease;max-width:300px}
+.toast.ok{border-color:rgba(45,206,137,.35);color:var(--green)}.toast.err{border-color:rgba(245,54,92,.35);color:var(--red)}.toast.info{border-color:rgba(78,205,196,.35);color:var(--teal)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes tOut{to{opacity:0;transform:translateY(8px)}}.toast.bye{animation:tOut .2s ease forwards}
+.footer{text-align:center;padding:4px;font-size:10.5px;color:var(--txt3);background:var(--bg-nav);border-top:1px solid var(--bdr);position:fixed;bottom:0;left:0;right:0;z-index:50}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="nav-logo"><div class="nav-logo-icon"></div>HazEPanel</a>
+  <div class="nav-crumb">
+    <a href="/" class="c">Servers</a>
+    <span class="sep">/</span>
+    <span class="cur" id="navName">Loading…</span>
+  </div>
+  <div class="nav-right">
+    <div class="conn-badge"><div class="dot-off" id="connDot"></div><span id="connChip">Connecting…</span></div>
+    <button class="nav-ico" title="Account" onclick="location.href='/account'">👤</button>
+    <button class="nav-ico" title="Admin"   onclick="location.href='/admin'">⚙️</button>
+    <button class="nav-ico" title="Sign Out" onclick="signOut()">⏏️</button>
+  </div>
+</nav>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-item active" data-tab="console"   onclick="switchTab('console')">  <span class="ti">💻</span> Console</button>
+  <button class="tab-item"        data-tab="files"     onclick="switchTab('files')">    <span class="ti">📁</span> File Manager</button>
+  <button class="tab-item"        data-tab="databases" onclick="switchTab('databases')"><span class="ti">🗄️</span> Databases</button>
+  <button class="tab-item"        data-tab="schedules" onclick="switchTab('schedules')"><span class="ti">🕐</span> Schedules</button>
+  <button class="tab-item"        data-tab="users"     onclick="switchTab('users')">    <span class="ti">👥</span> Users</button>
+  <button class="tab-item"        data-tab="backups"   onclick="switchTab('backups')">  <span class="ti">💾</span> Backups</button>
+  <button class="tab-item"        data-tab="network"   onclick="switchTab('network')">  <span class="ti">🌐</span> Network</button>
+  <button class="tab-item"        data-tab="startup"   onclick="switchTab('startup')">  <span class="ti">⚙️</span> Startup</button>
+  <button class="tab-item"        data-tab="settings"  onclick="switchTab('settings')"> <span class="ti">🔧</span> Settings</button>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-hdr">
+      <div class="sb-name"><span class="sb-icon" id="sbIcon">⚙️</span><span id="sbName">MINECRAFT</span></div>
+      <div class="sb-status"><div class="sb-dot offline" id="sbDot"></div><span id="sbStatus">Offline</span></div>
+    </div>
+    <div class="sb-res">
+      <div class="sb-r">
+        <div class="sb-r-head"><span class="sb-r-ic">💻</span><span class="sb-r-label">CPU Usage</span><span class="sb-r-val" id="sbCpu">—</span></div>
+        <div class="sb-r-bar"><div class="sb-r-fill" id="sbCpuBar" style="width:0%"></div></div>
+      </div>
+      <div class="sb-r">
+        <div class="sb-r-head"><span class="sb-r-ic">🧠</span><span class="sb-r-label">Memory</span><span class="sb-r-val" id="sbMem">—</span></div>
+        <div class="sb-r-bar"><div class="sb-r-fill" id="sbMemBar" style="width:0%"></div></div>
+      </div>
+      <div class="sb-r">
+        <div class="sb-r-head"><span class="sb-r-ic">💿</span><span class="sb-r-label">Disk</span><span class="sb-r-val" id="sbDisk">—</span></div>
+        <div class="sb-r-bar"><div class="sb-r-fill" id="sbDiskBar" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="sb-actions">
+      <div class="sb-row">
+        <button class="btn-sb" id="btnStart" onclick="srvAct('start')">▶ START</button>
+        <button class="btn-sb" id="btnRestart" onclick="srvAct('restart')" disabled>↻ RESTART</button>
+      </div>
+      <button class="btn-sb red" id="btnStop" onclick="srvAct('stop')" disabled>■ STOP</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <div class="panels">
+
+      <!-- ═══ CONSOLE ═══ -->
+      <div class="panel active" id="panel-console">
+        <div class="con-wrap" id="conOut"></div>
+        <div class="charts-row">
+          <div class="chart-box"><div class="chart-title">Memory Usage</div><canvas class="chart-canvas" id="chartMem"></canvas></div>
+          <div class="chart-box"><div class="chart-title">CPU Usage</div><canvas class="chart-canvas" id="chartCpu"></canvas></div>
+        </div>
+        <div class="con-input-row">
+          <div class="con-prompt">$</div>
+          <input class="con-input" id="conInput" placeholder="Type a command…" disabled onkeydown="if(event.key==='Enter')sendCmd()">
+          <button class="btn btn-ghost btn-sm" onclick="clearCon()">Clear</button>
+          <button class="btn btn-teal btn-sm" onclick="sendCmd()">Send</button>
+        </div>
+      </div>
+
+      <!-- ═══ FILE MANAGER ═══ -->
+      <div class="panel" id="panel-files">
+        <div class="files-container" id="filesContainer">
+          <div class="files-bar">
+            <div class="breadcrumbs" id="breadcrumbs"></div>
+            <button class="btn btn-ghost btn-sm" onclick="filesMkdir()">📁 New Folder</button>
+            <button class="btn btn-ghost btn-sm" onclick="filesUpload()">⬆ Upload</button>
+            <input type="file" id="uploadInput" multiple style="display:none" onchange="doUpload(this)">
+            <button class="btn btn-ghost btn-sm" onclick="goUp()">↑ Up</button>
+            <button class="btn btn-ghost btn-sm" onclick="loadFiles()">↺ Refresh</button>
+          </div>
+          <div class="file-table">
+            <table><thead><tr>
+              <th class="col-ic"></th><th>Name</th>
+              <th class="col-size">Size</th><th class="col-date">Modified</th><th class="col-act"></th>
+            </tr></thead>
+            <tbody id="fileBody"></tbody></table>
+          </div>
+        </div>
+        <div class="editor-container" id="editorContainer" style="display:none">
+          <div class="editor-bar">
+            <div class="editor-fn" id="editorFn">—</div>
+            <button class="btn btn-green btn-sm" onclick="saveFile()">💾 Save</button>
+            <button class="btn btn-ghost btn-sm" onclick="closeEditor()">✕ Close</button>
+          </div>
+          <textarea class="editor-area" id="editorArea" spellcheck="false"></textarea>
+        </div>
+      </div>
+
+      <!-- ═══ DATABASES ═══ -->
+      <div class="panel" id="panel-databases">
+        <div class="panel-wrap">
+          <div class="panel-hdr">
+            <div class="panel-title">Databases</div>
+            <button class="btn btn-teal btn-sm" onclick="openModal('db')">+ New Database</button>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">Active Databases</div>
+            <div id="dbList"><div class="db-empty"><div class="db-empty-icon">🗄️</div><div>Loading…</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SCHEDULES ═══ -->
+      <div class="panel" id="panel-schedules">
+        <div class="panel-wrap">
+          <div class="panel-hdr">
+            <div class="panel-title">Schedules</div>
+            <button class="btn btn-teal btn-sm" onclick="openModal('sch')">+ New Schedule</button>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">Active Schedules</div>
+            <div id="schList"><div class="db-empty"><div class="db-empty-icon">🕐</div><div>Loading…</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ USERS ═══ -->
+      <div class="panel" id="panel-users">
+        <div class="panel-wrap">
+          <div class="panel-hdr">
+            <div class="panel-title">Subusers</div>
+            <button class="btn btn-teal btn-sm" onclick="openModal('user')">+ Invite User</button>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">Authorized Users</div>
+            <div class="user-row">
+              <div class="user-avatar">A</div>
+              <div class="user-info">
+                <div class="user-email">admin@local</div>
+                <div class="user-role">Owner — Full access</div>
+              </div>
+              <div class="perm-tags"><span class="perm-tag">All Permissions</span></div>
+            </div>
+            <div id="userList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ BACKUPS ═══ -->
+      <div class="panel" id="panel-backups">
+        <div class="panel-wrap">
+          <div class="panel-hdr">
+            <div class="panel-title">Backups</div>
+            <button class="btn btn-teal btn-sm" onclick="createBackup()">+ Create Backup</button>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr" id="bkHdr">Available Backups</div>
+            <div id="bkList"><div class="db-empty"><div class="db-empty-icon">💾</div><div>Loading…</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ NETWORK ═══ -->
+      <div class="panel" id="panel-network">
+        <div class="panel-wrap">
+          <div class="panel-title" style="margin-bottom:14px">Network</div>
+          <div class="net-stat-grid">
+            <div class="net-stat"><div class="net-stat-val" id="netCpu">—</div><div class="net-stat-key">CPU Usage</div></div>
+            <div class="net-stat"><div class="net-stat-val" id="netMem">—</div><div class="net-stat-key">Memory</div></div>
+            <div class="net-stat"><div class="net-stat-val" id="netRx">0 B/s</div><div class="net-stat-key">Inbound</div></div>
+            <div class="net-stat"><div class="net-stat-val" id="netTx">0 B/s</div><div class="net-stat-key">Outbound</div></div>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">
+              <span>Allocations</span>
+              <button class="btn btn-ghost btn-xs" onclick="openModal('alloc')">+ Add Port</button>
+            </div>
+            <div id="allocList"><div class="db-empty"><div>Loading…</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ STARTUP ═══ -->
+      <div class="panel" id="panel-startup">
+        <div class="panel-wrap">
+          <div class="panel-title" style="margin-bottom:14px">Startup Configuration</div>
+          <div class="section-card">
+            <div class="section-hdr">Startup Command</div>
+            <div class="section-body">
+              <div class="form-field">
+                <label class="form-label">Docker Image</label>
+                <input class="form-input" id="stImage" readonly style="opacity:.6">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Startup Command</label>
+                <input class="form-input" id="stCmd" placeholder="Startup command…">
+                <div class="form-desc">Edit the startup command for this server (non-Minecraft types only).</div>
+              </div>
+            </div>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">
+              <span>Environment Variables</span>
+              <button class="btn btn-teal btn-xs" onclick="saveStartup()">💾 Save Changes</button>
+            </div>
+            <div id="startupEnv"><div class="db-empty"><div>Loading…</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ SETTINGS ═══ -->
+      <div class="panel" id="panel-settings">
+        <div class="panel-wrap">
+          <div class="panel-title" style="margin-bottom:14px">Settings</div>
+          <div class="section-card">
+            <div class="section-hdr">General</div>
+            <div class="section-body">
+              <div class="form-field">
+                <label class="form-label">Server Name</label>
+                <input class="form-input" id="settName" placeholder="My Minecraft Server">
+              </div>
+              <div class="form-field">
+                <label class="form-label">Description</label>
+                <input class="form-input" id="settDesc" placeholder="Optional description">
+              </div>
+              <button class="btn btn-teal btn-sm" onclick="saveSettings()">💾 Save Changes</button>
+            </div>
+          </div>
+          <div class="section-card">
+            <div class="section-hdr">SFTP Details</div>
+            <div class="section-body">
+              <div class="info-row"><div class="info-k">Server Address</div><div class="info-v mono" id="sftpHost">127.0.0.1:2022</div></div>
+              <div class="info-row"><div class="info-k">Username</div><div class="info-v mono" id="sftpUser">—</div></div>
+              <div class="info-row"><div class="info-k">Password</div><div class="info-v">Your panel account password</div></div>
+            </div>
+          </div>
+          <div class="section-card" style="border-color:rgba(245,54,92,.3)">
+            <div class="section-hdr" style="color:var(--red)">Danger Zone</div>
+            <div class="section-body" style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-red btn-sm" onclick="if(confirm('Reset all panel settings for this server?'))resetSettings()">⚠ Reset Settings</button>
+              <button class="btn btn-ghost btn-sm" onclick="copyId()">📋 Copy Server ID</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<!-- NEW DATABASE -->
+<div class="modal-bg hidden" id="modal-db">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title">New Database</div><button class="modal-close" onclick="closeModal('db')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-field"><label class="modal-label">Database Name *</label><input class="modal-input" id="dbName" placeholder="e.g. s5_world"></div>
+      <div class="modal-field"><label class="modal-label">Host</label><input class="modal-input" id="dbHost" value="127.0.0.1"><div class="modal-desc">MySQL/MariaDB host address</div></div>
+      <div class="modal-field"><label class="modal-label">Port</label><input class="modal-input" id="dbPort" type="number" value="3306"></div>
+      <div class="modal-field"><label class="modal-label">Allow Connections From</label><input class="modal-input" id="dbFrom" value="%" placeholder="%"><div class="modal-desc">% = any host, or specific IP</div></div>
+      <div class="modal-field"><label class="modal-label">Max Connections (0 = unlimited)</label><input class="modal-input" id="dbMax" type="number" value="0"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('db')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="submitDb()">Create Database</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW CREDENTIALS -->
+<div class="modal-bg hidden" id="modal-creds">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title" id="credsTitle">Database Credentials</div><button class="modal-close" onclick="closeModal('creds')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-field"><label class="modal-label">Database Name</label><input class="modal-input" id="credsName" readonly></div>
+      <div class="modal-field"><label class="modal-label">Username</label><input class="modal-input" id="credsUser" readonly></div>
+      <div class="modal-field"><label class="modal-label">Password</label><input class="modal-input" id="credsPw" readonly type="text"></div>
+      <div class="modal-field"><label class="modal-label">Host</label><input class="modal-input" id="credsHost" readonly></div>
+      <div class="modal-field"><label class="modal-label">JDBC Connection String</label><input class="modal-input" id="credsJdbc" readonly style="font-family:var(--mono);font-size:12px"></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost btn-sm" onclick="closeModal('creds')">Close</button></div>
+  </div>
+</div>
+
+<!-- NEW SCHEDULE -->
+<div class="modal-bg hidden" id="modal-sch">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title" id="schModalTitle">New Schedule</div><button class="modal-close" onclick="closeModal('sch')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-field"><label class="modal-label">Schedule Name *</label><input class="modal-input" id="schName" placeholder="e.g. Hourly Restart"></div>
+      <div class="modal-field">
+        <label class="modal-label">Cron Expression *</label>
+        <input class="modal-input" id="schCron" placeholder="* * * * *" oninput="updateCronPreview()">
+        <div class="cron-presets">
+          <span class="cron-preset" onclick="setCron('*/5 * * * *')">Every 5m</span>
+          <span class="cron-preset" onclick="setCron('0 * * * *')">Hourly</span>
+          <span class="cron-preset" onclick="setCron('0 0 * * *')">Daily</span>
+          <span class="cron-preset" onclick="setCron('0 3 * * *')">Daily 3am</span>
+          <span class="cron-preset" onclick="setCron('0 0 * * 0')">Weekly</span>
+          <span class="cron-preset" onclick="setCron('0 0 1 * *')">Monthly</span>
+        </div>
+        <div class="modal-desc" id="cronPreview" style="color:var(--teal);margin-top:6px"></div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Action *</label>
+        <select class="modal-select" id="schAction" onchange="updateSchActionUI()">
+          <option value="command">Send Console Command</option>
+          <option value="backup">Create Backup</option>
+          <option value="restart">Restart Server</option>
+          <option value="kill">Kill Process</option>
+        </select>
+      </div>
+      <div class="modal-field" id="schCmdField">
+        <label class="modal-label">Command</label>
+        <input class="modal-input" id="schCmd" placeholder="e.g. say Server restarting in 1 minute">
+      </div>
+      <input type="hidden" id="schEditId">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('sch')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="submitSch()">Save Schedule</button>
+    </div>
+  </div>
+</div>
+
+<!-- INVITE USER -->
+<div class="modal-bg hidden" id="modal-user">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title" id="userModalTitle">Invite User</div><button class="modal-close" onclick="closeModal('user')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-field"><label class="modal-label">Email Address *</label><input class="modal-input" id="userEmail" type="email" placeholder="user@example.com"></div>
+      <div class="modal-field">
+        <label class="modal-label">Permissions</label>
+        <div class="perm-grid">
+          <label class="perm-check"><input type="checkbox" name="perm" value="console.read" checked><span>Read Console</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="console.write"><span>Send Commands</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="files.read" checked><span>Read Files</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="files.write"><span>Edit Files</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="files.delete"><span>Delete Files</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="databases"><span>Databases</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="schedules"><span>Schedules</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="backups"><span>Backups</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="startup"><span>View Startup</span></label>
+          <label class="perm-check"><input type="checkbox" name="perm" value="control.start"><span>Start/Stop</span></label>
+        </div>
+      </div>
+      <input type="hidden" id="userEditId">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('user')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="submitUser()">Save User</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD ALLOCATION -->
+<div class="modal-bg hidden" id="modal-alloc">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title">Add Allocation</div><button class="modal-close" onclick="closeModal('alloc')">✕</button></div>
+    <div class="modal-body">
+      <div class="modal-field"><label class="modal-label">IP Address</label><input class="modal-input" id="allocIp" value="127.0.0.1"></div>
+      <div class="modal-field"><label class="modal-label">Port *</label><input class="modal-input" id="allocPort" type="number" placeholder="25575"></div>
+      <div class="modal-field"><label class="modal-label">Notes</label><input class="modal-input" id="allocNotes" placeholder="e.g. RCON port"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('alloc')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="submitAlloc()">Add Allocation</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-rack" id="toasts"></div>
+<div class="footer">©</div>
+
+<script>
+/* ── State ── */
+const serverId = location.pathname.split('/').pop();
+let srv = null, ws = null, autoScroll = true, upIv = null;
+let fp = '', editingFp = '';
+const MH = Array(60).fill(0), CH = Array(60).fill(0);
+let memCtx = null, cpuCtx = null;
+
+/* ── Boot ── */
+async function boot() {
+  if (!serverId) { alert('No server ID'); return; }
+  try {
+    const d = await api('/api/servers/' + serverId);
+    if (d.error) { alert('Server not found'); return; }
+    srv = d;
+    applyServerInfo(srv);
+    if (srv.logs) srv.logs.forEach(l => pushLog(l));
+    scrollCon();
+  } catch(e) { alert('Failed to load: ' + e.message); return; }
+  initCharts();
+  connectWs();
+}
+
+function applyServerInfo(s) {
+  document.title = s.name + ' — HazEPanel';
+  qs('#navName').textContent = s.name;
+  qs('#sbIcon').textContent = typeIcon(s.type);
+  qs('#sbName').textContent = s.name.toUpperCase().slice(0, 16);
+  applyStatus(s.status || 'offline');
+  if (s.stats) applyStats(s.stats, s);
+}
+
+/* ── Status ── */
+function applyStatus(status) {
+  qs('#sbDot').className = 'sb-dot ' + status;
+  qs('#sbStatus').textContent = cap(status);
+  const on = status === 'online', off = status === 'offline';
+  qs('#btnStart').disabled = !off;
+  qs('#btnStop').disabled = !on;
+  qs('#btnRestart').disabled = !on;
+  qs('#conInput').disabled = !on;
+  const dot = qs('#connDot');
+  dot.className = on ? 'dot-g' : 'dot-off';
+  qs('#connChip').textContent = on ? 'Connected' : status === 'offline' ? 'Offline' : cap(status);
+  if (!on) clearInterval(upIv);
+  else if (srv?.startedAt) startUptime(srv.startedAt);
+}
+
+/* ── Stats ── */
+function applyStats(st, s) {
+  const ref = s || srv;
+  const ml = ref?.limits?.memory || 2048, cl = ref?.limits?.cpu || 100;
+  const mp = Math.min((st.memoryMB / ml) * 100, 100), cp = Math.min(st.cpu, 100);
+  qs('#sbCpu').textContent = st.cpu + '%';
+  setBar('#sbCpuBar', cp);
+  qs('#sbMem').textContent = st.memoryMB.toFixed(0) + 'MB';
+  setBar('#sbMemBar', mp);
+  qs('#sbDisk').textContent = (st.diskMB || 0).toFixed(0) + 'MB';
+  setBar('#sbDiskBar', Math.min(((st.diskMB || 0) / (ref?.limits?.disk || 10240)) * 100, 100));
+  // Network tab stats
+  qs('#netCpu') && (qs('#netCpu').textContent = st.cpu + '%');
+  qs('#netMem') && (qs('#netMem').textContent = st.memoryMB.toFixed(0) + ' MB');
+  MH.shift(); MH.push(st.memoryMB);
+  CH.shift(); CH.push(st.cpu);
+  drawCharts();
+}
+
+function setBar(sel, pct) {
+  const el = qs(sel);
+  el.style.width = pct + '%';
+  el.className = 'sb-r-fill' + (pct > 85 ? ' danger' : pct > 60 ? ' warn' : '');
+}
+
+/* ── Uptime ── */
+function startUptime(t0) {
+  clearInterval(upIv);
+  const tick = () => {
+    if (!srv || !t0) return;
+  };
+  tick(); upIv = setInterval(tick, 1000);
+}
+
+/* ── Charts ── */
+function initCharts() {
+  const mc = qs('#chartMem'), cc = qs('#chartCpu');
+  if (mc) memCtx = mc.getContext('2d');
+  if (cc) cpuCtx = cc.getContext('2d');
+  drawCharts();
+}
+
+function drawChart(ctx, data, maxVal, color) {
+  if (!ctx) return;
+  const c = ctx.canvas, w = c.width = c.offsetWidth, h = c.height = c.offsetHeight;
+  if (!w || !h) return;
+  ctx.clearRect(0, 0, w, h);
+  const n = data.length;
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, color + '50'); grad.addColorStop(1, color + '05');
+  ctx.beginPath();
+  data.forEach((v, i) => { const x = (i / (n - 1)) * w, y = h - (v / maxVal) * h; i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+  ctx.fillStyle = grad; ctx.fill();
+  ctx.beginPath();
+  data.forEach((v, i) => { const x = (i / (n - 1)) * w, y = h - (v / maxVal) * h; i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); });
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+}
+
+function drawCharts() {
+  const ml = srv?.limits?.memory || 2048, cl = Math.max(...CH, 100);
+  drawChart(memCtx, MH, ml, '#4ecdc4');
+  drawChart(cpuCtx, CH, cl, '#4ecdc4');
+}
+window.addEventListener('resize', drawCharts);
+
+/* ── Console ── */
+function pushLog(log) {
+  const out = qs('#conOut');
+  const row = document.createElement('div'); row.className = 'log-line ' + (log.s || 'out');
+  const ts = document.createElement('span'); ts.className = 'log-ts'; ts.textContent = fmtTime(log.t);
+  const body = document.createElement('span'); body.className = 'log-body'; body.innerHTML = ansi(esc(log.m || ''));
+  row.appendChild(ts); row.appendChild(body); out.appendChild(row);
+  if (autoScroll) scrollCon();
+  while (out.children.length > 1500) out.removeChild(out.firstChild);
+}
+function scrollCon() { const o = qs('#conOut'); o.scrollTop = o.scrollHeight; }
+function clearCon() { api('/api/servers/' + serverId + '/logs', 'DELETE'); qs('#conOut').innerHTML = ''; }
+function sendCmd() {
+  const inp = qs('#conInput'), cmd = inp.value.trim(); if (!cmd) return;
+  api('/api/servers/' + serverId + '/command', 'POST', { command: cmd }).then(r => { if (!r.ok) toast(r.error, 'err'); });
+  inp.value = '';
+}
+
+/* ── Server Actions ── */
+async function srvAct(action) {
+  const r = await api('/api/servers/' + serverId + '/' + action, 'POST');
+  if (!r.ok) toast(r.error || 'Error', 'err'); else toast(cap(action) + '…', 'ok');
+}
+
+/* ── WebSocket ── */
+/* ── WebSocket + HTTP Polling Fallback (ngrok-safe) ── */
+let pollIv = null;
+let wsActive = false;
+let lastLogTs = 0;
+
+function connectWs() {
+  const proto = location.protocol === 'https:' ? 'wss://' : 'ws://';
+  try { ws = new WebSocket(proto + location.host + '?server=' + serverId); } catch(e) { startPolling(); return; }
+  ws.onopen  = () => { wsActive = true; stopPolling(); qs('#connChip').textContent = 'Connected'; qs('#connDot').className = 'dot-g'; };
+  ws.onmessage = e => {
+    const m = JSON.parse(e.data);
+    if (m.type === 'log') { pushLog(m); lastLogTs = m.t || Date.now(); }
+    if (m.type === 'status') { if (srv) srv.status = m.status; applyStatus(m.status); if (m.status === 'online' && srv?.startedAt) startUptime(srv.startedAt); }
+    if (m.type === 'server_update') { srv = { ...(srv || {}), ...m.server }; applyStatus(m.server.status); applyServerInfo(srv); }
+    if (m.type === 'stats') { if (srv) srv.stats = m.stats; if (srv?.status === 'online') applyStats(m.stats, srv); }
+    if (m.type === 'backup_update') { loadBackups(); }
+  };
+  ws.onerror = () => { try { ws.close(); } catch(e) {} };
+  ws.onclose = () => {
+    wsActive = false;
+    qs('#connChip').textContent = 'Polling…';
+    qs('#connDot').className = 'dot-off';
+    startPolling();
+    setTimeout(connectWs, 6000);
+  };
+}
+
+function startPolling() {
+  if (pollIv) return;
+  pollIv = setInterval(async () => {
+    try {
+      const d = await api('/api/servers/' + serverId);
+      if (!d || d.error) return;
+      const prevStatus = srv?.status;
+      srv = { ...(srv || {}), ...d };
+      if (d.status !== prevStatus) applyStatus(d.status || 'offline');
+      if (d.stats) applyStats(d.stats, d);
+      (d.logs || []).forEach(l => { if ((l.t || 0) > lastLogTs) { pushLog(l); lastLogTs = l.t || Date.now(); } });
+      qs('#connChip').textContent = 'Polling';
+    } catch(e) {}
+  }, 3000);
+}
+
+function stopPolling() { clearInterval(pollIv); pollIv = null; }
+
+/* ── Tabs ── */
+function switchTab(name) {
+  qsa('.tab-item').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  qsa('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  const loaders = { files: loadFiles, databases: loadDatabases, schedules: loadSchedules, users: loadUsers, backups: loadBackups, network: loadNetwork, startup: loadStartup, settings: loadSettings };
+  if (loaders[name]) loaders[name]();
+}
+
+/* ─────────── FILE MANAGER ─────────── */
+async function loadFiles(sub) {
+  if (sub !== undefined) fp = sub;
+  qs('#filesContainer').style.display = '';
+  qs('#editorContainer').style.display = 'none';
+  renderBc();
+  try {
+    const d = await api('/api/servers/' + serverId + '/files?path=' + encodeURIComponent(fp));
+    if (d.error) return toast(d.error, 'err');
+    const tb = qs('#fileBody');
+    if (!d.items?.length) { tb.innerHTML = '<tr><td colspan="5" style="padding:20px;text-align:center;color:var(--txt3)">Empty directory</td></tr>'; return; }
+    tb.innerHTML = d.items.map(f => {
+      const target = (fp ? fp + '/' : '') + f.name;
+      return `<tr onclick="${f.isDir ? `loadFiles('${target.replace(/'/g,"\\'")}')` : `openFile('${target.replace(/'/g,"\\'")}')`}">
+        <td class="col-ic">${f.isDir ? '📁' : ficon(f.name)}</td>
+        <td class="col-name">${esc(f.name)}</td>
+        <td class="col-size">${f.isDir ? '—' : fmtB(f.size)}</td>
+        <td class="col-date">${f.mtime ? new Date(f.mtime).toLocaleString() : '—'}</td>
+        <td class="col-act"><button class="del-btn" onclick="event.stopPropagation();delFile('${target.replace(/'/g,"\\'")}')" title="Delete">🗑</button></td>
+      </tr>`;
+    }).join('');
+  } catch(e) { toast('Error: ' + e.message, 'err'); }
+}
+function renderBc() {
+  const parts = fp ? fp.split('/').filter(Boolean) : [];
+  let html = `<span class="bc ${!parts.length ? 'cur' : ''}" onclick="loadFiles('')">/root</span>`;
+  let acc = '';
+  parts.forEach((p, i) => { acc += (acc ? '/' : '') + p; const c = acc; html += `<span class="bc-sep">/</span><span class="bc ${i === parts.length - 1 ? 'cur' : ''}" onclick="loadFiles('${c}')">${p}</span>`; });
+  qs('#breadcrumbs').innerHTML = html;
+}
+function goUp() { const p = fp.split('/').filter(Boolean); p.pop(); loadFiles(p.join('/')); }
+async function openFile(path) {
+  editingFp = path;
+  try {
+    const d = await api('/api/servers/' + serverId + '/file?path=' + encodeURIComponent(path));
+    if (d.error) return toast(d.error, 'err');
+    qs('#filesContainer').style.display = 'none';
+    qs('#editorContainer').style.display = 'flex';
+    qs('#editorFn').textContent = path;
+    qs('#editorArea').value = d.content;
+  } catch(e) { toast('Cannot read file: ' + e.message, 'err'); }
+}
+async function saveFile() {
+  const r = await api('/api/servers/' + serverId + '/file?path=' + encodeURIComponent(editingFp), 'PUT', { content: qs('#editorArea').value });
+  if (r.ok) toast('File saved', 'ok'); else toast(r.error, 'err');
+}
+function closeEditor() { qs('#filesContainer').style.display = ''; qs('#editorContainer').style.display = 'none'; editingFp = ''; }
+async function delFile(path) {
+  if (!confirm('Delete "' + path.split('/').pop() + '"?')) return;
+  const r = await api('/api/servers/' + serverId + '/file?path=' + encodeURIComponent(path), 'DELETE');
+  if (r.ok) { toast('Deleted', 'ok'); loadFiles(); } else toast(r.error, 'err');
+}
+async function filesMkdir() {
+  const name = prompt('Folder name:'); if (!name) return;
+  const newPath = (fp ? fp + '/' : '') + name;
+  const r = await api('/api/servers/' + serverId + '/mkdir', 'POST', { path: newPath });
+  if (r.ok) { toast('Folder created', 'ok'); loadFiles(); } else toast(r.error, 'err');
+}
+function filesUpload() { qs('#uploadInput').click(); }
+async function doUpload(inp) {
+  if (!inp.files.length) return;
+  const fd = new FormData();
+  [...inp.files].forEach(f => fd.append('file', f));
+  try {
+    const r = await fetch('/api/servers/' + serverId + '/upload?path=' + encodeURIComponent(fp), { method: 'POST', body: fd });
+    const d = await r.json();
+    if (d.ok) { toast('Uploaded ' + inp.files.length + ' file(s)', 'ok'); loadFiles(); }
+    else toast(d.error || 'Upload failed', 'err');
+  } catch(e) { toast('Upload error: ' + e.message, 'err'); }
+  inp.value = '';
+}
+
+/* ─────────── DATABASES ─────────── */
+async function loadDatabases() {
+  const list = await api('/api/servers/' + serverId + '/databases');
+  const el = qs('#dbList');
+  if (!list.length) { el.innerHTML = '<div class="db-empty"><div class="db-empty-icon">🗄️</div><div>No databases yet. Create one to get started.</div></div>'; return; }
+  el.innerHTML = list.map(db => `
+    <div class="db-row">
+      <div style="flex:1;min-width:0">
+        <div class="db-name">${esc(db.name)}</div>
+        <div class="db-meta">${esc(db.username)} @ ${db.connections_from} · max: ${db.max_connections || '∞'}</div>
+      </div>
+      <div class="db-host">${db.host}:${db.port}</div>
+      <button class="btn btn-ghost btn-xs" onclick='viewCreds(${JSON.stringify(db)})'>🔍 Credentials</button>
+      <button class="btn btn-red btn-xs" onclick="deleteDb('${db.id}')">🗑</button>
+    </div>`).join('');
+}
+function openModal(name) { qs('#modal-' + name).classList.remove('hidden'); }
+function closeModal(name) { qs('#modal-' + name).classList.add('hidden'); }
+async function submitDb() {
+  const name = qs('#dbName').value.trim();
+  if (!name) return toast('Database name required', 'err');
+  const r = await api('/api/servers/' + serverId + '/databases', 'POST', {
+    name, host: qs('#dbHost').value, port: parseInt(qs('#dbPort').value),
+    connections_from: qs('#dbFrom').value, max_connections: parseInt(qs('#dbMax').value)
+  });
+  if (r.id) { toast('Database created', 'ok'); closeModal('db'); qs('#dbName').value = ''; loadDatabases(); viewCreds(r); }
+  else toast(r.error || 'Error', 'err');
+}
+function viewCreds(db) {
+  qs('#credsTitle').textContent = 'Credentials: ' + db.name;
+  qs('#credsName').value = db.name;
+  qs('#credsUser').value = db.username;
+  qs('#credsPw').value = db.password;
+  qs('#credsHost').value = db.host + ':' + db.port;
+  qs('#credsJdbc').value = `jdbc:mysql://${db.username}:${db.password}@${db.host}:${db.port}/${db.name}`;
+  openModal('creds');
+}
+async function deleteDb(id) {
+  if (!confirm('Delete this database? The credentials will be removed.')) return;
+  const r = await api('/api/servers/' + serverId + '/databases/' + id, 'DELETE');
+  if (r.ok) { toast('Database deleted', 'ok'); loadDatabases(); } else toast(r.error, 'err');
+}
+
+/* ─────────── SCHEDULES ─────────── */
+async function loadSchedules() {
+  const list = await api('/api/servers/' + serverId + '/schedules');
+  const el = qs('#schList');
+  if (!list.length) { el.innerHTML = '<div class="db-empty"><div class="db-empty-icon">🕐</div><div>No schedules. Create one to automate tasks.</div></div>'; return; }
+  el.innerHTML = list.map(s => `
+    <div class="sch-row">
+      <div class="sch-dot ${s.enabled ? 'on' : 'off'}"></div>
+      <div class="sch-info">
+        <div class="sch-name">${esc(s.name)}</div>
+        <div class="sch-cron">${esc(s.cron)}${s.command ? ' · "' + esc(s.command) + '"' : ''}</div>
+      </div>
+      <span class="sch-action-badge ${s.action}">${s.action}</span>
+      <div class="sch-last">${s.lastRun ? new Date(s.lastRun).toLocaleTimeString() : 'Never run'}</div>
+      <div class="toggle-wrap" onclick="toggleSch('${s.id}', ${!s.enabled})" title="${s.enabled ? 'Disable' : 'Enable'}">
+        <div class="toggle ${s.enabled ? 'on' : ''}"></div>
+      </div>
+      <button class="btn btn-ghost btn-xs" onclick="runSchNow('${s.id}')" title="Run Now">▶</button>
+      <button class="btn btn-ghost btn-xs" onclick='editSch(${JSON.stringify(s)})'>✏</button>
+      <button class="btn btn-red btn-xs" onclick="deleteSch('${s.id}')">🗑</button>
+    </div>`).join('');
+}
+function setCron(v) { qs('#schCron').value = v; updateCronPreview(); }
+function updateSchActionUI() { qs('#schCmdField').style.display = qs('#schAction').value === 'command' ? '' : 'none'; }
+function updateCronPreview() {
+  const v = qs('#schCron').value.trim();
+  const parts = v.split(/\s+/);
+  if (parts.length !== 5) { qs('#cronPreview').textContent = ''; return; }
+  qs('#cronPreview').textContent = cronHuman(parts);
+}
+function cronHuman([min, hour, dom, mon, dow]) {
+  if (min === '*' && hour === '*') return 'Runs every minute';
+  if (min.startsWith('*/')) return `Every ${min.slice(2)} minutes`;
+  if (hour === '*') return `At minute ${min} of every hour`;
+  if (dom === '*' && mon === '*' && dow === '*') return `Daily at ${hour.padStart(2,'0')}:${min.padStart(2,'0')}`;
+  if (dow !== '*') return `Every ${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][parseInt(dow)]||dow} at ${hour}:${min.padStart(2,'0')}`;
+  if (dom !== '*') return `On day ${dom} of every month at ${hour}:${min.padStart(2,'0')}`;
+  return v;
+}
+async function submitSch() {
+  const name = qs('#schName').value.trim(), cron = qs('#schCron').value.trim();
+  if (!name || !cron) return toast('Name and cron expression required', 'err');
+  const id = qs('#schEditId').value;
+  const body = { name, cron, action: qs('#schAction').value, command: qs('#schCmd').value.trim() };
+  const url = '/api/servers/' + serverId + '/schedules' + (id ? '/' + id : '');
+  const method = id ? 'PUT' : 'POST';
+  const r = await api(url, method, body);
+  if (r.id || r.ok || r.name) { toast(id ? 'Schedule updated' : 'Schedule created', 'ok'); closeModal('sch'); loadSchedules(); }
+  else toast(r.error || 'Error', 'err');
+}
+function editSch(s) {
+  qs('#schModalTitle').textContent = 'Edit Schedule';
+  qs('#schName').value = s.name;
+  qs('#schCron').value = s.cron;
+  qs('#schAction').value = s.action;
+  qs('#schCmd').value = s.command || '';
+  qs('#schEditId').value = s.id;
+  updateCronPreview(); updateSchActionUI();
+  openModal('sch');
+}
+async function toggleSch(id, enabled) {
+  await api('/api/servers/' + serverId + '/schedules/' + id, 'PUT', { enabled });
+  loadSchedules();
+}
+async function runSchNow(id) {
+  const r = await api('/api/servers/' + serverId + '/schedules/' + id + '/run', 'POST');
+  if (r.ok) toast('Schedule triggered', 'ok'); else toast(r.error, 'err');
+}
+async function deleteSch(id) {
+  if (!confirm('Delete this schedule?')) return;
+  const r = await api('/api/servers/' + serverId + '/schedules/' + id, 'DELETE');
+  if (r.ok) { toast('Schedule deleted', 'ok'); loadSchedules(); } else toast(r.error, 'err');
+}
+
+/* ─────────── USERS ─────────── */
+async function loadUsers() {
+  const list = await api('/api/servers/' + serverId + '/users');
+  const el = qs('#userList');
+  if (!list.length) { el.innerHTML = '<div class="db-empty" style="padding:14px"><div>No subusers yet.</div></div>'; return; }
+  el.innerHTML = list.map(u => `
+    <div class="user-row">
+      <div class="user-avatar">${u.username.charAt(0).toUpperCase()}</div>
+      <div class="user-info">
+        <div class="user-email">${esc(u.email)}</div>
+        <div class="user-role">Subuser</div>
+        <div class="perm-tags">${u.permissions.slice(0,4).map(p => `<span class="perm-tag">${p}</span>`).join('')}${u.permissions.length > 4 ? `<span class="perm-tag">+${u.permissions.length-4} more</span>` : ''}</div>
+      </div>
+      <button class="btn btn-ghost btn-xs" style="margin-left:auto" onclick='editUser(${JSON.stringify(u)})'>✏ Edit</button>
+      <button class="btn btn-red btn-xs" onclick="deleteUser('${u.id}')">🗑</button>
+    </div>`).join('');
+}
+function editUser(u) {
+  qs('#userModalTitle').textContent = 'Edit User: ' + u.email;
+  qs('#userEmail').value = u.email;
+  qs('#userEmail').disabled = true;
+  qs('#userEditId').value = u.id;
+  qsa('input[name="perm"]').forEach(cb => { cb.checked = u.permissions.includes(cb.value); });
+  openModal('user');
+}
+async function submitUser() {
+  const email = qs('#userEmail').value.trim();
+  const id = qs('#userEditId').value;
+  if (!email && !id) return toast('Email required', 'err');
+  const permissions = [...qsa('input[name="perm"]:checked')].map(c => c.value);
+  const url = '/api/servers/' + serverId + '/users' + (id ? '/' + id : '');
+  const method = id ? 'PUT' : 'POST';
+  const r = await api(url, method, { email, permissions });
+  if (r.id || r.ok) { toast(id ? 'User updated' : 'User added', 'ok'); closeModal('user'); loadUsers(); }
+  else toast(r.error || 'Error', 'err');
+}
+async function deleteUser(id) {
+  if (!confirm('Remove this user?')) return;
+  const r = await api('/api/servers/' + serverId + '/users/' + id, 'DELETE');
+  if (r.ok) { toast('User removed', 'ok'); loadUsers(); } else toast(r.error, 'err');
+}
+
+/* ─────────── BACKUPS ─────────── */
+async function loadBackups() {
+  const list = await api('/api/servers/' + serverId + '/backups');
+  const el = qs('#bkList');
+  qs('#bkHdr').textContent = `Available Backups (${list.length})`;
+  if (!list.length) { el.innerHTML = '<div class="db-empty"><div class="db-empty-icon">💾</div><div>No backups yet. Create one to safeguard your data.</div></div>'; return; }
+  el.innerHTML = list.sort((a,b) => b.created - a.created).map(b => {
+    const inProg = b.status === 'in_progress';
+    return `<div class="bk-row" id="bkrow-${b.id}">
+      <div class="bk-status">${b.status === 'complete' ? '✅' : b.status === 'failed' ? '❌' : '⏳'}</div>
+      <div class="bk-info">
+        <div class="bk-name">${esc(b.name)}</div>
+        <div class="bk-meta">${inProg ? '<span style="color:var(--yellow)">Creating backup…</span>' : (b.completedAt ? new Date(b.completedAt).toLocaleString() : new Date(b.created).toLocaleString())}</div>
+      </div>
+      <div class="bk-size">${b.size ? fmtB(b.size) : '—'}</div>
+      <div class="bk-actions">
+        ${b.status === 'complete' ? `
+          <a href="/api/servers/${serverId}/backups/${b.id}/download" class="btn btn-ghost btn-xs">⬇ Download</a>
+          <button class="btn btn-ghost btn-xs" onclick="restoreBackup('${b.id}')">♻ Restore</button>` : ''}
+        ${inProg ? '<div class="bk-progress"><div class="spinner"></div>In progress</div>' : ''}
+        ${!inProg ? `<button class="btn btn-red btn-xs" onclick="deleteBackup('${b.id}')">🗑</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+async function createBackup() {
+  const name = prompt('Backup name (leave blank for auto):', '');
+  const body = name ? { name } : {};
+  const r = await api('/api/servers/' + serverId + '/backups', 'POST', body);
+  if (r.id) { toast('Backup started…', 'info'); loadBackups(); } else toast(r.error || 'Error', 'err');
+}
+async function restoreBackup(id) {
+  if (!confirm('Restore this backup? The server must be offline. Existing files will be overwritten.')) return;
+  const r = await api('/api/servers/' + serverId + '/backups/' + id + '/restore', 'POST');
+  if (r.ok) toast('Restore started — check console for progress', 'info'); else toast(r.error, 'err');
+}
+async function deleteBackup(id) {
+  if (!confirm('Permanently delete this backup?')) return;
+  const r = await api('/api/servers/' + serverId + '/backups/' + id, 'DELETE');
+  if (r.ok) { toast('Backup deleted', 'ok'); loadBackups(); } else toast(r.error, 'err');
+}
+
+/* ─────────── NETWORK ─────────── */
+async function loadNetwork() {
+  const d = await api('/api/servers/' + serverId + '/network');
+  const el = qs('#allocList');
+  if (!d.allocations?.length) { el.innerHTML = '<div class="db-empty"><div>No allocations found.</div></div>'; return; }
+  el.innerHTML = d.allocations.map(a => `
+    <div class="alloc-row">
+      <div class="alloc-addr">${a.ip}<span style="color:var(--txt3)"> : </span><span style="color:var(--teal);font-weight:700">${a.port}</span></div>
+      ${a.primary ? '<span class="alloc-primary-badge">Primary</span>' : ''}
+      <div class="alloc-note">${esc(a.notes || '')}</div>
+      ${!a.primary ? `<button class="btn btn-red btn-xs" onclick="deleteAlloc('${a.id}')">🗑</button>` : ''}
+    </div>`).join('');
+  if (d.stats) {
+    qs('#netCpu').textContent = d.stats.cpu + '%';
+    qs('#netMem').textContent = d.stats.memoryMB?.toFixed(0) + ' MB';
+  }
+}
+async function submitAlloc() {
+  const port = parseInt(qs('#allocPort').value);
+  if (!port) return toast('Port required', 'err');
+  const r = await api('/api/servers/' + serverId + '/network/allocations', 'POST', {
+    ip: qs('#allocIp').value, port, notes: qs('#allocNotes').value
+  });
+  if (r.id) { toast('Allocation added', 'ok'); closeModal('alloc'); loadNetwork(); qs('#allocPort').value = ''; qs('#allocNotes').value = ''; }
+  else toast(r.error || 'Error', 'err');
+}
+async function deleteAlloc(id) {
+  if (!confirm('Remove this allocation?')) return;
+  const r = await api('/api/servers/' + serverId + '/network/allocations/' + id, 'DELETE');
+  if (r.ok) { toast('Removed', 'ok'); loadNetwork(); } else toast(r.error, 'err');
+}
+
+/* ─────────── STARTUP ─────────── */
+let startupEnvData = [];
+async function loadStartup() {
+  const d = await api('/api/servers/' + serverId + '/startup');
+  qs('#stImage').value = d.image || '';
+  qs('#stCmd').value = d.startup || '';
+  startupEnvData = d.envVars || [];
+  const el = qs('#startupEnv');
+  if (!startupEnvData.length) { el.innerHTML = '<div class="db-empty"><div>No environment variables found.</div></div>'; return; }
+  el.innerHTML = startupEnvData.map((ev, i) => `
+    <div class="env-row">
+      <div class="env-key" title="${esc(ev.key)}">${esc(ev.key)}</div>
+      <input class="env-input" data-i="${i}" value="${esc(ev.value)}" oninput="startupEnvData[${i}].value=this.value">
+    </div>`).join('');
+}
+async function saveStartup() {
+  const r = await api('/api/servers/' + serverId + '/startup', 'PUT', { envVars: startupEnvData, startupCommand: qs('#stCmd').value, source: 'server.properties' });
+  if (r.ok) toast('Startup config saved', 'ok'); else toast(r.error, 'err');
+}
+
+/* ─────────── SETTINGS ─────────── */
+async function loadSettings() {
+  const d = await api('/api/servers/' + serverId + '/settings');
+  qs('#settName').value = d.name || '';
+  qs('#settDesc').value = d.description || '';
+  qs('#sftpHost').textContent = d.sftp.host;
+  qs('#sftpUser').textContent = d.sftp.username;
+}
+async function saveSettings() {
+  const r = await api('/api/servers/' + serverId + '/settings', 'PUT', { name: qs('#settName').value.trim(), description: qs('#settDesc').value.trim() });
+  if (r.ok) { toast('Settings saved', 'ok'); srv.name = qs('#settName').value.trim(); qs('#navName').textContent = srv.name; qs('#sbName').textContent = srv.name.toUpperCase().slice(0, 16); }
+  else toast(r.error, 'err');
+}
+async function resetSettings() {
+  const r = await api('/api/servers/' + serverId + '/settings', 'PUT', { description: '', name: serverId });
+  if (r.ok) { toast('Settings reset', 'ok'); loadSettings(); } else toast(r.error, 'err');
+}
+function copyId() { navigator.clipboard.writeText(serverId).then(() => toast('Server ID copied', 'ok')); }
+
+/* ─────────── MODAL OPEN HOOKS ─────────── */
+document.querySelector('#modal-db').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal('db'); });
+document.querySelector('#modal-sch').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal('sch'); });
+document.querySelector('#modal-user').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal('user'); });
+document.querySelector('#modal-creds').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal('creds'); });
+document.querySelector('#modal-alloc').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal('alloc'); });
+
+// Reset modal state when opening new schedule
+const origOpen = openModal;
+window.openModal = function(name) {
+  if (name === 'sch') {
+    qs('#schModalTitle').textContent = 'New Schedule';
+    qs('#schName').value = '';
+    qs('#schCron').value = '';
+    qs('#schAction').value = 'command';
+    qs('#schCmd').value = '';
+    qs('#schEditId').value = '';
+    qs('#cronPreview').textContent = '';
+    updateSchActionUI();
+  }
+  if (name === 'user') {
+    qs('#userModalTitle').textContent = 'Invite User';
+    qs('#userEmail').value = '';
+    qs('#userEmail').disabled = false;
+    qs('#userEditId').value = '';
+    qsa('input[name="perm"]').forEach(cb => { cb.checked = ['console.read','files.read'].includes(cb.value); });
+  }
+  origOpen(name);
+};
+
+/* ─────────── UTILS ─────────── */
+const qs  = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function fmtTime(ts) { return new Date(ts).toLocaleTimeString(); }
+function fmtB(b) { if (!b && b !== 0) return '—'; if (b < 1024) return b + ' B'; if (b < 1024 ** 2) return (b / 1024).toFixed(1) + ' KB'; if (b < 1024 ** 3) return (b / 1024 ** 2).toFixed(1) + ' MB'; return (b / 1024 ** 3).toFixed(2) + ' GB'; }
+function ficon(n) { const e = n.split('.').pop().toLowerCase(); return {jar:'☕',js:'🟩',ts:'🔷',py:'🐍',json:'📋',yml:'📋',yaml:'📋',txt:'📄',log:'📜',sh:'🐚',bat:'🪟',cfg:'⚙️',properties:'⚙️',html:'🌐',css:'🎨',xml:'📰',zip:'🗜️',gz:'🗜️',png:'🖼️',jpg:'🖼️',gif:'🖼️',md:'📝',env:'🔐',sql:'🗄️',db:'🗄️',lock:'🔒'}[e] || '📄'; }
+function typeIcon(t) { return {minecraft:'⛏️',bedrock:'🟢',nodejs:'🟩',python:'🐍',generic:'⚙️',unknown:'📁'}[t] || '⚙️'; }
+function ansi(s) { return s.replace(/\x1b\[(\d+)m/g, (_, c) => `<span class="a${c}">`).replace(/\x1b\[\d+;\d+m/g, '').replace(/\x1b\[0?m/g, '</span>'); }
+async function api(url, method = 'GET', body = null) {
+  const o = { method, headers: {} };
+  if (body) { o.headers['Content-Type'] = 'application/json'; o.body = JSON.stringify(body); }
+  const r = await fetch(url, o);
+  return r.json();
+}
+function toast(msg, type = 'info') {
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  el.textContent = (type === 'ok' ? '✓ ' : type === 'err' ? '✕ ' : 'ℹ ') + msg;
+  qs('#toasts').appendChild(el);
+  setTimeout(() => { el.classList.add('bye'); setTimeout(() => el.remove(), 220); }, 3500);
+}
+
+async function signOut(){
+  if(!confirm('Sign out of HazEPanel?\n(Local panel — the server will keep running.)')) return;
+  try { await fetch('/api/auth/logout', { method:'POST' }); } catch {}
+  location.href='/login';
+}
+qs('#conOut').addEventListener('scroll', function() { autoScroll = this.scrollHeight - this.scrollTop - this.clientHeight < 40; });
+
+boot();
+</script>
+</body>
+</html>

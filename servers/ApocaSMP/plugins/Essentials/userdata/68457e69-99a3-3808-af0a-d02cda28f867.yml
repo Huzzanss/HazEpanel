@@ -1,0 +1,57 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 182.8.162.248
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: true
+timestamps:
+  lastteleport: 1773997840963
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773999629713
+  login: 1773994882088
+  kits:
+    tools: 1773872488116
+money: '27860.0'
+last-account-name: Hapizzz
+logoutlocation:
+  world: bc194631-b931-4f66-bed9-99d4c273647b
+  world-name: world_nether
+  x: 997.2304405814891
+  y: 51.21602652490793
+  z: 976.4961319197298
+  yaw: -167.18185424804688
+  pitch: -23.479238510131836
+lastlocation:
+  world: bc194631-b931-4f66-bed9-99d4c273647b
+  world-name: world_nether
+  x: 625.5
+  y: 78.0
+  z: 625.5
+  yaw: 0.0
+  pitch: 0.0
+homes:
+  home:
+    world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+    world-name: world
+    x: 50011.350057840005
+    y: 120.0
+    z: 49892.373968344036
+    yaw: 176.71990966796875
+    pitch: 2.749083995819092
+  ezra:
+    world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+    world-name: world
+    x: 23731.18507435983
+    y: 161.0
+    z: 8768.955163239114
+    yaw: -174.8464813232422
+    pitch: 28.418182373046875

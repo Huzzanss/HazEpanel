@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HazEPanel — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f1320;--card:#1a1f31;--card2:#23283a;--bdr:rgba(255,255,255,.08);--bdr2:rgba(255,255,255,.14);--txt:#e4e8f4;--txt2:#8f98b3;--txt3:#596177;--teal:#4ecdc4;--green:#2dce89;--red:#f5365c;--font:'Rubik',sans-serif;--mono:'JetBrains Mono',monospace;--r:18px}
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:var(--font);background:radial-gradient(circle at top, #1b2140 0%, var(--bg) 45%);color:var(--txt)}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+.wrap{min-height:100vh;display:grid;place-items:center;padding:24px}
+.card{width:min(980px,100%);display:grid;grid-template-columns:1.1fr .9fr;background:rgba(13,16,27,.78);backdrop-filter:blur(18px);border:1px solid var(--bdr);border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.hero{padding:36px;background:linear-gradient(135deg, rgba(78,205,196,.14), rgba(78,205,196,.03));border-right:1px solid var(--bdr)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}.logo{width:46px;height:46px;border-radius:16px;background:var(--teal);display:grid;place-items:center;color:#0f1320;font-weight:800;font-size:18px}
+.kicker{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--txt3);font-weight:700}.title{font-size:38px;line-height:1.05;margin:12px 0 14px;font-weight:800}.sub{font-size:15px;line-height:1.7;color:var(--txt2);max-width:44ch}
+.pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.pill{padding:8px 12px;border-radius:999px;border:1px solid var(--bdr);background:rgba(255,255,255,.03);font-size:12px;color:var(--txt2)}
+.panel{padding:36px 32px;background:linear-gradient(180deg, rgba(26,31,49,.98), rgba(20,24,36,.98))}
+.h{font-size:24px;font-weight:800;margin:0 0 8px}.p{font-size:13px;color:var(--txt2);margin:0 0 26px;line-height:1.6}
+.field{margin-bottom:14px}.label{display:block;font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:7px}
+.input{width:100%;background:var(--card2);border:1px solid var(--bdr);color:var(--txt);padding:12px 14px;border-radius:14px;outline:none;transition:border-color .15s,transform .15s}.input:focus{border-color:var(--teal);transform:translateY(-1px)}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}.hint{font-size:12px;color:var(--txt3)}
+.btn{width:100%;border:none;background:linear-gradient(135deg,var(--teal),#73efe7);color:#101524;font-weight:800;padding:13px 16px;border-radius:14px;margin-top:10px;cursor:pointer;box-shadow:0 12px 30px rgba(78,205,196,.18);transition:transform .15s,filter .15s}.btn:hover{filter:brightness(1.03);transform:translateY(-1px)}
+.err{min-height:20px;margin-top:12px;color:#ff839b;font-size:12.5px}
+.note{margin-top:16px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--bdr);font-size:12px;color:var(--txt3);line-height:1.6}.mono{font-family:var(--mono)}
+@media (max-width: 900px){.card{grid-template-columns:1fr}.hero{border-right:none;border-bottom:1px solid var(--bdr)}.title{font-size:30px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <section class="hero">
+      <div class="brand"><div class="logo">H</div><div><div class="kicker">HazEPanel</div><div style="font-weight:700;color:var(--txt);margin-top:2px">Local game server panel</div></div></div>
+      <div class="title">Masuk dulu, baru kelola server.</div>
+      <div class="sub">Login dilindungi session cookie, lalu kamu bisa akses dashboard, account, admin, console, dan semua API server.</div>
+      <div class="pills">
+        <span class="pill">Default admin</span>
+        <span class="pill mono">admin</span>
+        <span class="pill mono">administrator</span>
+        <span class="pill">Create server</span>
+        <span class="pill">Settings tabs</span>
+      </div>
+      <div class="note">Kalau belum pernah ubah sandi, pakai <b>admin</b> / <b>administrator</b>. Setelah masuk, ubah di halaman Account.</div>
+    </section>
+    <section class="panel">
+      <h1 class="h">Sign in</h1>
+      <p class="p">Gunakan kredensial panel untuk masuk ke dashboard.</p>
+      <form onsubmit="login(event)">
+        <div class="field">
+          <label class="label">Username</label>
+          <input class="input" id="username" autocomplete="username" placeholder="admin" value="admin">
+        </div>
+        <div class="field">
+          <div class="row"><label class="label" style="margin:0">Password</label><span class="hint">Default: administrator</span></div>
+          <input class="input" id="password" type="password" autocomplete="current-password" placeholder="administrator" value="administrator">
+        </div>
+        <button class="btn" type="submit">Login</button>
+        <div class="err" id="err"></div>
+      </form>
+    </section>
+  </div>
+</div>
+<script>
+async function login(e){
+  e.preventDefault();
+  const username=document.getElementById('username').value.trim();
+  const password=document.getElementById('password').value;
+  const err=document.getElementById('err');
+  err.textContent='';
+  try{
+    const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({username,password})});
+    const data=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(data.error||'Login gagal');
+    location.href='/';
+  }catch(ex){
+    err.textContent=ex.message||'Login gagal';
+  }
+}
+fetch('/api/auth/me').then(r=>{ if(r.ok) location.href='/' }).catch(()=>{});
+</script>
+</body>
+</html>

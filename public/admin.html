@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — HazEPanel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141824;--bg-nav:#141824;--bg-card:#1e2233;--bg-card2:#252a3a;--bg-hover:#252a3a;--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.13);--teal:#4ecdc4;--teal-g:rgba(78,205,196,.12);--teal-b:rgba(78,205,196,.3);--green:#2dce89;--green-g:rgba(45,206,137,.12);--red:#f5365c;--red-g:rgba(245,54,92,.12);--yellow:#fb6340;--yel-g:rgba(251,99,64,.12);--gray:#6c7a96;--txt:#d3d8e8;--txt2:#8896ac;--txt3:#485069;--font:'Rubik',sans-serif;--mono:'JetBrains Mono',monospace;--r:6px;--nav-h:54px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:14px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.nav{height:var(--nav-h);background:var(--bg-nav);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:15px;font-weight:700;display:flex;align-items:center;gap:10px;color:var(--txt)}
+.nav-logo-icon{width:28px;height:28px;background:var(--teal);border-radius:var(--r);display:grid;place-items:center;font-size:14px}
+.nav-crumb{display:flex;align-items:center;gap:6px;font-size:13px;margin-left:18px;flex:1}
+.nav-crumb .c{color:var(--txt2)}.nav-crumb .sep{color:var(--txt3)}.nav-crumb .cur{color:var(--txt);font-weight:500}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:4px}
+.nav-ico{width:34px;height:34px;display:grid;place-items:center;border-radius:var(--r);color:var(--txt2);font-size:14px;background:none;border:none;transition:all .15s;cursor:pointer}
+.nav-ico:hover{background:var(--bg-card);color:var(--txt)}.nav-ico.active{background:var(--teal-g);color:var(--teal)}
+.side-layout{display:flex;min-height:calc(100vh - var(--nav-h))}
+.sidebar{width:220px;flex-shrink:0;background:var(--bg-nav);border-right:1px solid var(--bdr);padding:16px 8px;position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto}
+.sb-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--txt3);padding:10px 10px 5px}
+.sb-link{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;border-radius:var(--r);border:1px solid transparent;background:none;color:var(--txt2);font-size:13px;font-weight:500;transition:all .14s;text-align:left;margin-bottom:1px;cursor:pointer}
+.sb-link:hover{background:var(--bg-hover);color:var(--txt)}.sb-link.active{background:var(--teal-g);color:var(--teal);border-color:var(--teal-b)}
+.sb-link .ic{font-size:14px;width:18px;text-align:center;flex-shrink:0}
+.sb-divider{height:1px;background:var(--bdr);margin:8px 0}
+.main{flex:1;padding:28px 32px 60px}
+.page-title{font-size:22px;font-weight:700;margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--txt2);margin-bottom:28px}
+.section{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:16px;display:none}
+.section.active{display:block}
+.section-hdr{padding:14px 18px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--txt3)}
+.section-body{padding:20px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-row.single{grid-template-columns:1fr}.form-row.three{grid-template-columns:1fr 1fr 1fr}
+.form-field{display:flex;flex-direction:column;gap:5px}
+.form-label{font-size:12px;font-weight:600;color:var(--txt2)}
+.form-input{background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.form-input:focus{border-color:var(--teal)}.form-input:disabled{opacity:.5;cursor:not-allowed}
+.form-select{background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;cursor:pointer;transition:border-color .15s}
+.form-select:focus{border-color:var(--teal)}
+.form-desc{font-size:11.5px;color:var(--txt3)}
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:var(--r);font-size:13px;font-weight:600;border:1px solid transparent;transition:all .14s;cursor:pointer}
+.btn:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn-teal{background:var(--teal);color:#141824;border-color:var(--teal)}.btn-teal:hover{filter:brightness(1.1)}
+.btn-ghost{background:var(--bg-card2);color:var(--txt2);border-color:var(--bdr)}.btn-ghost:hover{background:var(--bg-hover);color:var(--txt);border-color:var(--bdr2)}
+.btn-red{background:var(--red-g);color:var(--red);border-color:rgba(245,54,92,.3)}.btn-red:hover{background:rgba(245,54,92,.2)}
+.btn-green{background:var(--green-g);color:var(--green);border-color:rgba(45,206,137,.3)}.btn-green:hover{background:rgba(45,206,137,.2)}
+.btn-yellow{background:var(--yel-g);color:var(--yellow);border-color:rgba(251,99,64,.3)}.btn-yellow:hover{background:rgba(251,99,64,.2)}
+.btn-sm{padding:5px 11px;font-size:12px}.btn-xs{padding:3px 8px;font-size:11px}
+
+/* OVERVIEW */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);padding:14px 16px}
+.stat-val{font-size:24px;font-weight:700;font-family:var(--mono);margin-bottom:2px}
+.stat-key{font-size:10.5px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);font-weight:700}
+.srv-list-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--bdr);transition:background .12s}
+.srv-list-row:last-child{border-bottom:none}.srv-list-row:hover{background:var(--bg-hover)}
+.srv-icon{font-size:18px;flex-shrink:0}
+.srv-info{flex:1;min-width:0}
+.srv-name{font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srv-meta{font-size:11.5px;font-family:var(--mono);color:var(--txt3);margin-top:1px}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-dot.online{background:var(--green);box-shadow:0 0 4px var(--green)}
+.status-dot.offline{background:var(--gray)}.status-dot.starting,.status-dot.stopping{background:var(--yellow);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.srv-controls{display:flex;gap:5px}
+
+/* NODES */
+.node-card{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);margin-bottom:12px;overflow:hidden}
+.node-hdr{padding:14px 18px;display:flex;align-items:center;gap:12px}
+.node-icon{font-size:20px}
+.node-info{flex:1}
+.node-name{font-size:14px;font-weight:700}
+.node-meta{font-size:12px;color:var(--txt2);font-family:var(--mono);margin-top:2px}
+.node-status{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--mono)}
+.node-status.online{background:var(--green-g);color:var(--green)}.node-status.offline{background:rgba(108,122,150,.1);color:var(--gray)}
+.node-body{padding:14px 18px;border-top:1px solid var(--bdr);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.node-stat{display:flex;flex-direction:column;gap:3px}
+.node-stat-key{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);font-weight:700}
+.node-stat-val{font-size:13px;font-family:var(--mono);color:var(--txt)}
+.node-bar-t{height:3px;background:var(--bg-card2);border-radius:2px;overflow:hidden;margin-top:2px}
+.node-bar-f{height:100%;border-radius:2px;background:var(--teal);transition:width .4s}
+.node-bar-f.warn{background:var(--yellow)}.node-bar-f.danger{background:var(--red)}
+.node-footer{padding:10px 18px;border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:flex-end;gap:8px;background:var(--bg-card2)}
+
+/* INFO ROW */
+.info-row{display:flex;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.info-row:last-child{border-bottom:none}
+.info-k{font-size:12.5px;color:var(--txt2);width:180px;flex-shrink:0;padding-top:1px}
+.info-v{font-size:12.5px;color:var(--txt);flex:1;word-break:break-all}
+.info-v.mono{font-family:var(--mono);font-size:12px;color:var(--txt2)}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal-bg.hidden{display:none}
+.modal{background:var(--bg-card);border:1px solid var(--bdr2);border-radius:var(--r);width:460px;max-width:92vw;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-hdr{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:15px;font-weight:700}
+.modal-close{background:none;border:none;color:var(--txt2);font-size:18px;padding:2px 6px;border-radius:3px;cursor:pointer;line-height:1}
+.modal-close:hover{color:var(--txt);background:var(--bg-hover)}
+.modal-body{padding:20px;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:12px 20px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:8px}
+.modal-label{font-size:12px;font-weight:600;color:var(--txt2);margin-bottom:5px;display:block}
+.modal-input{width:100%;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px;border-radius:var(--r);outline:none;transition:border-color .15s}
+.modal-input:focus{border-color:var(--teal)}
+
+.toast-rack{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{display:flex;align-items:center;gap:8px;background:var(--bg-card2);border:1px solid var(--bdr2);padding:10px 16px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:tIn .2s ease;max-width:300px}
+.toast.ok{border-color:rgba(45,206,137,.35);color:var(--green)}.toast.err{border-color:rgba(245,54,92,.35);color:var(--red)}.toast.info{border-color:rgba(78,205,196,.35);color:var(--teal)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes tOut{to{opacity:0;transform:translateY(8px)}}.toast.bye{animation:tOut .2s ease forwards}
+.footer{text-align:center;padding:12px;font-size:11px;color:var(--txt3);border-top:1px solid var(--bdr)}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:10.5px;font-weight:600}
+.badge.green{background:var(--green-g);color:var(--green)}.badge.gray{background:rgba(108,122,150,.1);color:var(--gray)}.badge.teal{background:var(--teal-g);color:var(--teal)}.badge.yellow{background:var(--yel-g);color:var(--yellow)}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" class="nav-logo"><div class="nav-logo-icon"></div>HazEPanel <span style="font-size:10px;color:var(--teal);margin-left:4px;font-weight:400">ADMIN</span></a>
+  <div class="nav-crumb">
+    <a href="/" class="c">Servers</a><span class="sep">/</span><span class="cur">Admin Panel</span>
+  </div>
+  <div class="nav-right">
+    <button class="nav-ico" title="Servers"  onclick="location.href='/'">🗂</button>
+    <button class="nav-ico" title="Account"  onclick="location.href='/account'">👤</button>
+    <button class="nav-ico active" title="Admin">⚙️</button>
+    <button class="nav-ico" title="Sign Out" onclick="signOut()">⏏️</button>
+  </div>
+</nav>
+
+<div class="side-layout">
+  <nav class="sidebar">
+    <div class="sb-section">Admin</div>
+    <button class="sb-link active" data-sec="overview"  onclick="showSection('overview')"> <span class="ic">📊</span> Overview</button>
+    <button class="sb-link"        data-sec="servers"   onclick="showSection('servers')">  <span class="ic">🖥️</span> Servers</button>
+    <button class="sb-link"        data-sec="nodes"     onclick="showSection('nodes')">    <span class="ic">🔗</span> Nodes</button>
+    <button class="sb-link"        data-sec="settings"  onclick="showSection('settings')"> <span class="ic">🔧</span> Settings</button>
+    <button class="sb-link"        data-sec="sysinfo"   onclick="showSection('sysinfo')">  <span class="ic">💻</span> System Info</button>
+    <div class="sb-divider"></div>
+    <div class="sb-section">Navigation</div>
+    <button class="sb-link" onclick="location.href='/'">          <span class="ic">🏠</span> My Servers</button>
+    <button class="sb-link" onclick="location.href='/account'">   <span class="ic">👤</span> My Account</button>
+  </nav>
+
+  <div class="main">
+    <div class="page-title" id="pageTitle">Overview</div>
+    <div class="page-sub" id="pageSub">Panel health and server summary at a glance.</div>
+
+    <!-- OVERVIEW -->
+    <div class="section active" id="sec-overview">
+      <div class="section-hdr"><div class="section-title">Summary</div><button class="btn btn-ghost btn-sm" onclick="loadOverview()">↺ Refresh</button></div>
+      <div class="section-body">
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-val" id="ovTotal"  style="color:var(--teal)">—</div><div class="stat-key">Total Servers</div></div>
+          <div class="stat-card"><div class="stat-val" id="ovOnline" style="color:var(--green)">—</div><div class="stat-key">Online</div></div>
+          <div class="stat-card"><div class="stat-val" id="ovOffline"style="color:var(--gray)">—</div><div class="stat-key">Offline</div></div>
+          <div class="stat-card"><div class="stat-val" id="ovCpu"    style="color:var(--yellow)">—</div><div class="stat-key">System CPU</div></div>
+          <div class="stat-card"><div class="stat-val" id="ovRam"    style="color:var(--teal)">—</div><div class="stat-key">RAM Used</div></div>
+          <div class="stat-card"><div class="stat-val" id="ovUptime" style="color:var(--txt2)">—</div><div class="stat-key">OS Uptime</div></div>
+        </div>
+      </div>
+      <div class="section-hdr"><div class="section-title">Quick Server Controls</div></div>
+      <div id="ovServerList"><div style="padding:20px;text-align:center;color:var(--txt3)">Loading…</div></div>
+    </div>
+
+    <!-- SERVERS -->
+    <div class="section" id="sec-servers">
+      <div class="section-hdr">
+        <div class="section-title">All Servers</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost btn-sm" onclick="adminRescan()">↺ Rescan Dir</button>
+          <button class="btn btn-teal btn-sm" onclick="location.href='/'">Go to Panel →</button>
+        </div>
+      </div>
+      <div id="adminServerList"><div style="padding:20px;text-align:center;color:var(--txt3)">Loading…</div></div>
+    </div>
+
+    <!-- NODES -->
+    <div class="section" id="sec-nodes">
+      <div class="section-hdr">
+        <div class="section-title">Nodes</div>
+        <button class="btn btn-teal btn-sm" onclick="openModal('node')">+ Add Node</button>
+      </div>
+      <div id="nodeList" style="padding:16px"><div style="text-align:center;color:var(--txt3)">Loading…</div></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="section" id="sec-settings">
+      <div class="section-hdr"><div class="section-title">Panel Configuration</div></div>
+      <div class="section-body">
+        <div class="form-row">
+          <div class="form-field"><label class="form-label">Panel Name</label><input class="form-input" id="setPanelName" placeholder="HazEPanel"><div class="form-desc">Displayed in the browser title and navbar.</div></div>
+          <div class="form-field"><label class="form-label">Panel Port</label><input class="form-input" id="setPort" type="number" placeholder="3000"><div class="form-desc">Restart required after changing port.</div></div>
+        </div>
+        <div class="form-row single">
+          <div class="form-field"><label class="form-label">Servers Directory</label><input class="form-input" id="setServersDir" placeholder="D:\Server"><div class="form-desc">Root directory where game server folders are stored.</div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label class="form-label">Language</label>
+            <select class="form-select" id="setLang"><option value="en">English</option><option value="id">Indonesian</option><option value="de">German</option><option value="fr">French</option></select>
+          </div>
+          <div class="form-field"><label class="form-label">Theme</label>
+            <select class="form-select" id="setTheme"><option value="dark">Dark (Default)</option><option value="darker">Darker</option><option value="midnight">Midnight</option></select>
+          </div>
+        </div>
+        <div class="form-actions"><button class="btn btn-teal" onclick="saveAdminSettings()">💾 Save Configuration</button></div>
+      </div>
+      <div class="section-hdr"><div class="section-title">Danger Zone</div></div>
+      <div class="section-body" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg-card2);border:1px solid var(--bdr);border-radius:var(--r)">
+          <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">Restart Panel Server</div><div style="font-size:12px;color:var(--txt2)">Reload all server configs and restart the Express process.</div></div>
+          <button class="btn btn-yellow btn-sm" onclick="restartPanel()">↻ Restart</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg-card2);border:1px solid rgba(245,54,92,.3);border-radius:var(--r)">
+          <div><div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:2px">Stop All Servers</div><div style="font-size:12px;color:var(--txt2)">Send stop signal to all currently running servers.</div></div>
+          <button class="btn btn-red btn-sm" onclick="stopAll()">■ Stop All</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEM INFO -->
+    <div class="section" id="sec-sysinfo">
+      <div class="section-hdr"><div class="section-title">System Information</div><button class="btn btn-ghost btn-sm" onclick="loadSysInfo()">↺ Refresh</button></div>
+      <div class="section-body" id="sysInfoBody"><div style="text-align:center;color:var(--txt3)">Loading…</div></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NODE MODAL -->
+<div class="modal-bg hidden" id="modal-node">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title">Add Node</div><button class="modal-close" onclick="closeModal('node')">✕</button></div>
+    <div class="modal-body">
+      <div><label class="modal-label">Node Name *</label><input class="modal-input" id="nodeName" placeholder="e.g. Node-US-1"></div>
+      <div><label class="modal-label">FQDN / IP Address *</label><input class="modal-input" id="nodeFqdn" placeholder="127.0.0.1 or node.example.com"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><label class="modal-label">Scheme</label>
+          <select class="modal-input" id="nodeScheme" style="cursor:pointer"><option value="http">HTTP</option><option value="https">HTTPS</option></select>
+        </div>
+        <div><label class="modal-label">Port</label><input class="modal-input" id="nodePort" type="number" value="8080"></div>
+      </div>
+      <div><label class="modal-label">Location</label><input class="modal-input" id="nodeLocation" placeholder="e.g. Singapore"></div>
+      <div><label class="modal-label">Description</label><input class="modal-input" id="nodeDesc" placeholder="Optional description"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="closeModal('node')">Cancel</button>
+      <button class="btn btn-teal btn-sm" onclick="submitNode()">Add Node</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-rack" id="toasts"></div>
+<div class="footer">©</div>
+
+<script>
+let overviewData = {};
+
+async function boot() {
+  loadOverview();
+  loadAdminSettings();
+}
+
+function showSection(name) {
+  qsa('.section').forEach(s => s.classList.remove('active'));
+  qsa('.sb-link[data-sec]').forEach(b => b.classList.toggle('active', b.dataset.sec === name));
+  qs('#sec-' + name).classList.add('active');
+  const titles = { overview:'Overview', servers:'Server Management', nodes:'Nodes', settings:'Panel Settings', sysinfo:'System Information' };
+  const subs   = { overview:'Panel health and server summary.', servers:'Manage all game servers.', nodes:'Manage connected nodes.', settings:'Configure the panel behaviour.', sysinfo:'Live hardware and OS details.' };
+  qs('#pageTitle').textContent = titles[name] || name;
+  qs('#pageSub').textContent   = subs[name]   || '';
+  const loaders = { overview: loadOverview, servers: loadAdminServers, nodes: loadNodes, settings: loadAdminSettings, sysinfo: loadSysInfo };
+  if (loaders[name]) loaders[name]();
+}
+
+async function loadOverview() {
+  const d = await api('/api/admin/overview');
+  overviewData = d;
+  qs('#ovTotal').textContent   = d.servers.total;
+  qs('#ovOnline').textContent  = d.servers.online;
+  qs('#ovOffline').textContent = d.servers.offline;
+  const usedPct = Math.round((d.system.usedMem / d.system.totalMem) * 100);
+  qs('#ovRam').textContent   = fmtB(d.system.usedMem) + ' / ' + fmtB(d.system.totalMem);
+  qs('#ovUptime').textContent = fmtUptime(d.system.uptime * 1000);
+  const cpuLoad = await getCpuLoad();
+  qs('#ovCpu').textContent = cpuLoad;
+
+  const el = qs('#ovServerList');
+  if (!d.list?.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--txt3)">No servers found. Check SERVERS_DIR in server.js.</div>'; return; }
+  el.innerHTML = d.list.map(s => `
+    <div class="srv-list-row">
+      <div class="srv-icon">${typeIcon(s.type)}</div>
+      <div class="srv-info">
+        <div class="srv-name">${esc(s.name)}</div>
+        <div class="srv-meta">${s.eggName} · ${s.allocation?.ip||'127.0.0.1'}:${s.allocation?.port||'—'}</div>
+      </div>
+      <div class="status-dot ${s.status}"></div>
+      <span style="font-size:11px;font-family:var(--mono);color:var(--txt2);min-width:60px">${cap(s.status)}</span>
+      <div class="srv-controls">
+        ${s.status==='offline'?`<button class="btn btn-green btn-xs" onclick="qAction('${s.id}','start')">▶ Start</button>`:''}
+        ${s.status==='online'?`<button class="btn btn-yellow btn-xs" onclick="qAction('${s.id}','restart')">↻</button><button class="btn btn-red btn-xs" onclick="qAction('${s.id}','stop')">■ Stop</button>`:''}
+        <button class="btn btn-ghost btn-xs" onclick="location.href='/server/${s.id}'">→ Manage</button>
+      </div>
+    </div>`).join('');
+}
+
+async function getCpuLoad() {
+  try {
+    const sys = await api('/api/system');
+    const usedPct = Math.round((sys.usedMem / sys.totalMem) * 100);
+    return usedPct + '% RAM';
+  } catch { return '—'; }
+}
+
+async function loadAdminServers() {
+  const d = await api('/api/admin/overview');
+  const el = qs('#adminServerList');
+  if (!d.list?.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--txt3)">No servers found.</div>'; return; }
+  el.innerHTML = `<table style="width:100%;border-collapse:collapse">
+    <thead><tr>
+      <th style="padding:8px 16px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr)">Name</th>
+      <th style="padding:8px 16px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr)">Type</th>
+      <th style="padding:8px 16px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr)">Allocation</th>
+      <th style="padding:8px 16px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr)">Status</th>
+      <th style="padding:8px 16px;text-align:right;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--txt3);background:var(--bg-card);border-bottom:1px solid var(--bdr)">Actions</th>
+    </tr></thead>
+    <tbody>${d.list.map(s => `
+      <tr style="border-bottom:1px solid var(--bdr);transition:background .12s" onmouseover="this.style.background='var(--bg-hover)'" onmouseout="this.style.background=''">
+        <td style="padding:10px 16px;font-size:13px;font-weight:600">${esc(s.name)}</td>
+        <td style="padding:10px 16px;font-size:12px;color:var(--txt2)">${esc(s.eggName)}</td>
+        <td style="padding:10px 16px;font-family:var(--mono);font-size:12px;color:var(--txt3)">${s.allocation?.ip||'127.0.0.1'}:${s.allocation?.port||'—'}</td>
+        <td style="padding:10px 16px"><span class="badge ${s.status==='online'?'green':s.status==='offline'?'gray':'yellow'}">${cap(s.status)}</span></td>
+        <td style="padding:10px 16px;text-align:right">
+          <div style="display:flex;gap:5px;justify-content:flex-end">
+            ${s.status==='offline'?`<button class="btn btn-green btn-xs" onclick="qAction('${s.id}','start')">▶</button>`:''}
+            ${s.status==='online'?`<button class="btn btn-yellow btn-xs" onclick="qAction('${s.id}','restart')">↻</button><button class="btn btn-red btn-xs" onclick="qAction('${s.id}','stop')">■</button>`:''}
+            <button class="btn btn-ghost btn-xs" onclick="location.href='/server/${s.id}'">Manage →</button>
+          </div>
+        </td>
+      </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+async function qAction(id, action) {
+  const r = await api('/api/servers/' + id + '/' + action, 'POST');
+  if (!r.ok) toast(r.error || 'Error', 'err');
+  else { toast(cap(action) + ' sent to ' + id, 'ok'); setTimeout(loadOverview, 2000); }
+}
+
+async function adminRescan() {
+  const r = await api('/api/rescan', 'POST');
+  toast('Rescan complete — ' + r.length + ' server(s)', 'info');
+  loadAdminServers();
+}
+
+async function loadNodes() {
+  const list = await api('/api/admin/nodes');
+  const el = qs('#nodeList');
+  if (!list.length) { el.innerHTML = '<div style="text-align:center;color:var(--txt3);padding:20px">No nodes configured.</div>'; return; }
+  el.innerHTML = list.map(n => {
+    const usedMem = n.memory - (n.freeMemory||n.memory*.3);
+    const memPct  = Math.min(Math.round((usedMem/n.memory)*100), 100);
+    return `<div class="node-card">
+      <div class="node-hdr">
+        <div class="node-icon">🔗</div>
+        <div class="node-info">
+          <div class="node-name">${esc(n.name)}</div>
+          <div class="node-meta">${n.scheme}://${n.fqdn}:${n.port} · ${n.location}</div>
+        </div>
+        <div class="node-status ${n.online?'online':'offline'}">${n.online?'● Online':'○ Offline'}</div>
+        ${n.id!=='node_local'?`<button class="btn btn-red btn-xs" onclick="deleteNode('${n.id}')">🗑</button>`:''}
+      </div>
+      <div class="node-body">
+        <div class="node-stat"><div class="node-stat-key">Memory</div><div class="node-stat-val">${fmtB(usedMem)} / ${fmtB(n.memory)}</div><div class="node-bar-t"><div class="node-bar-f${memPct>85?' danger':memPct>60?' warn':''}" style="width:${memPct}%"></div></div></div>
+        <div class="node-stat"><div class="node-stat-key">Uptime</div><div class="node-stat-val">${fmtUptime((n.uptime||0)*1000)}</div></div>
+        <div class="node-stat"><div class="node-stat-key">Scheme</div><div class="node-stat-val">${n.scheme.toUpperCase()}</div></div>
+        <div class="node-stat"><div class="node-stat-key">Location</div><div class="node-stat-val">${esc(n.location)}</div></div>
+      </div>
+      <div class="node-footer">
+        <button class="btn btn-ghost btn-xs" onclick="copyNodeKey('${n.fqdn}:${n.port}')">📋 Copy Address</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function copyNodeKey(addr) { navigator.clipboard.writeText(addr).then(()=>toast('Copied: ' + addr,'ok')); }
+
+async function submitNode() {
+  const name = qs('#nodeName').value.trim(), fqdn = qs('#nodeFqdn').value.trim();
+  if (!name || !fqdn) return toast('Name and FQDN required','err');
+  const r = await api('/api/admin/nodes', 'POST', { name, fqdn, scheme: qs('#nodeScheme').value, port: parseInt(qs('#nodePort').value), location: qs('#nodeLocation').value, description: qs('#nodeDesc').value });
+  if (r.id) { toast('Node added','ok'); closeModal('node'); loadNodes(); ['nodeName','nodeFqdn','nodeLocation','nodeDesc'].forEach(id=>qs('#'+id).value=''); }
+  else toast(r.error||'Error','err');
+}
+
+async function deleteNode(id) {
+  if (!confirm('Remove this node?')) return;
+  const r = await api('/api/admin/nodes/' + id, 'DELETE');
+  if (r.ok) { toast('Node removed','ok'); loadNodes(); } else toast(r.error,'err');
+}
+
+async function loadAdminSettings() {
+  const d = await api('/api/admin/settings');
+  qs('#setPanelName').value  = d.panelName  || 'HazEPanel';
+  qs('#setPort').value       = d.port       || 3000;
+  qs('#setServersDir').value = d.serversDir || '';
+  qs('#setLang').value       = d.language   || 'en';
+  qs('#setTheme').value      = d.theme      || 'dark';
+}
+
+async function saveAdminSettings() {
+  const r = await api('/api/admin/settings', 'PUT', {
+    panelName:  qs('#setPanelName').value.trim(),
+    port:       parseInt(qs('#setPort').value),
+    serversDir: qs('#setServersDir').value.trim(),
+    language:   qs('#setLang').value,
+    theme:      qs('#setTheme').value,
+  });
+  if (r.ok) toast('Settings saved — some changes require a server restart','ok'); else toast(r.error,'err');
+}
+
+async function loadSysInfo() {
+  const d = await api('/api/system');
+  qs('#sysInfoBody').innerHTML = `
+    <div class="info-row"><div class="info-k">Hostname</div><div class="info-v mono">${esc(d.hostname)}</div></div>
+    <div class="info-row"><div class="info-k">Platform</div><div class="info-v mono">${esc(d.platform)} (${d.arch})</div></div>
+    <div class="info-row"><div class="info-k">CPU Model</div><div class="info-v">${esc(d.cpuModel)}</div></div>
+    <div class="info-row"><div class="info-k">CPU Cores</div><div class="info-v mono">${d.cpuCount}</div></div>
+    <div class="info-row"><div class="info-k">Total Memory</div><div class="info-v mono">${fmtB(d.totalMem)}</div></div>
+    <div class="info-row"><div class="info-k">Free Memory</div><div class="info-v mono">${fmtB(d.freeMem)} (${Math.round(d.freeMem/d.totalMem*100)}%)</div></div>
+    <div class="info-row"><div class="info-k">Used Memory</div><div class="info-v mono">${fmtB(d.usedMem)} (${Math.round(d.usedMem/d.totalMem*100)}%)</div></div>
+    <div class="info-row"><div class="info-k">OS Uptime</div><div class="info-v mono">${fmtUptime(d.uptime*1000)}</div></div>
+    <div class="info-row"><div class="info-k">Servers Directory</div><div class="info-v mono">${esc(d.serversDir)}</div></div>
+    <div class="info-row"><div class="info-k">Server Count</div><div class="info-v mono">${d.serverCount}</div></div>
+    <div class="info-row"><div class="info-k">Node.js</div><div class="info-v mono">${esc(typeof process!=='undefined'?'Running':'—')}</div></div>
+  `;
+}
+
+async function stopAll() {
+  if (!confirm('Stop ALL running servers? This will send a stop signal to each.')) return;
+  const d = await api('/api/admin/overview');
+  const running = d.list.filter(s=>s.status==='online');
+  for (const s of running) await api('/api/servers/'+s.id+'/stop','POST');
+  toast(`Stop sent to ${running.length} server(s)`,'ok');
+  setTimeout(loadOverview, 2000);
+}
+
+function restartPanel() {
+  toast('Restart signal sent — page will reload in 3 seconds','info');
+  setTimeout(() => location.reload(), 3000);
+}
+
+function openModal(n)  { qs('#modal-'+n).classList.remove('hidden'); }
+function closeModal(n) { qs('#modal-'+n).classList.add('hidden'); }
+qs('#modal-node').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal('node'); });
+
+async function signOut() {
+  if (!confirm('Sign out of HazEPanel?')) return;
+  try { await fetch('/api/auth/logout', { method:'POST' }); } catch {}
+  location.href='/login';
+}
+
+const qs  = s => document.querySelector(s);
+const qsa = s => document.querySelectorAll(s);
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function fmtB(b){if(!b)return'0 B';if(b<1024)return Math.round(b)+' B';if(b<1024**2)return(b/1024).toFixed(1)+' KB';if(b<1024**3)return(b/1024**2).toFixed(1)+' MB';return(b/1024**3).toFixed(1)+' GB'}
+function fmtUptime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60),d=Math.floor(h/24);if(d)return d+'d '+pad(h%24)+'h '+pad(m%60)+'m';if(h)return pad(h)+'h '+pad(m%60)+'m';return pad(m)+'m '+pad(s%60)+'s'}
+const pad = n => String(n).padStart(2,'0');
+function typeIcon(t){return{minecraft:'⛏️',bedrock:'🟢',nodejs:'🟩',python:'🐍',generic:'⚙️',unknown:'📁'}[t]||'⚙️'}
+async function api(url,method='GET',body=null){const o={method,headers:{}};if(body){o.headers['Content-Type']='application/json';o.body=JSON.stringify(body);}return(await fetch(url,o)).json()}
+function toast(msg,type='info'){const el=document.createElement('div');el.className='toast '+type;el.textContent=(type==='ok'?'✓ ':type==='err'?'✕ ':'ℹ ')+msg;qs('#toasts').appendChild(el);setTimeout(()=>{el.classList.add('bye');setTimeout(()=>el.remove(),220)},3500)}
+boot();
+</script>
+</body>
+</html>

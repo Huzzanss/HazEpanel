@@ -1,0 +1,44 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 182.8.182.162
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: true
+timestamps:
+  lastteleport: 1773890172298
+  lastheal: 1773890503975
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773892477461
+  login: 1773890684597
+  kits:
+    tools: 1773842070990
+    dtools: 1773840064928
+    notch: 1773840135676
+    firework: 1773840376711
+    color: 1773840408343
+money: '10000'
+last-account-name: MaticQuert
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 10119.162075870167
+  y: 22.0
+  z: 10106.867840617415
+  yaw: -6.52685546875
+  pitch: 55.8906135559082
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 10044.440426494828
+  y: 62.0
+  z: 9910.300000011921
+  yaw: 141.35699462890625
+  pitch: 28.073205947875977

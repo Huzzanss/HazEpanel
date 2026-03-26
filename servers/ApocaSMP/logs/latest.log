@@ -1,0 +1,427 @@
+[10:08:55] [ServerMain/INFO]: [bootstrap] Running Java 24 (Java HotSpot(TM) 64-Bit Server VM 24.0.2+12-54; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[10:08:55] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21.11-127-main@bd74bf6 (2026-03-10T02:55:23Z) for Minecraft 1.21.11
+[10:08:56] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[10:08:57] [Paper Plugin Remapper Thread - 1/INFO]: [PluginRemapper] Remapping plugin 'plugins\MMOItems-6.9.4.jar'...
+[10:08:57] [Paper Plugin Remapper Thread - 0/INFO]: [PluginRemapper] Remapping plugin 'plugins\MythicLib-1.6.1.jar'...
+[10:08:57] [Paper Plugin Remapper Thread - 2/INFO]: [PluginRemapper] Remapping plugin 'plugins\MythicMobs-5.4.0-4615.jar'...
+[10:08:58] [ServerMain/ERROR]: [PluginRemapper] Encountered exception remapping plugins
+java.util.concurrent.CompletionException: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MMOItems-6.9.4.jar'
+	at java.base/java.util.concurrent.CompletableFuture.wrapInCompletionException(CompletableFuture.java:325) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:361) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:366) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:695) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:528) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:1447) ~[?:?]
+	Suppressed: java.util.concurrent.CompletionException: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MythicLib-1.6.1.jar'
+		... 8 more
+	Caused by: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MythicLib-1.6.1.jar'
+		at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:362) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+		at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:692) ~[?:?]
+		... 4 more
+	Caused by: java.lang.RuntimeException: Failed to execute task io/lumine/mythic/lib/MythicLibL10
+		at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:56) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.AsyncHelper.consumeAll(AsyncHelper.java:36) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:161) ~[paper-1.21.11.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:79) ~[paper-1.21.11.jar:?]
+		at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:359) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+		... 5 more
+	Caused by: java.util.concurrent.ExecutionException: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static io/lumine/mythic/lib/MythicLibL10/a Ljavassist/ws/a; and private static io/lumine/mythic/lib/MythicLibL10/a Ljava/io/File;)
+		at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124) ~[?:?]
+		at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:193) ~[?:?]
+		at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:52) ~[AutoRenamingTool-2.0.3.jar:?]
+		... 9 more
+	Caused by: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static io/lumine/mythic/lib/MythicLibL10/a Ljavassist/ws/a; and private static io/lumine/mythic/lib/MythicLibL10/a Ljava/io/File;)
+		at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:135) ~[?:?]
+		at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$0(Collectors.java:182) ~[?:?]
+		at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169) ~[?:?]
+		at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215) ~[?:?]
+		at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[?:?]
+		at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[?:?]
+		at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:727) ~[?:?]
+		at net.neoforged.art.internal.ClassProviderImpl$ClassInfo.<init>(ClassProviderImpl.java:122) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.ClassProviderBuilderImpl.lambda$addClass$1(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+		at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1756) ~[?:?]
+		at net.neoforged.art.internal.ClassProviderBuilderImpl.addClass(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.lambda$run$2(RenamerImpl.java:162) ~[paper-1.21.11.jar:?]
+		at net.neoforged.art.internal.AsyncHelper.lambda$null$0(AsyncHelper.java:33) ~[AutoRenamingTool-2.0.3.jar:?]
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[?:?]
+		... 3 more
+	Suppressed: java.util.concurrent.CompletionException: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MythicMobs-5.4.0-4615.jar'
+		... 8 more
+	Caused by: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MythicMobs-5.4.0-4615.jar'
+		at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:362) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+		at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:692) ~[?:?]
+		... 4 more
+	Caused by: java.lang.RuntimeException: Failed to execute task io/lumine/mythic/bukkit/utils/plugin/LuminePluginL10
+		at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:56) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.AsyncHelper.consumeAll(AsyncHelper.java:36) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:161) ~[paper-1.21.11.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:79) ~[paper-1.21.11.jar:?]
+		at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:359) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+		... 5 more
+	Caused by: java.util.concurrent.ExecutionException: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static io/lumine/mythic/bukkit/utils/plugin/LuminePluginL10/a Ljavassist/ws/a; and private static io/lumine/mythic/bukkit/utils/plugin/LuminePluginL10/a Ljava/io/File;)
+		at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124) ~[?:?]
+		at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:193) ~[?:?]
+		at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:52) ~[AutoRenamingTool-2.0.3.jar:?]
+		... 9 more
+	Caused by: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static io/lumine/mythic/bukkit/utils/plugin/LuminePluginL10/a Ljavassist/ws/a; and private static io/lumine/mythic/bukkit/utils/plugin/LuminePluginL10/a Ljava/io/File;)
+		at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:135) ~[?:?]
+		at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$0(Collectors.java:182) ~[?:?]
+		at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169) ~[?:?]
+		at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215) ~[?:?]
+		at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[?:?]
+		at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[?:?]
+		at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[?:?]
+		at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:727) ~[?:?]
+		at net.neoforged.art.internal.ClassProviderImpl$ClassInfo.<init>(ClassProviderImpl.java:122) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.ClassProviderBuilderImpl.lambda$addClass$1(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+		at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1724) ~[?:?]
+		at net.neoforged.art.internal.ClassProviderBuilderImpl.addClass(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+		at net.neoforged.art.internal.RenamerImpl.lambda$run$2(RenamerImpl.java:162) ~[paper-1.21.11.jar:?]
+		at net.neoforged.art.internal.AsyncHelper.lambda$null$0(AsyncHelper.java:33) ~[AutoRenamingTool-2.0.3.jar:?]
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[?:?]
+		... 3 more
+Caused by: java.lang.RuntimeException: Failed to remap plugin jar 'plugins\MMOItems-6.9.4.jar'
+	at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:362) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+	at java.base/java.util.concurrent.CompletableFuture$UniApply.tryFire(CompletableFuture.java:692) ~[?:?]
+	... 4 more
+Caused by: java.lang.RuntimeException: Failed to execute task net/Indyuce/mmoitems/MMOItemsL10
+	at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:56) ~[AutoRenamingTool-2.0.3.jar:?]
+	at net.neoforged.art.internal.AsyncHelper.consumeAll(AsyncHelper.java:36) ~[AutoRenamingTool-2.0.3.jar:?]
+	at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:161) ~[paper-1.21.11.jar:?]
+	at net.neoforged.art.internal.RenamerImpl.run(RenamerImpl.java:79) ~[paper-1.21.11.jar:?]
+	at io.papermc.paper.pluginremap.PluginRemapper.lambda$remap$7(PluginRemapper.java:359) ~[paper-1.21.11.jar:1.21.11-127-bd74bf6]
+	... 5 more
+Caused by: java.util.concurrent.ExecutionException: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static net/Indyuce/mmoitems/MMOItemsL10/a Ljavassist/ws/a; and private static net/Indyuce/mmoitems/MMOItemsL10/a Ljava/io/File;)
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:124) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:193) ~[?:?]
+	at net.neoforged.art.internal.AsyncHelper.invokeAll(AsyncHelper.java:52) ~[AutoRenamingTool-2.0.3.jar:?]
+	... 9 more
+Caused by: java.lang.IllegalStateException: Duplicate key a (attempted merging values private static net/Indyuce/mmoitems/MMOItemsL10/a Ljavassist/ws/a; and private static net/Indyuce/mmoitems/MMOItemsL10/a Ljava/io/File;)
+	at java.base/java.util.stream.Collectors.duplicateKeyException(Collectors.java:135) ~[?:?]
+	at java.base/java.util.stream.Collectors.lambda$uniqKeysMapAccumulator$0(Collectors.java:182) ~[?:?]
+	at java.base/java.util.stream.ReduceOps$3ReducingSink.accept(ReduceOps.java:169) ~[?:?]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:215) ~[?:?]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716) ~[?:?]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570) ~[?:?]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[?:?]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[?:?]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[?:?]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:727) ~[?:?]
+	at net.neoforged.art.internal.ClassProviderImpl$ClassInfo.<init>(ClassProviderImpl.java:122) ~[AutoRenamingTool-2.0.3.jar:?]
+	at net.neoforged.art.internal.ClassProviderBuilderImpl.lambda$addClass$1(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+	at java.base/java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1724) ~[?:?]
+	at net.neoforged.art.internal.ClassProviderBuilderImpl.addClass(ClassProviderBuilderImpl.java:64) ~[AutoRenamingTool-2.0.3.jar:?]
+	at net.neoforged.art.internal.RenamerImpl.lambda$run$2(RenamerImpl.java:162) ~[paper-1.21.11.jar:?]
+	at net.neoforged.art.internal.AsyncHelper.lambda$null$0(AsyncHelper.java:33) ~[AutoRenamingTool-2.0.3.jar:?]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328) ~[?:?]
+	... 3 more
+[10:08:59] [ServerMain/INFO]: [PluginInitializerManager] Initialized 25 plugins
+[10:08:59] [ServerMain/INFO]: [PluginInitializerManager] Paper plugins (2):
+ - EconomyShopGUI (6.16.4), Minepacks (2.5.5-T20260104173759)
+[10:08:59] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (23):
+ - ChatItem (2.6.2), ClearLag (3.2.2), EasyArmorStands (2.6.1), EnchantBookPlus (1.2.1), Essentials (2.22.0-dev+74-d7452bf), EssentialsChat (2.22.0-dev+74-d7452bf), EssentialsSpawn (2.22.0-dev+74-d7452bf), FastAsyncWorldEdit (2.15.0+59372c5), HeadDrop (26.1), ItemEdit (3.7.8), LuckPerms (5.5.37), Orebfuscator (5.5.7), PlaceholderAPI (2.12.2), ProtocolLib (5.4.0), SitAnyware (1.0), SkinsRestorer (15.11.0), TAB (5.5.0), TerraformGenerator (25.0.2), UberEnchant (8.12.4), Vanish (0.1), Vault (1.7.3-b131), ViaBackwards (5.7.2), ViaVersion (5.7.2)
+[10:09:06] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[10:09:09] [ServerMain/INFO]: Loaded 1470 recipes
+[10:09:09] [ServerMain/INFO]: Loaded 1584 advancements
+[10:09:09] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Initialising converters for DataConverter...
+[10:09:09] [ServerMain/INFO]: [ca.spottedleaf.dataconverter.minecraft.datatypes.MCTypeRegistry] Finished initialising converters for DataConverter in 506,1ms
+[10:09:10] [Server thread/INFO]: Starting minecraft server version 1.21.11
+[10:09:10] [Server thread/INFO]: Loading properties
+[10:09:10] [Server thread/INFO]: This server is running Paper version 1.21.11-127-main@bd74bf6 (2026-03-10T02:55:23Z) (Implementing API version 1.21.11-R0.1-SNAPSHOT)
+[10:09:10] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[10:09:10] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[10:09:10] [Server thread/INFO]: Using 4 threads for Netty based IO
+[10:09:10] [Server thread/INFO]: [MoonriseCommon] Paper is using 4 worker threads, 1 I/O threads
+[10:09:10] [Server thread/INFO]: Default game type: SURVIVAL
+[10:09:10] [Server thread/INFO]: Generating keypair
+[10:09:11] [Server thread/INFO]: Starting Minecraft server on *:25565
+[10:09:11] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[10:09:11] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[10:09:12] [Server thread/INFO]: [Minepacks] PCGF-PluginLib not installed. Switching to standalone mode!
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loading 5 libraries... please wait
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-api\4.20.0\adventure-api-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-key\4.20.0\adventure-key-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\examination-api\1.3.0\examination-api-1.3.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\examination-string\1.3.0\examination-string-1.3.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\org\jetbrains\annotations\26.0.2\annotations-26.0.2.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-platform-bukkit\4.3.4\adventure-platform-bukkit-4.3.4.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-platform-api\4.3.4\adventure-platform-api-4.3.4.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-bungeecord\4.3.4\adventure-text-serializer-bungeecord-4.3.4.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-nbt\4.13.1\adventure-nbt-4.13.1.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-gson-legacy-impl\4.13.1\adventure-text-serializer-gson-legacy-impl-4.13.1.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-platform-facet\4.3.4\adventure-platform-facet-4.3.4.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-platform-viaversion\4.3.4\adventure-platform-viaversion-4.3.4.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-minimessage\4.20.0\adventure-text-minimessage-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-gson\4.20.0\adventure-text-serializer-gson-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-json\4.20.0\adventure-text-serializer-json-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\option\1.1.0\option-1.1.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\org\jspecify\jspecify\1.0.0\jspecify-1.0.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\com\google\code\gson\gson\2.8.0\gson-2.8.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\com\google\auto\service\auto-service-annotations\1.1.1\auto-service-annotations-1.1.1.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-commons\4.20.0\adventure-text-serializer-commons-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [ItemEdit] Loaded library D:\Server\ApocaSMP\libraries\net\kyori\adventure-text-serializer-legacy\4.20.0\adventure-text-serializer-legacy-4.20.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [HeadDrop] Loading 2 libraries... please wait
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [HeadDrop] Loaded library D:\Server\ApocaSMP\libraries\com\zaxxer\HikariCP\6.3.0\HikariCP-6.3.0.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [HeadDrop] Loaded library D:\Server\ApocaSMP\libraries\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar
+[10:09:12] [Server thread/INFO]: [SpigotLibraryLoader] [HeadDrop] Loaded library D:\Server\ApocaSMP\libraries\org\json\json\20250517\json-20250517.jar
+[10:09:13] [Server thread/INFO]: [ViaVersion] Loading server plugin ViaVersion v5.7.2
+[10:09:13] [Server thread/INFO]: [ViaVersion] ViaVersion 5.7.2 is now loaded. Registering protocol transformers and injecting...
+[10:09:13] [Via-Mappingloader-1/INFO]: [ViaVersion] Loading block connection mappings ...
+[10:09:13] [Via-Mappingloader-1/INFO]: [ViaVersion] Using FastUtil Long2ObjectOpenHashMap for block connections
+[10:09:14] [Server thread/INFO]: [ViaBackwards] Loading translations...
+[10:09:14] [Server thread/INFO]: [ViaBackwards] Registering protocols...
+[10:09:15] [Server thread/INFO]: [LuckPerms] Loading server plugin LuckPerms v5.5.37
+[10:09:15] [Server thread/INFO]: [LuckPerms] Loading configuration...
+[10:09:15] [Server thread/INFO]: [Vault] Loading server plugin Vault v1.7.3-b131
+[10:09:15] [Server thread/INFO]: [Essentials] Loading server plugin Essentials v2.22.0-dev+74-d7452bf
+[10:09:15] [Server thread/INFO]: [ProtocolLib] Loading server plugin ProtocolLib v5.4.0
+[10:09:15] [Server thread/WARN]: [ProtocolLib] Version (MC: 1.21.11) has not yet been tested! Proceed with caution.
+[10:09:15] [Server thread/INFO]: [PlaceholderAPI] Loading server plugin PlaceholderAPI v2.12.2
+[10:09:18] [Server thread/INFO]: [ViaBackwards] Loading server plugin ViaBackwards v5.7.2
+[10:09:18] [Server thread/INFO]: [FastAsyncWorldEdit] Loading server plugin FastAsyncWorldEdit v2.15.0+59372c5
+[10:09:19] [Server thread/INFO]: Got request to register class com.sk89q.worldedit.bukkit.BukkitServerInterface with WorldEdit [com.sk89q.worldedit.extension.platform.PlatformManager@d4270af]
+[10:09:19] [Server thread/INFO]: [EssentialsChat] Loading server plugin EssentialsChat v2.22.0-dev+74-d7452bf
+[10:09:19] [Server thread/INFO]: [Vanish] Loading server plugin Vanish v0.1
+[10:09:19] [Server thread/INFO]: [UberEnchant] Loading server plugin UberEnchant v8.12.4
+[10:09:19] [Server thread/INFO]: [TerraformGenerator] Loading server plugin TerraformGenerator v25.0.2
+[10:09:19] [Server thread/INFO]: [TAB] Loading server plugin TAB v5.5.0
+[10:09:19] [Server thread/INFO]: [SkinsRestorer] Loading server plugin SkinsRestorer v15.11.0
+[10:09:19] [Server thread/INFO]: [SitAnyware] Loading server plugin SitAnyware v1.0
+[10:09:19] [Server thread/INFO]: [Orebfuscator] Loading server plugin Orebfuscator v5.5.7
+[10:09:19] [Server thread/INFO]: [Minepacks] Loading server plugin Minepacks v2.5.5-T20260104173759
+[10:09:19] [Server thread/INFO]: [ItemEdit] Loading server plugin ItemEdit v3.7.8
+[10:09:19] [Server thread/INFO]: [HeadDrop] Loading server plugin HeadDrop v26.1
+[10:09:19] [Server thread/INFO]: [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+[10:09:19] [Server thread/INFO]: [com.zaxxer.hikari.pool.HikariPool] HikariPool-1 - Added connection org.sqlite.jdbc4.JDBC4Connection@2979c4ff
+[10:09:19] [Server thread/INFO]: [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Start completed.
+[10:09:19] [Server thread/INFO]: [HeadDrop] [STDOUT] Cleaned up 0 rows older than 30 days.
+[10:09:19] [Server thread/WARN]: Nag author(s): '[RRS]' of 'HeadDrop v26.1' about their usage of System.out/err.print. Please use your plugin's logger instead (JavaPlugin#getLogger).
+[10:09:19] [Server thread/INFO]: [EssentialsSpawn] Loading server plugin EssentialsSpawn v2.22.0-dev+74-d7452bf
+[10:09:19] [Server thread/INFO]: [EnchantBookPlus] Loading server plugin EnchantBookPlus v1.2.1
+[10:09:19] [Server thread/INFO]: [EconomyShopGUI] Loading server plugin EconomyShopGUI v6.16.4
+[10:09:19] [Server thread/INFO]: [EasyArmorStands] Loading server plugin EasyArmorStands v2.6.1
+[10:09:20] [Server thread/INFO]: [ClearLag] Loading server plugin ClearLag v3.2.2
+[10:09:20] [Server thread/INFO]: [ChatItem] Loading server plugin ChatItem v2.6.2
+[10:09:20] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[10:09:20] [Server thread/INFO]: [LuckPerms] Enabling LuckPerms v5.5.37
+[10:09:20] [Server thread/INFO]:         __    
+[10:09:20] [Server thread/INFO]:   |    |__)   LuckPerms v5.5.37
+[10:09:20] [Server thread/INFO]:   |___ |      Running on Bukkit - Paper
+[10:09:20] [Server thread/INFO]: 
+[10:09:21] [Server thread/INFO]: [LuckPerms] Loading storage provider... [H2]
+[10:09:21] [Server thread/INFO]: [LuckPerms] Loading internal permission managers...
+[10:09:21] [Server thread/INFO]: [LuckPerms] Performing initial data load...
+[10:09:22] [Server thread/INFO]: [LuckPerms] Successfully enabled. (took 1848ms)
+[10:09:22] [Server thread/INFO]: [Vault] Enabling Vault v1.7.3-b131
+[10:09:22] [Server thread/INFO]: [Vault] [Economy] Essentials Economy found: Waiting
+[10:09:22] [Server thread/INFO]: [Vault] [Permission] SuperPermissions loaded as backup permission system.
+[10:09:22] [Server thread/INFO]: [Vault] Enabled Version 1.7.3-b131
+[10:09:22] [Server thread/INFO]: [LuckPerms] Registered Vault permission & chat hook.
+[10:09:22] [Server thread/INFO]: [ProtocolLib] Enabling ProtocolLib v5.4.0
+[10:09:22] [Server thread/INFO]: [FastAsyncWorldEdit] Enabling FastAsyncWorldEdit v2.15.0+59372c5
+[10:09:22] [Server thread/INFO]: [com.fastasyncworldedit.core.Fawe] LZ4 Compression Binding loaded successfully
+[10:09:22] [Server thread/INFO]: [com.fastasyncworldedit.core.Fawe] ZSTD Compression Binding loaded successfully
+[10:09:22] [Server thread/INFO]: Registering commands with com.sk89q.worldedit.bukkit.BukkitServerInterface
+[10:09:22] [Server thread/INFO]: WEPIF: Vault detected! Using Vault for permissions
+[10:09:23] [Server thread/INFO]: Using com.sk89q.worldedit.bukkit.adapter.impl.fawe.v1_21_11.PaperweightFaweAdapter as the Bukkit adapter
+[10:09:24] [Server thread/INFO]: [TerraformGenerator] Enabling TerraformGenerator v25.0.2
+[10:09:24] [Server thread/INFO]: [TerraformGenerator] Custom Logger Initialized
+[10:09:24] [Server thread/INFO]: [TerraformGenerator] bStats Metrics enabled.
+[10:09:25] [Server thread/INFO]: [TerraformGenerator] Detected version: v1_21_R7, packName: v1_21_R7
+[10:09:25] [Server thread/INFO]: [SkinsRestorer] Enabling SkinsRestorer v15.11.0
+[10:09:25] [Server thread/INFO]: [SkinsRestorer] Running on Minecraft 1.21.11.
+[10:09:26] [Server thread/INFO]: [SkinsRestorer] Using paper join listener!
+[10:09:26] [Server thread/INFO]: [PlaceholderAPI] Successfully registered internal expansion: skinsrestorer [15.11.0]
+[10:09:26] [Server thread/INFO]: [SkinsRestorer] PlaceholderAPI expansion registered!
+[10:09:26] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[10:09:26] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[10:09:26] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[10:09:26] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[10:09:26] [Server thread/INFO]: Preparing level "world"
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer] ----------------------------------------------
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     +==================+
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     |   SkinsRestorer  |
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     |------------------|
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     |  Standalone Mode |
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     +==================+
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer] ----------------------------------------------
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     Version: 15.11.0
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     Commit: 52f31ab
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer]     This is the latest version!
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer] ----------------------------------------------
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer] Do you have issues? Read our troubleshooting guide: https://skinsrestorer.net/docs/troubleshooting
+[10:09:26] [Folia Async Scheduler Thread #1/INFO]: [SkinsRestorer] Want to support SkinsRestorer? Consider donating: https://skinsrestorer.net/donate
+[10:09:27] [Server thread/INFO]: [TerraformGenerator] Detected world: world, commencing injection... 
+[10:09:27] [Server thread/INFO]: [TerraformGenerator] Injection success! Proceeding with generation.
+[10:09:27] [Server thread/INFO]: Loading 0 persistent chunks for world 'minecraft:overworld'...
+[10:09:27] [Server thread/INFO]: Preparing spawn area: 100%
+[10:09:27] [Server thread/INFO]: Prepared spawn area in 10 ms
+[10:09:27] [Server thread/INFO]: [TerraformGenerator] world loaded.
+[10:09:27] [Server thread/INFO]: Loading 0 persistent chunks for world 'minecraft:the_nether'...
+[10:09:27] [Server thread/INFO]: Preparing spawn area: 100%
+[10:09:27] [Server thread/INFO]: Prepared spawn area in 13 ms
+[10:09:27] [Server thread/INFO]: Loading 0 persistent chunks for world 'minecraft:the_end'...
+[10:09:27] [Server thread/INFO]: Prepared spawn area in 15 ms
+[10:09:27] [Server thread/INFO]: Done preparing level "world" (0.770s)
+[10:09:27] [Server thread/INFO]: [ViaVersion] Enabling ViaVersion v5.7.2
+[10:09:27] [Server thread/INFO]: [ViaVersion] ViaVersion detected server version: 1.21.11 (774)
+[10:09:27] [Server thread/INFO]: [Essentials] Enabling Essentials v2.22.0-dev+74-d7452bf
+[10:09:27] [Server thread/INFO]: [Essentials] Attempting to convert old kits in config.yml to new kits.yml
+[10:09:27] [Server thread/INFO]: [Essentials] No kits found to migrate.
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Tick Count Provider as the provider for TickCountProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Reflection Online Mode Provider as the provider for OnlineModeProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Known Commands Provider as the provider for KnownCommandsProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.17.1+ World Info Provider as the provider for WorldInfoProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.12+ Spawner Block Provider as the provider for SpawnerBlockProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.20.4+ Damage Event Provider as the provider for DamageEventProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Serialization Provider as the provider for SerializationProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper 1.13+ Tile Entity Provider as the provider for TileEntityProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Biome Key Provider as the provider for BiomeKeyProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Material Tag Provider as the provider for MaterialTagProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Server State Provider as the provider for ServerStateProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.13+ Spawn Egg Provider as the provider for SpawnEggProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.12.2+ Player Locale Provider as the provider for PlayerLocaleProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.8.3+ Spawner Item Provider as the provider for SpawnerItemProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Reflection Formatted Command Alias Provider as the provider for FormattedCommandAliasProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Legacy Biome Name Provider as the provider for BiomeNameProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.14+ Sign Data Provider as the provider for SignDataProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected Paper Container Provider as the provider for ContainerProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.21+ InventoryView Interface ABI Provider as the provider for InventoryViewProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.21.4+ Sync Commands Provider as the provider for SyncCommandsProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.14.4+ Persistent Data Container Provider as the provider for PersistentDataProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.11+ Item Unbreakable Provider as the provider for ItemUnbreakableProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.20.5+ Banner Data Provider as the provider for BannerDataProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Selected 1.20.6+ Potion Meta Provider as the provider for PotionMetaProvider
+[10:09:28] [Server thread/INFO]: [Essentials] Loaded 46309 items from items.json.
+[10:09:28] [Server thread/INFO]: [Essentials] Using locale en_US
+[10:09:28] [Server thread/INFO]: [Essentials] ServerListPingEvent: Spigot iterator API
+[10:09:28] [Server thread/INFO]: [Essentials] Starting Metrics. Opt-out using the global bStats config.
+[10:09:28] [Server thread/INFO]: [Vault] [Economy] Essentials Economy hooked.
+[10:09:28] [Server thread/INFO]: [Essentials] Using Vault based permissions (LuckPerms)
+[10:09:28] [Server thread/INFO]: [PlaceholderAPI] Enabling PlaceholderAPI v2.12.2
+[10:09:28] [Server thread/INFO]: [PlaceholderAPI] Fetching available expansion information...
+[10:09:28] [Server thread/INFO]: [ViaBackwards] Enabling ViaBackwards v5.7.2
+[10:09:28] [Server thread/INFO]: [EssentialsChat] Enabling EssentialsChat v2.22.0-dev+74-d7452bf
+[10:09:28] [Server thread/INFO]: [EssentialsChat] Starting Metrics. Opt-out using the global bStats config.
+[10:09:28] [Server thread/INFO]: [Vanish] Enabling Vanish v0.1
+[10:09:28] [Server thread/INFO]: [UberEnchant] Enabling UberEnchant v8.12.4
+[10:09:28] [Server thread/INFO]: [UberEnchant] Updated translations in locale/en_us.properties!
+[10:09:29] [Server thread/INFO]: [TAB] Enabling TAB v5.5.0
+[10:09:29] [Server thread/INFO]: [TAB] [WARN] [config.yml] scoreboard: Scoreboard "scoreboard-1.20.3+" has no display condition set, however, there is another scoreboard in the chain (scoreboard). Scoreboards are checked from top to bottom until a scoreboard with meeting condition or no condition is found. Because of this, the scoreboard (scoreboard) after the no-condition scoreboard (scoreboard-1.20.3+) will never be displayed. Unless this is intentional to externally display the scoreboard (commands, API), this is a mistake.
+[10:09:29] [Server thread/INFO]: [TAB] [WARN] Found a total of 1 issues.
+[10:09:29] [Server thread/INFO]: [TAB] Enabled in 320ms
+[10:09:29] [Server thread/INFO]: [SitAnyware] Enabling SitAnyware v1.0
+[10:09:29] [Server thread/INFO]: [Orebfuscator] Enabling Orebfuscator v5.5.7
+[10:09:29] [Server thread/INFO]: [Orebfuscator] Searching NMS adapter for server version "v1_21_R7_mojang"!
+[10:09:29] [Server thread/INFO]: [Orebfuscator] NMS adapter for server version "v1_21_R7_mojang" found!
+[10:09:30] [Server thread/INFO]: [Minepacks] Enabling Minepacks v2.5.5-T20260104173759
+[10:09:30] [Server thread/INFO]: [Minepacks] Starting Minepacks in standalone mode!
+[10:09:30] [Server thread/INFO]: [Minepacks] Config file successfully loaded.
+[10:09:30] [Server thread/WARN]: [Minepacks] Paper support is experimental! Use at your own risk!
+[10:09:30] [Server thread/WARN]: [Minepacks] No guarantee for data integrity! Backup constantly!
+[10:09:30] [Server thread/INFO]: [Minepacks] Language file successfully loaded. Language: english  Author: GeorgH93
+[10:09:30] [Server thread/INFO]: [Minepacks] Minepacks-Connection-Pool - Starting...
+[10:09:30] [Server thread/INFO]: [Minepacks] Minepacks-Connection-Pool - Start completed.
+[10:09:30] [Server thread/INFO]: [Minepacks] Item name language file successfully loaded. Language: english  Author: GeorgH93
+[10:09:30] [Server thread/INFO]: [Minepacks] Loading item translations ...
+[10:09:30] [Server thread/INFO]: [Minepacks] Finished loading item translations for 826 items.
+[10:09:30] [Server thread/INFO]: [PlaceholderAPI] Successfully registered internal expansion: minepacks [2.5.5-T20260104173759]
+[10:09:30] [Server thread/INFO]: [Minepacks] PlaceholderAPI hook was successfully registered!
+[10:09:30] [Server thread/INFO]: [Minepacks]  Minepacks has been enabled!  :) 
+[10:09:30] [Server thread/INFO]: [ItemEdit] Enabling ItemEdit v3.7.8
+[10:09:30] [Server thread/INFO]: [ItemEdit] Hooking into MiniMessageAPI see https://webui.advntr.dev/
+[10:09:30] [Server thread/INFO]: [ItemEdit] Selected Storage Type: YAML
+[10:09:30] [Server thread/INFO]: [ItemEdit] Hooking into Vault
+[10:09:30] [Server thread/INFO]: [ItemEdit] Hooking into PlaceHolderAPI
+[10:09:30] [Server thread/INFO]: [ItemEdit] placeholders:
+[10:09:30] [Server thread/INFO]: [ItemEdit]   %itemedit_amount_<{itemid}>_[{slot}]_[{player}]%
+[10:09:30] [Server thread/INFO]: [ItemEdit]     shows how many itemid player has on slot
+[10:09:30] [Server thread/INFO]: [ItemEdit]     <{itemid}> for item id on serveritem
+[10:09:30] [Server thread/INFO]: [ItemEdit]     [{slot}] for the slot where the item should be counted, by default inventory
+[10:09:30] [Server thread/INFO]: [ItemEdit]       Values: inventory (include offhand), equip (include offhand), inventoryandequip (include offhand), hand, offhand, head, chest, legs, feet
+[10:09:30] [Server thread/INFO]: [ItemEdit]     [{player}] for the player, by default self
+[10:09:30] [Server thread/INFO]: [ItemEdit]     example: %itemedit_amount_{my_item_id}_{hand}%
+[10:09:30] [Server thread/INFO]: [PlaceholderAPI] Successfully registered internal expansion: itemedit [1.0]
+[10:09:30] [Server thread/INFO]: [ItemEdit] # Enabled (took 227 ms)
+[10:09:30] [Server thread/INFO]: [HeadDrop] Enabling HeadDrop v26.1
+[10:09:30] [Server thread/INFO]: [HeadDrop] [HeadDrop] 
+==============================
+[10:09:30] [Server thread/INFO]: [HeadDrop] [HeadDrop]     HeadDrop Plugin v26.1
+[10:09:30] [Server thread/INFO]: [HeadDrop] [HeadDrop] ==============================
+
+[10:09:30] [Server thread/INFO]: [PlaceholderAPI] Successfully registered internal expansion: headdrop [1.0]
+[10:09:30] [Server thread/INFO]: [HeadDrop] [HeadDrop] Hooked into PlaceholderAPI!
+[10:09:30] [Server thread/INFO]: [HeadDrop] [HeadDrop] Enabled successfully!
+[10:09:30] [Server thread/INFO]: [EssentialsSpawn] Enabling EssentialsSpawn v2.22.0-dev+74-d7452bf
+[10:09:30] [Server thread/INFO]: [EssentialsSpawn] Starting Metrics. Opt-out using the global bStats config.
+[10:09:30] [Server thread/INFO]: [EnchantBookPlus] Enabling EnchantBookPlus v1.2.1
+[10:09:30] [Server thread/INFO]: [EconomyShopGUI] Enabling EconomyShopGUI v6.16.4
+[10:09:30] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Initializing paper meta...
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Using lang-en.yml as language file
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Completed loading 16 section configs from /sections/
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Completed loading 16 shop configs from /shops/
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Updating Shop settings...
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Successfully hooked into Vault and using EssentialsX Economy as economy provider
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Completed loading 1 economy provider(s) for all 14 shop sections.
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Using minecraft version 1.21.11...
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Spawner provider set to AUTO in config
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Automatically searching for compatible spawner provider....
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Failed to automatically find compatible spawner provider, using default...
+[10:09:31] [Server thread/INFO]: [PlaceholderAPI] Successfully registered internal expansion: esgui [1.1.0]
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Debug mode is enabled.
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Loading all items...
+[10:09:31] [Server thread/INFO]: [EconomyShopGUI] [INFO]: Initialized - Took 962ms to complete
+[10:09:31] [Server thread/INFO]: [EasyArmorStands] Enabling EasyArmorStands v2.6.1
+[10:09:33] [Server thread/INFO]: [ClearLag] Enabling ClearLag v3.2.2
+[10:09:33] [Server thread/INFO]: [ClearLag] Using version-adapter: LatestVersionAdapter
+[10:09:33] [Server thread/INFO]: [ClearLag] Loading modules...
+[10:09:33] [Server thread/WARN]: [ClearLag] Clearlag failed to use the internal TPS tracker during initialization. Reverted to estimation... (Index 3 out of bounds for length 3)
+[10:09:33] [Server thread/INFO]: [ClearLag] Modules enabed, loading config values
+[10:09:33] [Server thread/INFO]: [ClearLag] Modules have been loaded!
+[10:09:33] [Server thread/INFO]: [ClearLag] Clearlag is now enabled!
+[10:09:33] [Thread-17/WARN]: [ClearLag] Clearlag failed to check for updates - bukkit may be down
+[10:09:33] [Thread-17/WARN]: java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3
+[10:09:33] [Thread-17/WARN]: 	at Clearlag.jar//me.minebuilders.clearlag.Util.getBukkitVersion(Util.java:105)
+[10:09:33] [Thread-17/WARN]: 	at Clearlag.jar//me.minebuilders.clearlag.BukkitUpdater.updateAvailable(BukkitUpdater.java:32)
+[10:09:33] [Thread-17/WARN]: 	at Clearlag.jar//me.minebuilders.clearlag.BukkitUpdater.run(BukkitUpdater.java:82)
+[10:09:33] [Thread-17/WARN]: 	at java.base/java.lang.Thread.run(Thread.java:1447)
+[10:09:33] [Server thread/INFO]: [ChatItem] Enabling ChatItem v2.6.2
+[10:09:33] [Server thread/INFO]: [ChatItem] Detected server version: v1_21 (Platform: PaperMC)
+[10:09:33] [Server thread/INFO]: [ChatItem] The plugin ProtocolLib has been detected. Loading Protocollib support ...
+[10:09:33] [Server thread/INFO]: [ChatItem] Use ComponentBuilder's method.
+[10:09:33] [Server thread/INFO]: [ChatItem] Manager automatically chosen: PacketEditing (packet), ChatListener (chat), Paper (paper), Own Formatter (ownformatter)
+[10:09:33] [Server thread/INFO]: [ChatItem] Load PlaceholderAPI, Essentials, Vault support.
+[10:09:34] [Server thread/INFO]: [ChatItem] Loaded translation for en_gb.
+[10:09:34] [Server thread/INFO]: [spark] Starting background profiler...
+[10:09:34] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[10:09:34] [Server thread/INFO]: [PlaceholderAPI] Placeholder expansion registration initializing...
+[10:09:34] [Server thread/INFO]: Running delayed init tasks
+[10:09:34] [Craft Scheduler Thread - 0 - Essentials/INFO]: [Essentials] Fetching version information...
+[10:09:34] [Craft Scheduler Thread - 1 - ViaVersion/INFO]: [ViaVersion] Finished mapping loading, shutting down loader executor.
+[10:09:34] [Server thread/INFO]: [Essentials] Essentials found a compatible payment resolution method: Vault Compatibility Layer (v1.7.3-b131)!
+[10:09:34] [Craft Scheduler Thread - 7 - Vault/INFO]: [Vault] Checking for Updates ... 
+[10:09:34] [Server thread/INFO]: [UberEnchant] ======================================================
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Custom enchantment table mechanics are Enabled  ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Custom anvil mechanics are Enabled              ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Custom villager mechanics are Enabled           ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Custom grindstone mechanics are Enabled         ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Found 42 vanilla enchantments.                  ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Loaded: 38 default UberEnchantments.            ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Loaded: 0 UberEnchantments.                     ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ||  Total Enchantments: 80                          ||
+[10:09:34] [Server thread/INFO]: [UberEnchant] ======================================================
+[10:09:34] [Server thread/INFO]: Done (40.213s)! For help, type "help"
+[10:09:34] [Server thread/INFO]: [PlaceholderAPI] Successfully registered external expansion: statistic [2.0.2]
+[10:09:34] [Server thread/INFO]: [PlaceholderAPI] Successfully registered external expansion: vault [1.8.3]
+[10:09:34] [Server thread/INFO]: 2 placeholder hook(s) registered!
+[10:09:34] [Craft Scheduler Thread - 7 - Vault/INFO]: [Vault] No new version available
+[10:09:35] [Craft Scheduler Thread - 0 - Essentials/WARN]: [Essentials] You're 1 EssentialsX dev build(s) out of date!
+[10:09:35] [Craft Scheduler Thread - 0 - Essentials/WARN]: [Essentials] Download it here: https://essentialsx.net/downloads.html

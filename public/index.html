@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HazEPanel — Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#141824;--bg-nav:#141824;--bg-card:#1e2233;--bg-card2:#252a3a;
+  --bg-hover:#252a3a;--bdr:rgba(255,255,255,.06);--bdr2:rgba(255,255,255,.12);
+  --teal:#4ecdc4;--teal-g:rgba(78,205,196,.12);--green:#2dce89;--green-g:rgba(45,206,137,.12);
+  --red:#f5365c;--red-g:rgba(245,54,92,.12);--yellow:#fb6340;--yel-g:rgba(251,99,64,.12);
+  --gray:#6c7a96;--txt:#d3d8e8;--txt2:#8896ac;--txt3:#485069;
+  --font:'Rubik',sans-serif;--mono:'JetBrains Mono',monospace;--r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg);color:var(--txt);font-family:var(--font);font-size:14px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.nav{position:sticky;top:0;z-index:100;background:var(--bg-nav);border-bottom:1px solid var(--bdr);height:54px;display:flex;align-items:center;padding:0 24px;}
+.nav-logo{font-size:15px;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:10px;margin-right:auto;}
+.nav-logo-icon{width:28px;height:28px;background:var(--teal);border-radius:var(--r);display:grid;place-items:center;font-size:14px;}
+.nav-icons{display:flex;align-items:center;gap:2px}
+.nav-ico{width:36px;height:36px;display:grid;place-items:center;border-radius:var(--r);color:var(--txt2);font-size:14px;background:none;border:none;transition:all .15s;cursor:pointer;}
+.nav-ico:hover{background:var(--bg-card);color:var(--txt)}
+.nav-user{display:flex;align-items:center;gap:8px;margin-left:8px;padding:5px 12px 5px 6px;background:var(--bg-card);border:1px solid var(--bdr);border-radius:20px;font-size:12.5px;cursor:pointer;}
+.nav-avatar{width:26px;height:26px;border-radius:50%;background:var(--teal);display:grid;place-items:center;font-size:11px;font-weight:700;color:#141824;}
+.hero{background:linear-gradient(135deg,#1a1e30 0%,#141824 100%);border-bottom:1px solid var(--bdr);padding:28px 32px 24px;}
+.hero-title{font-size:22px;font-weight:600;margin-bottom:4px}
+.hero-sub{font-size:13px;color:var(--txt2)}
+.hero-stats{display:flex;gap:28px;margin-top:18px}
+.hstat{display:flex;flex-direction:column;gap:2px}
+.hstat-val{font-size:22px;font-weight:700;font-family:var(--mono)}
+.hstat-key{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3);font-weight:600}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 24px 60px}
+.toolbar{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.search-wrap{position:relative;flex:1;max-width:320px}
+.search-ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--txt3);font-size:13px;pointer-events:none}
+.search-input{width:100%;background:var(--bg-card);border:1px solid var(--bdr);color:var(--txt);font-family:var(--font);font-size:13px;padding:8px 12px 8px 34px;border-radius:var(--r);outline:none;transition:border-color .15s;}
+.search-input:focus{border-color:var(--teal)}.search-input::placeholder{color:var(--txt3)}
+.filter-btn{background:var(--bg-card);border:1px solid var(--bdr);color:var(--txt2);padding:7px 14px;border-radius:var(--r);font-size:13px;display:flex;align-items:center;gap:6px;transition:all .15s;}
+.filter-btn:hover,.filter-btn.on{background:var(--bg-hover);color:var(--txt);border-color:var(--bdr2)}
+.filter-btn.on{color:var(--teal);border-color:rgba(78,205,196,.3)}
+.rescan-btn{background:var(--teal);color:#141824;border:none;font-weight:700;padding:7px 16px;border-radius:var(--r);font-size:13px;display:flex;align-items:center;gap:6px;transition:all .15s;margin-left:auto;}
+.rescan-btn:hover{filter:brightness(1.1)}
+.server-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.srv-card{background:var(--bg-card);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden;transition:border-color .2s,transform .15s;cursor:pointer;display:flex;flex-direction:column;}
+.srv-card:hover{border-color:var(--bdr2);transform:translateY(-1px)}
+.srv-card.online{border-top:2px solid var(--green)}.srv-card.offline{border-top:2px solid var(--txt3)}
+.srv-card.starting,.srv-card.stopping{border-top:2px solid var(--yellow)}.srv-card.error{border-top:2px solid var(--red)}
+.card-top{display:flex;align-items:flex-start;gap:12px;padding:16px}
+.card-icon-wrap{width:40px;height:40px;border-radius:var(--r);display:grid;place-items:center;font-size:20px;flex-shrink:0;background:var(--bg-card2);}
+.card-info{flex:1;min-width:0}.card-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.card-egg{font-size:11.5px;color:var(--txt2)}.card-alloc{font-size:11px;font-family:var(--mono);color:var(--txt3);margin-top:2px}
+.card-status-wrap{flex-shrink:0;text-align:right}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:600;font-family:var(--mono);text-transform:uppercase;letter-spacing:.5px;}
+.status-badge::before{content:'';width:6px;height:6px;border-radius:50%}
+.status-badge.online{background:var(--green-g);color:var(--green)}.status-badge.online::before{background:var(--green);box-shadow:0 0 4px var(--green)}
+.status-badge.offline{background:rgba(108,122,150,.1);color:var(--gray)}.status-badge.offline::before{background:var(--gray)}
+.status-badge.starting,.status-badge.stopping{background:var(--yel-g);color:var(--yellow)}
+.status-badge.starting::before,.status-badge.stopping::before{background:var(--yellow);animation:blink 1s infinite}
+.status-badge.error{background:var(--red-g);color:var(--red)}.status-badge.error::before{background:var(--red)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.card-node{font-size:10px;color:var(--txt3);margin-top:3px;font-family:var(--mono)}
+.card-resources{padding:10px 16px 14px;border-top:1px solid var(--bdr);display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.res{display:flex;flex-direction:column;gap:4px}.res-head{display:flex;align-items:center;justify-content:space-between}
+.res-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--txt3)}
+.res-val{font-size:11px;font-family:var(--mono);color:var(--txt2)}
+.res-bar-track{height:2px;background:var(--bg-card2);border-radius:2px;overflow:hidden;margin-top:2px}
+.res-bar-fill{height:100%;border-radius:2px;transition:width .6s ease;background:var(--teal)}
+.res-bar-fill.warn{background:var(--yellow)}.res-bar-fill.danger{background:var(--red)}
+.card-footer{padding:7px 16px;background:var(--bg-card2);border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;}
+.card-footer-meta{font-size:11px;color:var(--txt3);font-family:var(--mono)}
+.card-open-btn{font-size:12px;font-weight:600;color:var(--teal);background:none;border:none;display:flex;align-items:center;gap:4px;transition:color .15s;padding:2px 4px}
+.card-open-btn:hover{color:#7ee8e4}
+.empty{text-align:center;padding:80px 20px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty-icon{font-size:42px;opacity:.2}.empty-title{font-size:15px;font-weight:600;color:var(--txt2)}.empty-sub{font-size:13px;color:var(--txt3)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 14px;border-radius:14px;border:1px solid transparent;font-size:13px;font-weight:700;cursor:pointer;transition:transform .14s,filter .14s,background .14s,color .14s}
+.btn:hover{transform:translateY(-1px)}
+.btn-teal{background:var(--teal);color:#101524;border-color:rgba(78,205,196,.2)}
+.btn-ghost{background:var(--bg-card);border-color:var(--bdr);color:var(--txt2)}
+.btn-ghost:hover{background:var(--bg-hover);color:var(--txt)}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal-bg.hidden{display:none}
+.modal{background:var(--bg-card);border:1px solid var(--bdr2);border-radius:24px;width:560px;max-width:92vw;max-height:84vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+.modal-hdr{padding:16px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:16px;font-weight:800}
+.modal-close{background:none;border:none;color:var(--txt2);font-size:20px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:8px}
+.modal-close:hover{background:var(--bg-hover);color:var(--txt)}
+.modal-body{padding:18px 20px;display:flex;flex-direction:column;gap:14px;overflow:auto}
+.modal-footer{padding:12px 20px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:8px}
+.modal-input,.modal-select{width:100%;background:var(--bg-card2);border:1px solid var(--bdr);color:var(--txt);padding:11px 13px;border-radius:14px;outline:none;transition:border-color .15s}
+.modal-input:focus,.modal-select:focus{border-color:var(--teal)}
+.modal-label{display:block;font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:7px}
+.form-field{display:flex;flex-direction:column}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-desc{font-size:12px;color:var(--txt3);line-height:1.5}
+
+.toast-rack{position:fixed;bottom:20px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{display:flex;align-items:center;gap:8px;background:var(--bg-card2);border:1px solid var(--bdr2);padding:11px 16px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 8px 32px rgba(0,0,0,.5);animation:tIn .2s ease;max-width:320px;}
+.toast.ok{border-color:rgba(45,206,137,.35);color:var(--green)}.toast.err{border-color:rgba(245,54,92,.35);color:var(--red)}.toast.info{border-color:rgba(78,205,196,.35);color:var(--teal)}
+@keyframes tIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes tOut{to{opacity:0;transform:translateY(8px)}}.toast.bye{animation:tOut .2s ease forwards}
+.site-footer{text-align:center;padding:16px;font-size:11px;color:var(--txt3);border-top:1px solid var(--bdr)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon"></div>
+    HazEPanel
+  </div>
+  <div class="nav-icons">
+    <button class="nav-ico" title="Search"      onclick="openSearch()">🔍</button>
+    <button class="nav-ico active" title="All Servers" onclick="location.href='/'">🗂</button>
+    <button class="nav-ico" title="Account"     onclick="location.href='/account'">👤</button>
+    <button class="nav-ico" title="Admin"        onclick="location.href='/admin'">⚙️</button>
+    <button class="nav-ico" title="Sign Out"    onclick="signOut()">⏏️</button>
+  </div>
+  <div class="nav-user">
+    <div class="nav-avatar" id="navAvatar">A</div>
+    <span id="navUser">Admin</span>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-title">My Servers</div>
+  <div class="hero-sub">Manage your game servers and services.</div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val" id="stOnline" style="color:var(--green)">0</div><div class="hstat-key">Online</div></div>
+    <div class="hstat"><div class="hstat-val" id="stOffline" style="color:var(--gray)">0</div><div class="hstat-key">Offline</div></div>
+    <div class="hstat"><div class="hstat-val" id="stTotal" style="color:var(--teal)">0</div><div class="hstat-key">Total</div></div>
+    <div class="hstat"><div class="hstat-val" id="stRam" style="color:var(--yellow)">0 MB</div><div class="hstat-key">RAM Used</div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="toolbar">
+    <div class="search-wrap">
+      <div class="search-ic">🔍</div>
+      <input class="search-input" id="searchInput" placeholder="Search servers…" oninput="filterCards()">
+    </div>
+    <button class="filter-btn" id="filterOnline" onclick="toggleFilter('online')">🟢 Online</button>
+    <button class="filter-btn" id="filterOffline" onclick="toggleFilter('offline')">⚫ Offline</button>
+    <button class="btn btn-ghost" style="border-color:var(--bdr);background:var(--bg-card);color:var(--txt2)" onclick="openCreateServer()">＋ New Server</button>
+    <button class="rescan-btn" onclick="rescan()">↺ Rescan</button>
+  </div>
+  <div class="server-grid" id="serverGrid">
+    <div class="empty"><div class="empty-icon">🦕</div><div class="empty-title">Loading servers…</div></div>
+  </div>
+</div>
+
+<div class="site-footer">©</div>
+
+<div class="modal-bg hidden" id="createServerModal">
+  <div class="modal" style="width:520px">
+    <div class="modal-hdr"><div class="modal-title">Create New Server</div><button class="modal-close" onclick="closeCreateServer()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-field"><label class="modal-label">Server Name</label><input class="modal-input" id="newSrvName" placeholder="My Node App"></div>
+      <div class="form-field"><label class="modal-label">Type</label>
+        <select class="modal-select" id="newSrvType">
+          <option value="node">Node.js</option>
+          <option value="python">Python</option>
+          <option value="batch">Batch (Windows)</option>
+          <option value="shell">Shell (Linux)</option>
+          <option value="minecraft">Minecraft Template</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label class="modal-label">Port</label><input class="modal-input" id="newSrvPort" type="number" value="3000"></div>
+        <div class="form-field"><label class="modal-label">Folder ID</label><input class="modal-input" id="newSrvId" placeholder="auto from name"></div>
+      </div>
+      <div class="form-field"><label class="modal-label">Description</label><textarea class="modal-input" id="newSrvDesc" rows="4" placeholder="Optional notes about this server"></textarea></div>
+      <div class="form-desc">Default login uses <b>admin</b> / <b>administrator</b> until you change it in Account.</div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost" onclick="closeCreateServer()">Cancel</button><button class="btn btn-teal" onclick="submitCreateServer()">Create Server</button></div>
+  </div>
+</div>
+
+<div class="toast-rack" id="toasts"></div>
+
+<script>
+let servers={},filter=null;
+async function boot(){try{const me=await api('/api/auth/me');qs('#navUser').textContent=me.user.displayName||me.user.username;qs('#navAvatar').textContent=(me.user.displayName||me.user.username).charAt(0).toUpperCase();}catch{}try{const list=await api('/api/servers');list.forEach(s=>servers[s.id]=s);render();}catch{toast('Failed to load servers','err')}connectWs()}
+async function rescan(){const list=await api('/api/rescan','POST');list.forEach(s=>{servers[s.id]=servers[s.id]?{...servers[s.id],...s}:s});render();toast('Rescan complete — '+list.length+' server(s)','info')}
+function render(){
+  const query=qs('#searchInput').value.toLowerCase();
+  const list=Object.values(servers).filter(s=>{if(filter&&s.status!==filter)return false;if(query&&!s.name.toLowerCase().includes(query)&&!s.label.toLowerCase().includes(query))return false;return true});
+  const online=Object.values(servers).filter(s=>s.status==='online').length;
+  const offline=Object.values(servers).filter(s=>s.status==='offline').length;
+  const total=Object.keys(servers).length;
+  const ramUsed=Object.values(servers).reduce((a,s)=>a+(s.stats?.memoryMB||0),0);
+  qs('#stOnline').textContent=online;qs('#stOffline').textContent=offline;qs('#stTotal').textContent=total;qs('#stRam').textContent=ramUsed.toFixed(0)+' MB';
+  if(!list.length){qs('#serverGrid').innerHTML=`<div class="empty"><div class="empty-icon">🦕</div><div class="empty-title">${total?'No servers match your filter':'No servers found'}</div><div class="empty-sub">${total?'Try a different filter or search term':'Check SERVERS_DIR in server.js'}</div></div>`;return}
+  qs('#serverGrid').innerHTML=list.map(s=>cardHTML(s)).join('');
+}
+function cardHTML(s){
+  const cpu=s.stats?.cpu||0,mem=s.stats?.memoryMB||0,memLim=s.limits?.memory||2048;
+  const memPct=Math.min((mem/memLim)*100,100),cpuPct=Math.min(cpu,100),on=s.status==='online';
+  return `<div class="srv-card ${s.status}" onclick="openServer('${s.id}')">
+    <div class="card-top">
+      <div class="card-icon-wrap">${typeIcon(s.type)}</div>
+      <div class="card-info"><div class="card-name">${s.name}</div><div class="card-egg">${s.eggName||s.label}</div><div class="card-alloc">${s.allocation?.ip||'127.0.0.1'}:${s.allocation?.port||'—'}</div></div>
+      <div class="card-status-wrap"><div class="status-badge ${s.status}">${cap(s.status)}</div><div class="card-node">${s.node?.name||'local'} · ${s.node?.location||'Local'}</div></div>
+    </div>
+    <div class="card-resources">
+      <div class="res"><div class="res-head"><div class="res-label">CPU</div><div class="res-val">${on?cpu+'%':'—'}</div></div><div class="res-bar-track"><div class="res-bar-fill ${cpuPct>85?'danger':cpuPct>60?'warn':''}" style="width:${on?cpuPct:0}%"></div></div></div>
+      <div class="res"><div class="res-head"><div class="res-label">Memory</div><div class="res-val">${on?mem.toFixed(0)+' MB':'—'}</div></div><div class="res-bar-track"><div class="res-bar-fill ${memPct>85?'danger':memPct>60?'warn':''}" style="width:${on?memPct:0}%"></div></div></div>
+      <div class="res"><div class="res-head"><div class="res-label">Uptime</div><div class="res-val" id="up-${s.id}">${on&&s.startedAt?fmtUptime(Date.now()-s.startedAt):'—'}</div></div><div class="res-bar-track" style="background:transparent"></div></div>
+    </div>
+    <div class="card-footer"><div class="card-footer-meta">PID: ${s.pid||'—'} · ${s.type}</div><button class="card-open-btn" onclick="event.stopPropagation();openServer('${s.id}')">Manage →</button></div>
+  </div>`;
+}
+function typeIcon(t){return{minecraft:'⛏️',bedrock:'🟢',nodejs:'🟩',python:'🐍',generic:'⚙️',unknown:'📁'}[t]||'⚙️'}
+function openServer(id){window.location.href='/server/'+id}
+function filterCards(){render()}
+function toggleFilter(f){filter=filter===f?null:f;qs('#filterOnline').classList.toggle('on',filter==='online');qs('#filterOffline').classList.toggle('on',filter==='offline');render()}
+setInterval(()=>{Object.values(servers).forEach(s=>{if(s.status==='online'&&s.startedAt){const el=document.getElementById('up-'+s.id);if(el)el.textContent=fmtUptime(Date.now()-s.startedAt)}})},1000);
+function connectWs(){const proto=location.protocol==='https:'?'wss://':'ws://';const ws=new WebSocket(proto+location.host+'?type=dashboard');ws.onmessage=e=>{const m=JSON.parse(e.data);if(m.type==='server_update'){servers[m.server.id]={...(servers[m.server.id]||{}),...m.server};render()}if(m.type==='stats_update'&&servers[m.id]){servers[m.id].stats=m.stats;render()}};ws.onclose=()=>setTimeout(connectWs,2500)}
+const qs=s=>document.querySelector(s),cap=s=>s.charAt(0).toUpperCase()+s.slice(1),pad=n=>String(n).padStart(2,'0');
+function fmtUptime(ms){const s=Math.floor(ms/1000),m=Math.floor(s/60),h=Math.floor(m/60),d=Math.floor(h/24);if(d)return d+'d '+pad(h%24)+'h';if(h)return pad(h)+'h '+pad(m%60)+'m';return pad(m)+'m '+pad(s%60)+'s'}
+async function api(url,method='GET',body=null){const o={method,headers:{}};if(body){o.headers['Content-Type']='application/json';o.body=JSON.stringify(body)}return(await fetch(url,o)).json()}
+function toast(msg,type='info'){const el=document.createElement('div');el.className='toast '+type;el.textContent=(type==='ok'?'✓ ':type==='err'?'✕ ':'ℹ ')+msg;qs('#toasts').appendChild(el);setTimeout(()=>{el.classList.add('bye');setTimeout(()=>el.remove(),220)},3500)}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function openCreateServer(){ qs('#createServerModal').classList.remove('hidden'); qs('#newSrvName').focus(); }
+function closeCreateServer(){ qs('#createServerModal').classList.add('hidden'); }
+async function submitCreateServer(){
+  const name=qs('#newSrvName').value.trim();
+  const type=qs('#newSrvType').value;
+  const port=parseInt(qs('#newSrvPort').value||'3000',10);
+  const id=qs('#newSrvId').value.trim();
+  const description=qs('#newSrvDesc').value.trim();
+  if(!name) return toast('Server name required','err');
+  const r=await api('/api/servers/create','POST',{name,type,port,id,description});
+  if(r.ok&&r.server){
+    toast('Server created','ok');
+    closeCreateServer();
+    qs('#newSrvName').value=''; qs('#newSrvId').value=''; qs('#newSrvDesc').value='';
+    await rescan();
+    openServer(r.server.id);
+  } else toast(r.error||'Create failed','err');
+}
+document.getElementById('createServerModal').addEventListener('click',e=>{ if(e.target===e.currentTarget) closeCreateServer(); });
+
+/* ── SEARCH OVERLAY ── */
+function openSearch(){
+  let ov=qs('#searchOverlay');
+  if(!ov){
+    ov=document.createElement('div'); ov.id='searchOverlay';
+    ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding-top:80px;backdrop-filter:blur(3px)';
+    ov.innerHTML=`<div style="background:var(--bg-card);border:1px solid var(--bdr2);border-radius:8px;width:540px;max-width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--bdr)">
+        <span style="color:var(--txt3);font-size:15px">🔍</span>
+        <input id="overlayInput" placeholder="Search servers by name, type…" autofocus style="flex:1;background:none;border:none;outline:none;color:var(--txt);font-size:14px;font-family:var(--font)">
+        <button onclick="closeSearch()" style="background:none;border:none;color:var(--txt2);font-size:18px;cursor:pointer;line-height:1">✕</button>
+      </div>
+      <div id="overlayResults" style="max-height:360px;overflow-y:auto"></div>
+      <div style="padding:7px 16px;font-size:11px;color:var(--txt3);border-top:1px solid var(--bdr)">ESC to close</div>
+    </div>`;
+    ov.addEventListener('click', e=>{ if(e.target===ov) closeSearch(); });
+    document.body.appendChild(ov);
+  } else { ov.style.display='flex'; }
+  const inp=document.getElementById('overlayInput');
+  inp.value=''; inp.focus(); inp.oninput=renderOverlayResults;
+  document.addEventListener('keydown', _escCb);
+  renderOverlayResults();
+}
+function closeSearch(){ const o=qs('#searchOverlay'); if(o) o.style.display='none'; document.removeEventListener('keydown',_escCb); }
+function _escCb(e){ if(e.key==='Escape') closeSearch(); }
+function renderOverlayResults(){
+  const q=(document.getElementById('overlayInput')?.value||'').toLowerCase();
+  const list=Object.values(servers).filter(s=>!q||s.name.toLowerCase().includes(q)||s.type.includes(q)||(s.eggName||'').toLowerCase().includes(q));
+  const el=document.getElementById('overlayResults');
+  if(!Object.keys(servers).length){ el.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3)">No servers loaded yet.</div>'; return; }
+  if(!list.length){ el.innerHTML='<div style="padding:20px;text-align:center;color:var(--txt3)">No servers match "'+q+'"</div>'; return; }
+  el.innerHTML=list.map(s=>`
+    <div onclick="closeSearch();openServer('${s.id}')" style="display:flex;align-items:center;gap:12px;padding:11px 16px;border-bottom:1px solid var(--bdr);cursor:pointer;transition:background .12s" onmouseover="this.style.background='var(--bg-hover)'" onmouseout="this.style.background=''">
+      <span style="font-size:18px">${typeIcon(s.type)}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(s.name)}</div>
+        <div style="font-size:11.5px;color:var(--txt3);font-family:var(--mono)">${s.eggName||s.label} · ${s.allocation?.ip||'127.0.0.1'}:${s.allocation?.port||'—'}</div>
+      </div>
+      <span style="font-size:11px;font-weight:700;font-family:var(--mono);color:${s.status==='online'?'var(--green)':'var(--gray)'}">${s.status.toUpperCase()}</span>
+    </div>`).join('');
+}
+
+async function signOut(){
+  if(!confirm('Sign out of HazEPanel?\n(Local panel — the server will keep running.)')) return;
+  try { await api('/api/auth/logout', 'POST'); } catch {}
+  location.href='/login';
+}
+boot();
+</script>
+</body>
+</html>

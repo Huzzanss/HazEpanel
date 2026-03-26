@@ -1,0 +1,21 @@
+# Set the locale
+locale: en_us
+
+# Use a supported economy plugin
+use_economy: true
+
+# Set if enchantments should be in one config or each their own
+one_config: true
+
+# Cost for certain commands
+cost:
+  name:
+    add: 500.0
+    set: 500.0
+    remove: 100.0
+  lore:
+    add: 500.0
+    clear: 100.0
+    remove: 100.0
+    set: 500.0
+    insert: 500.0

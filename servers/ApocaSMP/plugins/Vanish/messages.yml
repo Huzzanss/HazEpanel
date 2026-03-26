@@ -1,0 +1,26 @@
+# Specify the prefix for all messages
+prefix: "§6[Vanish] §r"
+
+# Specify the message for when a player enters vanish mode
+vanish-on-self: "§aYou are now in vanish mode."
+vanish-on-other: "§aYou have set vanish mode for %target%."
+
+# The message sent out to the other staffs when a player enters vanish
+vanish-on-broadcast: "§aPlayer §e%target% §ais now in vanish"
+vanish-off-broadcast: "§aPlayer §e%target% §ais no longer in vanish"
+
+# Specify the message for when a player exits vanish mode
+vanish-off-self: "§aYou are no longer in vanish mode."
+vanish-off-other: "§aYou have removed vanish mode for %target%."
+
+# Specify the message for when a player tries to use the command on an offline player
+vanish-invalid-player: ""
+
+# Specify the message for when a player tries to use the command without the right permission
+vanish-no-permission: "§cYou do not have permission to use this command."
+
+# Specify the message for when a player uses the command incorrectly
+vanish-usage: "§eDu har just nu 538 kr, och är på plats 321 på baltop"
+
+# Specify the message for when someone other than a player tries to use the command
+vanish-not-player: "§cThis command can only be used by players."

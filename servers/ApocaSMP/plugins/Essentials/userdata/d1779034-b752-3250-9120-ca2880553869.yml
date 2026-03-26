@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 176.88.123.138
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1773911014665
+  login: 1773910962838
+money: '0'
+last-account-name: EmreMC
+lastlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 4996.5
+  y: 59.0
+  z: 5000.5
+  yaw: 0.0
+  pitch: 0.0
+logoutlocation:
+  world: b12e00c1-cefd-4b1f-bdac-0784343bf7c4
+  world-name: world
+  x: 4994.538498282986
+  y: 43.0
+  z: 5007.300000011921
+  yaw: 138.00013732910156
+  pitch: 42.450008392333984
